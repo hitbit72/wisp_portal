@@ -5,6 +5,27 @@ from clientes.forms import BootstrapFormMixin
 from .models import Dispositivo, Enlace, Interfaz, Sector
 
 
+class JSONTextoOpcional(forms.JSONField):
+    """
+    Campo JSON tolerante: si el texto introducido es JSON válido se guarda
+    como dict/list; si no, se guarda el texto tal cual (como string) en vez
+    de rechazar el formulario. Así un usuario no pierde el formulario por
+    escribir un formato suelto (p.ej. 'modelo: lhg').
+    """
+
+    def to_python(self, value):
+        if value in self.empty_values:
+            return None
+        if isinstance(value, (list, dict, int, float)):
+            return value
+        if isinstance(value, str) and not value.strip():
+            return None
+        try:
+            return super().to_python(value)
+        except forms.ValidationError:
+            return value.strip()
+
+
 class SectorForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = Sector
@@ -21,6 +42,13 @@ class DispositivoForm(BootstrapFormMixin, forms.ModelForm):
     """'sector' no se edita desde el formulario: se fija desde la vista
     al crear un dispositivo bajo un sector concreto."""
 
+    atributos_extra = JSONTextoOpcional(
+        required=False,
+        label='Atributos del dispositivo',
+        help_text='Datos específicos de la marca/modelo. Puedes escribir texto suelto o un objeto JSON válido (p.ej. {"banda": 5}).',
+        widget=forms.Textarea(attrs={'rows': 5}),
+    )
+
     class Meta:
         model = Dispositivo
         fields = [
@@ -30,7 +58,6 @@ class DispositivoForm(BootstrapFormMixin, forms.ModelForm):
         ]
         widgets = {
             'fecha_instalacion': forms.DateInput(attrs={'type': 'date'}),
-            'atributos_extra': forms.Textarea(attrs={'rows': 5}),
             'notas': forms.Textarea(attrs={'rows': 3}),
         }
 
