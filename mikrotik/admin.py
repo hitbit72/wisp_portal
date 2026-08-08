@@ -35,8 +35,8 @@ class TareaSincronizacionAdmin(admin.ModelAdmin):
     manual disponible es reintentar una tarea fallida (por ejemplo, después
     de arreglar un problema de red o credenciales).
     """
-    list_display = ('contrato', 'router', 'identificador_mikrotik', 'operacion', 'estado', 'intentos', 'creada_en', 'procesada_en')
-    list_filter = ('estado', 'operacion', 'conexion', 'router')
+    list_display = ('contrato', 'router', 'identificador_mikrotik', 'operacion', 'estado_contrato', 'estado', 'intentos', 'creada_en', 'procesada_en')
+    list_filter = ('estado', 'operacion', 'conexion', 'estado_contrato', 'router')
     search_fields = ('contrato__cliente__nombre_completo', 'identificador_mikrotik')
     readonly_fields = [f.name for f in TareaSincronizacion._meta.fields]
     actions = ['reintentar_tareas']
