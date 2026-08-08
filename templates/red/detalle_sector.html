@@ -25,6 +25,7 @@
     <thead>
         <tr>
             <th>Nombre</th>
+            <th>Modo</th>
             <th>Tipo</th>
             <th>Marca</th>
             <th>Modelo</th>
@@ -37,6 +38,7 @@
         {% for dispositivo in sector.dispositivos.all %}
         <tr>
             <td><a href="{% url 'red:detalle_dispositivo' dispositivo.pk %}">{{ dispositivo.nombre }}</a></td>
+            <td>{{ dispositivo.get_rol_display }}</td>
             <td>{{ dispositivo.get_tipo_display }}</td>
             <td>{{ dispositivo.get_marca_display }}</td>
             <td>{{ dispositivo.modelo|default:"—" }}</td>
