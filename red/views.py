@@ -176,7 +176,7 @@ def nueva_interfaz(request, dispositivo_pk):
     else:
         form = InterfazForm()
 
-    return render(request, 'red/form_interfaz.html', {
+    return render(request, 'red/interfaz/form_interfaz.html', {
         'form': form, 'dispositivo': dispositivo, 'interfaz': None,
     })
 
@@ -194,7 +194,7 @@ def editar_interfaz(request, pk):
     else:
         form = InterfazForm(instance=interfaz)
 
-    return render(request, 'red/form_interfaz.html', {
+    return render(request, 'red/interfaz/form_interfaz.html', {
         'form': form, 'dispositivo': interfaz.dispositivo, 'interfaz': interfaz,
     })
 
@@ -208,7 +208,7 @@ def eliminar_interfaz(request, pk):
         interfaz.delete()
         return redirect('red:detalle_dispositivo', pk=dispositivo_pk)
 
-    return render(request, 'red/confirmar_eliminar_interfaz.html', {'interfaz': interfaz})
+    return render(request, 'red/interfaz/confirmar_eliminar_interfaz.html', {'interfaz': interfaz})
 
 
 # --- Enlaces ----------------------------------------------------------------
@@ -228,7 +228,7 @@ def nuevo_enlace(request, dispositivo_pk):
     else:
         form = EnlaceForm(dispositivo_origen=dispositivo)
 
-    return render(request, 'red/form_enlace.html', {
+    return render(request, 'red/enlace/form_enlace.html', {
         'form': form, 'dispositivo': dispositivo, 'enlace': None,
     })
 
@@ -246,7 +246,7 @@ def editar_enlace(request, pk):
     else:
         form = EnlaceForm(instance=enlace, dispositivo_origen=enlace.dispositivo_origen)
 
-    return render(request, 'red/form_enlace.html', {
+    return render(request, 'red/enlace/form_enlace.html', {
         'form': form, 'dispositivo': enlace.dispositivo_origen, 'enlace': enlace,
     })
 
@@ -260,4 +260,4 @@ def eliminar_enlace(request, pk):
         enlace.delete()
         return redirect('red:detalle_dispositivo', pk=dispositivo_pk)
 
-    return render(request, 'red/confirmar_eliminar_enlace.html', {'enlace': enlace})
+    return render(request, 'red/enlace/confirmar_eliminar_enlace.html', {'enlace': enlace})
