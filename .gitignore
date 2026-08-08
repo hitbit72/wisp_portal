@@ -1,0 +1,12 @@
+.env
+.venv/
+.agents/
+docs/
+__pycache__/
+*.pyc
+staticfiles/
+*.sqlite3
+.DS_Store
+run.bat
+opencode.json
+AGENTS.md
