@@ -34,6 +34,7 @@ def encolar_tarea(contrato, operacion, identificador_anterior='', vincular_contr
         router=contrato.plan.router,
         identificador_mikrotik=contrato.identificador_mikrotik,
         conexion=contrato.conexion,
+        plan_nombre=contrato.plan.nombre,
         estado_contrato=contrato.estado,
         operacion=operacion,
         identificador_anterior=identificador_anterior,
