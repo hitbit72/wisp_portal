@@ -39,7 +39,7 @@
             <div class="card-body">
                 <h5 class="card-title">Ubicación y cliente</h5>
                 <p class="mb-1"><strong>Fecha de instalación:</strong> {{ dispositivo.fecha_instalacion|default:"—" }}</p>
-                <p class="mb-1"><strong>Cliente:</strong> {% if dispositivo.cliente %}{{ dispositivo.cliente.nombre_completo }}{% else %}—{% endif %}</p>
+                {% if dispositivo.cliente %}<p class="mb-1"><strong>Cliente:</strong> {% if dispositivo.cliente %}{{ dispositivo.cliente.nombre_completo }}{% else %}—{% endif %}</p>{% endif %}
                 <p class="mb-1"><strong>Latitud:</strong> {{ dispositivo.latitud|default:"—" }}</p>
                 <p class="mb-0"><strong>Longitud:</strong> {{ dispositivo.longitud|default:"—" }}</p>
             </div>
