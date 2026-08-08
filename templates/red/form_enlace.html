@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block titulo %}{% if enlace %}Editar enlace{% else %}Nuevo enlace{% endif %} · Portal WISP{% endblock %}
+{% block contenido %}
+<h2>{% if enlace %}Editar enlace{% else %}Nuevo enlace{% endif %}</h2>
+<div class="text-muted mb-3">Origen: <strong>{{ dispositivo.nombre }}</strong> ({{ dispositivo.get_tipo_display }})</div>
+
+<form method="post" class="mt-3" style="max-width: 760px;">
+    {% csrf_token %}
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label class="form-label">Hacia (dispositivo destino)</label>
+            {{ form.dispositivo_destino }}
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Tipo de enlace</label>
+            {{ form.tipo }}
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Interfaz origen</label>
+            {{ form.interfaz_origen }}
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Interfaz destino</label>
+            {{ form.interfaz_destino }}
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Ancho de banda (Mbps)</label>
+            {{ form.ancho_banda_mbps }}
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Distancia (km)</label>
+            {{ form.distancia_km }}
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Frecuencia (GHz)</label>
+            {{ form.frecuencia_ghz }}
+            <div class="form-text">Solo aplica a radioenlaces.</div>
+        </div>
+        <div class="col-12">
+            <label class="form-label">Notas</label>
+            {{ form.notas }}
+        </div>
+    </div>
+
+    <div class="mt-4 d-flex gap-2">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a href="{% url 'red:detalle_dispositivo' dispositivo.pk %}" class="btn btn-outline-secondary">Cancelar</a>
+    </div>
+</form>
+{% endblock %}

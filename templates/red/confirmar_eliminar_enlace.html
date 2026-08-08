@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block titulo %}Eliminar enlace · Portal WISP{% endblock %}
+{% block contenido %}
+<h2>Eliminar enlace</h2>
+
+<div class="alert alert-warning" style="max-width: 640px;">
+    ¿Seguro que quieres eliminar el enlace
+    <strong>{{ enlace.dispositivo_origen.nombre }} → {{ enlace.dispositivo_destino.nombre }}</strong>
+    ({{ enlace.get_tipo_display }})?
+    La acción no se puede deshacer.
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+    <a href="{% url 'red:detalle_dispositivo' enlace.dispositivo_origen.pk %}" class="btn btn-outline-secondary">Cancelar</a>
+</form>
+{% endblock %}
