@@ -41,7 +41,8 @@ class Dispositivo(models.Model):
         ST = 'stp', 'Estación'
         OLT = 'olt', 'OLT'
         ONU = 'onu', 'ONU'
-        ANTENA_CLIENTE = 'antena_cliente', 'Antena de cliente'
+        ANTENA_CLIENTE = 'antena_cliente', 'Antena de cliente',
+        OTROS = 'otros', 'Otros'
 
     class Marca(models.TextChoices):
         MIKROTIK = 'mikrotik', 'MikroTik'
@@ -61,7 +62,8 @@ class Dispositivo(models.Model):
     class Estado(models.TextChoices):
         ACTIVO = 'activo', 'Activo'
         INACTIVO = 'inactivo', 'Inactivo'
-        MANTENIMIENTO = 'mantenimiento', 'En mantenimiento'
+        MANTENIMIENTO = 'mantenimiento', 'En mantenimiento',
+        INSTALACION = 'instalacion', 'En instalación'
 
     nombre = models.CharField(max_length=100)
     tipo = models.CharField(max_length=20, choices=Tipo.choices)
@@ -144,7 +146,8 @@ class Enlace(models.Model):
     class Tipo(models.TextChoices):
         BACKBONE = 'backbone', 'Backbone'
         ACCESO = 'acceso', 'Acceso'
-        RADIOENLACE = 'radioenlace', 'Radioenlace'
+        RADIOENLACE = 'radioenlace', 'Radioenlace',
+        TORNCAL = 'torncal', 'Torncal'
 
     dispositivo_origen = models.ForeignKey(
         Dispositivo, on_delete=models.CASCADE, related_name='enlaces_origen',
