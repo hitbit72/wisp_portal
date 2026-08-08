@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% block titulo %}{{ dispositivo.nombre }} · Portal WISP{% endblock %}
+{% block contenido %}
+<div class="d-flex justify-content-between align-items-start mb-3">
+    <div>
+        <h2 class="mb-0">{{ dispositivo.nombre }}</h2>
+        <div class="text-muted">
+            {{ dispositivo.get_tipo_display }} · {{ dispositivo.get_marca_display }}
+            {% if dispositivo.modelo %} · {{ dispositivo.modelo }}{% endif %}
+            {% if dispositivo.sector %} · <a href="{% url 'red:detalle_sector' dispositivo.sector.pk %}">{{ dispositivo.sector.nombre }}</a>{% endif %}
+        </div>
+    </div>
+    <div class="d-flex gap-2">
+        <a href="{% url 'red:editar_dispositivo' dispositivo.pk %}" class="btn btn-outline-secondary">Editar</a>
+        <a href="{% url 'red:eliminar_dispositivo' dispositivo.pk %}" class="btn btn-outline-danger">Eliminar</a>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Datos del equipo</h5>
+                <p class="mb-1"><strong>Estado:</strong>
+                    <span class="badge
+                        {% if dispositivo.estado == 'activo' %}bg-success
+                        {% elif dispositivo.estado == 'mantenimiento' %}bg-warning text-dark
+                        {% else %}bg-secondary{% endif %}">
+                        {{ dispositivo.get_estado_display }}
+                    </span></p>
+                <p class="mb-1"><strong>IP de gestión:</strong> {{ dispositivo.ip_gestion|default:"—" }}</p>
+                <p class="mb-1"><strong>MAC:</strong> {{ dispositivo.mac_address|default:"—" }}</p>
+                <p class="mb-0"><strong>Firmware:</strong> {{ dispositivo.firmware_version|default:"—" }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Ubicación y cliente</h5>
+                <p class="mb-1"><strong>Fecha de instalación:</strong> {{ dispositivo.fecha_instalacion|default:"—" }}</p>
+                <p class="mb-1"><strong>Cliente:</strong> {% if dispositivo.cliente %}{{ dispositivo.cliente.nombre_completo }}{% else %}—{% endif %}</p>
+                <p class="mb-1"><strong>Latitud:</strong> {{ dispositivo.latitud|default:"—" }}</p>
+                <p class="mb-0"><strong>Longitud:</strong> {{ dispositivo.longitud|default:"—" }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if dispositivo.atributos_extra %}
+<div class="alert alert-light border mb-4">{{ dispositivo.atributos_extra|linebreaks }}</div>
+{% endif %}
+
+{% if dispositivo.notas %}
+<div class="alert alert-light border mb-4">{{ dispositivo.notas|linebreaks }}</div>
+{% endif %}
+
+<div class="d-flex justify-content-between align-items-center mb-2">
+    <h4 class="mb-0">Interfaces</h4>
+    <a href="{% url 'red:nueva_interfaz' dispositivo.pk %}" class="btn btn-primary btn-sm">+ Nueva interfaz</a>
+</div>
+
+<table class="table table-hover align-middle bg-white">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>Estado</th>
+            <th>IP</th>
+            <th>MAC</th>
+            <th>VLAN</th>
+            <th>Velocidad</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for interfaz in dispositivo.interfaces.all %}
+        <tr>
+            <td>{{ interfaz.nombre }}</td>
+            <td>{{ interfaz.get_tipo_display }}</td>
+            <td>
+                <span class="badge
+                    {% if interfaz.estado == 'arriba' %}bg-success
+                    {% elif interfaz.estado == 'abajo' %}bg-danger
+                    {% else %}bg-secondary{% endif %}">
+                    {{ interfaz.get_estado_display }}
+                </span>
+            </td>
+            <td>{{ interfaz.ip_address|default:"—" }}</td>
+            <td>{{ interfaz.mac_address|default:"—" }}</td>
+            <td>{{ interfaz.vlan_id|default:"—" }}</td>
+            <td>{% firstof interfaz.velocidad_mbps "—" %} {% if interfaz.velocidad_mbps %}Mbps{% endif %}</td>
+            <td class="text-end">
+                <a href="{% url 'red:editar_interfaz' interfaz.pk %}" class="btn btn-sm btn-outline-secondary">Editar</a>
+                <a href="{% url 'red:eliminar_interfaz' interfaz.pk %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="8" class="text-center text-muted py-3">Este dispositivo no tiene interfaces.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="d-flex justify-content-between align-items-center mb-2">
+    <h4 class="mb-0">Enlaces</h4>
+    <a href="{% url 'red:nuevo_enlace' dispositivo.pk %}" class="btn btn-primary btn-sm">+ Nuevo enlace</a>
+</div>
+
+<table class="table table-hover align-middle bg-white">
+    <thead>
+        <tr>
+            <th>Desde</th>
+            <th>Hacia</th>
+            <th>Tipo</th>
+            <th>Ancho de banda</th>
+            <th>Distancia</th>
+            <th>Frecuencia</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for enlace in dispositivo.enlaces_origen.all %}
+        <tr>
+            <td>{{ enlace.dispositivo_origen.nombre }}</td>
+            <td><a href="{% url 'red:detalle_dispositivo' enlace.dispositivo_destino.pk %}">{{ enlace.dispositivo_destino.nombre }}</a></td>
+            <td>{{ enlace.get_tipo_display }}</td>
+            <td>{% if enlace.ancho_banda_mbps %}{{ enlace.ancho_banda_mbps }} Mbps{% else %}—{% endif %}</td>
+            <td>{% if enlace.distancia_km %}{{ enlace.distancia_km }} km{% else %}—{% endif %}</td>
+            <td>{% if enlace.frecuencia_ghz %}{{ enlace.frecuencia_ghz }} GHz{% else %}—{% endif %}</td>
+            <td class="text-end">
+                <a href="{% url 'red:editar_enlace' enlace.pk %}" class="btn btn-sm btn-outline-secondary">Editar</a>
+                <a href="{% url 'red:eliminar_enlace' enlace.pk %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="7" class="text-center text-muted py-3">Este dispositivo no tiene enlaces.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'red:lista_dispositivos' %}" class="btn btn-link ps-0">&larr; Volver al listado de dispositivos</a>
+| <a href="{% if dispositivo.sector %}{% url 'red:detalle_sector' dispositivo.sector.pk %}{% endif %}" class="btn btn-link ps-0">Volver al sector</a>
+{% endblock %}
