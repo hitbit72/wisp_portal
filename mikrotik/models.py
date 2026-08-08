@@ -148,7 +148,7 @@ class TareaSincronizacion(models.Model):
     )
     plan_nombre = models.CharField(
         max_length=100, blank=True,
-        help_text="Copia de nombre del Plan en el momento de encolar la tarea",
+        help_text="Copia de contrato.plan.nombre en el momento de encolar la tarea",
     )
     router = models.ForeignKey(
         'mikrotik.Router', on_delete=models.SET_NULL, null=True, blank=True,
