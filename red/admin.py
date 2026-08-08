@@ -15,8 +15,8 @@ class SectorAdmin(admin.ModelAdmin):
 
 @admin.register(Dispositivo)
 class DispositivoAdmin(admin.ModelAdmin):
-    list_display = ('ip_gestion','nombre', 'tipo', 'marca', 'modelo', 'sector', 'estado', 'cliente')
-    list_filter = ('tipo', 'marca', 'estado', 'sector')
+    list_display = ('ip_gestion','nombre', 'rol', 'tipo', 'marca', 'modelo', 'sector', 'estado', 'cliente')
+    list_filter = ('rol','tipo', 'marca', 'estado', 'sector')
     search_fields = ('nombre', 'ip_gestion', 'mac_address', 'cliente')
     inlines = [InterfazInline]
 

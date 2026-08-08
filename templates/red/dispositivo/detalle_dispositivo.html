@@ -5,7 +5,7 @@
     <div>
         <h2 class="mb-0">{{ dispositivo.nombre }}</h2>
         <div class="text-muted">
-            {{ dispositivo.get_tipo_display }} · {{ dispositivo.get_marca_display }}
+            {{ dispositivo.get_tipo_display }} · {{ dispositivo.get_rol_display }} · {{ dispositivo.get_marca_display }}
             {% if dispositivo.modelo %} · {{ dispositivo.modelo }}{% endif %}
             {% if dispositivo.sector %} · <a href="{% url 'red:detalle_sector' dispositivo.sector.pk %}">{{ dispositivo.sector.nombre }}</a>{% endif %}
         </div>
@@ -28,6 +28,7 @@
                         {% else %}bg-secondary{% endif %}">
                         {{ dispositivo.get_estado_display }}
                     </span></p>
+                <p class="mb-1"><strong>Modo:</strong> {{ dispositivo.get_rol_display|default:"—" }}</p>
                 <p class="mb-1"><strong>IP de gestión:</strong> {{ dispositivo.ip_gestion|default:"—" }}</p>
                 <p class="mb-1"><strong>MAC:</strong> {{ dispositivo.mac_address|default:"—" }}</p>
                 <p class="mb-0"><strong>Firmware:</strong> {{ dispositivo.firmware_version|default:"—" }}</p>

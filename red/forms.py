@@ -52,7 +52,7 @@ class DispositivoForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = Dispositivo
         fields = [
-            'nombre', 'tipo', 'marca', 'modelo', 'cliente',
+            'nombre', 'rol', 'tipo', 'marca', 'modelo', 'cliente',
             'ip_gestion', 'mac_address', 'firmware_version',
             'estado', 'fecha_instalacion', 'latitud', 'longitud', 'atributos_extra', 'notas',
         ]

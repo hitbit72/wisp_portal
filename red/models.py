@@ -65,10 +65,18 @@ class Dispositivo(models.Model):
         MANTENIMIENTO = 'mantenimiento', 'En mantenimiento',
         INSTALACION = 'instalacion', 'En instalación'
 
+    class Rol(models.TextChoices):
+        MAIN = 'main', 'Principal'
+        STATION = 'station', 'Estación'
+        MASTER = 'master', 'Master'
+        SLAVE = 'slave', 'Esclavo'
+        OTRO = 'otro', 'Otro'
+    
     nombre = models.CharField(max_length=100)
     tipo = models.CharField(max_length=20, choices=Tipo.choices)
     marca = models.CharField(max_length=20, choices=Marca.choices)
     modelo = models.CharField(max_length=100, blank=True)
+    rol = models.CharField(max_length=20, choices=Rol.choices, default=Rol.OTRO, verbose_name='Modo operación')
 
     sector = models.ForeignKey(Sector, on_delete=models.SET_NULL, null=True, blank=True, related_name='dispositivos')
     cliente = models.ForeignKey(
