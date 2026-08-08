@@ -98,8 +98,8 @@ def lista_dispositivos(request):
     }
 
     if request.headers.get('HX-Request'):
-        return render(request, 'red/_tabla_dispositivos.html', contexto)
-    return render(request, 'red/lista_dispositivos.html', contexto)
+        return render(request, 'red/dispositivo/_tabla_dispositivos.html', contexto)
+    return render(request, 'red/dispositivo/lista_dispositivos.html', contexto)
 
 
 @login_required
@@ -116,7 +116,7 @@ def nuevo_dispositivo(request, sector_pk):
     else:
         form = DispositivoForm()
 
-    return render(request, 'red/form_dispositivo.html', {
+    return render(request, 'red/dispositivo/form_dispositivo.html', {
         'form': form, 'sector': sector, 'dispositivo': None,
     })
 
@@ -127,7 +127,7 @@ def detalle_dispositivo(request, pk):
         Dispositivo.objects.prefetch_related('interfaces', 'enlaces_origen', 'enlaces_destino'),
         pk=pk,
     )
-    return render(request, 'red/detalle_dispositivo.html', {'dispositivo': dispositivo})
+    return render(request, 'red/dispositivo/detalle_dispositivo.html', {'dispositivo': dispositivo})
 
 
 @login_required
@@ -143,7 +143,7 @@ def editar_dispositivo(request, pk):
     else:
         form = DispositivoForm(instance=dispositivo)
 
-    return render(request, 'red/form_dispositivo.html', {
+    return render(request, 'red/dispositivo/form_dispositivo.html', {
         'form': form, 'sector': dispositivo.sector, 'dispositivo': dispositivo,
     })
 
@@ -157,7 +157,7 @@ def eliminar_dispositivo(request, pk):
         dispositivo.delete()
         return redirect('red:detalle_sector', pk=sector_pk)
 
-    return render(request, 'red/confirmar_eliminar_dispositivo.html', {'dispositivo': dispositivo})
+    return render(request, 'red/dispositivo/confirmar_eliminar_dispositivo.html', {'dispositivo': dispositivo})
 
 
 # --- Interfaces -------------------------------------------------------------
