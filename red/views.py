@@ -63,6 +63,46 @@ def eliminar_sector(request, pk):
 # --- Dispositivos -----------------------------------------------------------
 
 @login_required
+def lista_dispositivos(request):
+    """Listado global de dispositivos (sin pasar por sectores), con búsqueda
+    y filtros. Es una segunda vía de acceso: los dispositivos también se ven
+    desde el detalle de su sector."""
+    dispositivos = Dispositivo.objects.select_related('sector', 'cliente')
+
+    busqueda = request.GET.get('q', '').strip()
+    if busqueda:
+        dispositivos = dispositivos.filter(
+            Q(nombre__icontains=busqueda)
+            | Q(modelo__icontains=busqueda)
+            | Q(ip_gestion__icontains=busqueda)
+            | Q(mac_address__icontains=busqueda)
+        )
+
+    tipo_seleccionado = request.GET.get('tipo', '').strip()
+    if tipo_seleccionado:
+        dispositivos = dispositivos.filter(tipo=tipo_seleccionado)
+
+    estado_seleccionado = request.GET.get('estado', '').strip()
+    if estado_seleccionado:
+        dispositivos = dispositivos.filter(estado=estado_seleccionado)
+
+    paginator = Paginator(dispositivos, 25)
+    pagina = paginator.get_page(request.GET.get('page'))
+
+    contexto = {
+        'pagina': pagina,
+        'busqueda': busqueda,
+        'tipo_seleccionado': tipo_seleccionado,
+        'estado_seleccionado': estado_seleccionado,
+        'tipos_dispositivo': Dispositivo.Tipo.choices,
+    }
+
+    if request.headers.get('HX-Request'):
+        return render(request, 'red/_tabla_dispositivos.html', contexto)
+    return render(request, 'red/lista_dispositivos.html', contexto)
+
+
+@login_required
 def nuevo_dispositivo(request, sector_pk):
     sector = get_object_or_404(Sector, pk=sector_pk)
 
