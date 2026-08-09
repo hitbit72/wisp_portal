@@ -9,7 +9,7 @@
 <form class="row g-2 mb-3"
       hx-get="{% url 'red:lista_dispositivos' %}"
       hx-target="#tabla-dispositivos"
-      hx-trigger="input changed delay:400ms from:#id_q, change from:#id_sector, change from:#id_tipo, change from:#id_estado"
+      hx-trigger="input changed delay:500ms from:#id_q, change from:#id_sector, change from:#id_tipo, change from:#id_estado"
       hx-push-url="true">
     <div class="col-md-5">
         <input type="text" name="q" id="id_q" class="form-control"
