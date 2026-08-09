@@ -116,12 +116,10 @@ def nuevo_dispositivo(request, sector_pk):
     if request.method == 'POST':
         form = DispositivoForm(request.POST)
         if form.is_valid():
-            dispositivo = form.save(commit=False)
-            dispositivo.sector = sector
-            dispositivo.save()
-            return redirect('red:detalle_sector', pk=sector.pk)
+            dispositivo = form.save()
+            return redirect('red:detalle_sector', pk=dispositivo.sector_id or sector.pk)
     else:
-        form = DispositivoForm()
+        form = DispositivoForm(initial={'sector': sector})
 
     return render(request, 'red/dispositivo/form_dispositivo.html', {
         'form': form, 'sector': sector, 'dispositivo': None,
@@ -152,8 +150,8 @@ def editar_dispositivo(request, pk):
     if request.method == 'POST':
         form = DispositivoForm(request.POST, instance=dispositivo)
         if form.is_valid():
-            form.save()
-            return redirect('red:detalle_sector', pk=sector_pk)
+            dispositivo = form.save()
+            return redirect('red:detalle_sector', pk=dispositivo.sector_id or sector_pk)
     else:
         form = DispositivoForm(instance=dispositivo)
 

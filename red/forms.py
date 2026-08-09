@@ -53,8 +53,8 @@ class SectorForm(BootstrapFormMixin, forms.ModelForm):
 
 
 class DispositivoForm(BootstrapFormMixin, forms.ModelForm):
-    """'sector' no se edita desde el formulario: se fija desde la vista
-    al crear un dispositivo bajo un sector concreto."""
+    """'sector' se puede seleccionar en el formulario; al crear un dispositivo
+    bajo un sector concreto la vista lo preselecciona como valor inicial."""
 
     atributos_extra = JSONTextoOpcional(
         required=False,
@@ -66,7 +66,7 @@ class DispositivoForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = Dispositivo
         fields = [
-            'nombre', 'rol', 'tipo', 'marca', 'modelo', 'cliente',
+            'nombre', 'rol', 'tipo', 'marca', 'modelo', 'sector', 'cliente',
             'ip_gestion', 'mac_address', 'firmware_version',
             'estado', 'fecha_instalacion', 'latitud', 'longitud', 'atributos_extra', 'notas',
         ]
