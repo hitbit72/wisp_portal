@@ -268,7 +268,7 @@ def editar_enlace(request, pk):
             return redirect('red:detalle_dispositivo', pk=dispositivo_pk)
         else:
             # si el formlario no es válido.
-            error_msg = "Por favor, corrige los errores en el formulario." + form.errors.as_text()
+            error_msg = "Por favor, corrige los errores en el formulario.<br>" + form.errors.as_text()
     else:
         form = EnlaceForm(instance=enlace, dispositivo_origen=enlace.dispositivo_origen)
 
