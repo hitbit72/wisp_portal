@@ -14,9 +14,9 @@ def _etiqueta_dispositivo(obj):
 
 
 def _etiqueta_interfaz(obj):
-    """Etiqueta de interfaz: solo el nombre, para que coincida con las
-    opciones que se cargan dinámicamente por dispositivo."""
-    return obj.nombre
+    """Etiqueta de interfaz: 'nombre · IP', coherente con el fragmento HTMX."""
+    ip = obj.ip_address or 'sin IP'
+    return f'{obj.nombre} · {ip}'
 
 
 class JSONTextoOpcional(forms.JSONField):
@@ -97,9 +97,11 @@ class EnlaceForm(BootstrapFormMixin, forms.ModelForm):
         super().__init__(*args, **kwargs)
         if dispositivo_origen is not None:
             self.fields['interfaz_origen'].queryset = dispositivo_origen.interfaces.all()
+            self.fields['dispositivo_destino'].queryset = Dispositivo.objects.exclude(
+                pk=dispositivo_origen.pk
+            ).select_related('sector')
 
         destino = self.fields['dispositivo_destino']
-        destino.queryset = Dispositivo.objects.select_related('sector')
         destino.label_from_instance = _etiqueta_dispositivo
         destino.widget.attrs.update({
             'hx-get': reverse('red:opciones_interfaces_dispositivo'),
@@ -109,7 +111,8 @@ class EnlaceForm(BootstrapFormMixin, forms.ModelForm):
             'hx-include': '#id_dispositivo_destino',
         })
 
-        self.fields['interfaz_destino'].label_from_instance = _etiqueta_interfaz
+        for campo in ('interfaz_origen', 'interfaz_destino'):
+            self.fields[campo].label_from_instance = _etiqueta_interfaz
 
         if self.is_bound:
             destino_id = self.data.get('dispositivo_destino')
