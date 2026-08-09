@@ -128,7 +128,14 @@ def detalle_dispositivo(request, pk):
         Dispositivo.objects.prefetch_related('interfaces', 'enlaces_origen', 'enlaces_destino'),
         pk=pk,
     )
-    return render(request, 'red/dispositivo/detalle_dispositivo.html', {'dispositivo': dispositivo})
+    enlaces = sorted(
+        (*dispositivo.enlaces_origen.all(), *dispositivo.enlaces_destino.all()),
+        key=lambda e: e.pk,
+    )
+    return render(request, 'red/dispositivo/detalle_dispositivo.html', {
+        'dispositivo': dispositivo,
+        'enlaces': enlaces,
+    })
 
 
 @login_required
