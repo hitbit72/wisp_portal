@@ -173,7 +173,7 @@ class Enlace(models.Model):
     ancho_banda_mbps = models.PositiveIntegerField(null=True, blank=True)
     distancia_km = models.DecimalField(max_digits=6, decimal_places=3, null=True, blank=True)
     frecuencia_ghz = models.DecimalField(
-        max_digits=5, decimal_places=3, null=True, blank=True,
+        max_digits=6, decimal_places=3, null=True, blank=True,
         help_text='Solo aplica a radioenlaces.',
     )
     notas = models.TextField(blank=True)
