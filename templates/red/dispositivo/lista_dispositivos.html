@@ -11,13 +11,13 @@
       hx-target="#tabla-dispositivos"
       hx-trigger="input changed delay:400ms from:#id_q, change from:#id_tipo, change from:#id_estado"
       hx-push-url="true">
-    <div class="col-md-6">
+    <div class="col-md-5">
         <input type="text" name="q" id="id_q" class="form-control"
                placeholder="Buscar por nombre, modelo, IP o MAC..." value="{{ busqueda }}">
     </div>
 
     <div class="col-md-3">
-        <select name="tipo" id="id_tipo" class="form-select">
+        <select name="sector" id="id_sector" class="form-select">
             <option value="">Todos los sectores</option>
             {% for valor, etiqueta in todos_sectores %}
             <option value="{{ valor }}" {% if valor == sector_seleccionado %}selected{% endif %}>{{ etiqueta }}</option>
@@ -25,7 +25,7 @@
         </select>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-2">
         <select name="tipo" id="id_tipo" class="form-select">
             <option value="">Todos los tipos</option>
             {% for valor, etiqueta in tipos_dispositivo %}
@@ -33,7 +33,7 @@
             {% endfor %}
         </select>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
         <select name="estado" id="id_estado" class="form-select">
             <option value="">Todos los estados</option>
             <option value="activo" {% if estado_seleccionado == 'activo' %}selected{% endif %}>Activo</option>
