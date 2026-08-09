@@ -87,6 +87,10 @@ def lista_dispositivos(request):
     if estado_seleccionado:
         dispositivos = dispositivos.filter(estado=estado_seleccionado)
 
+    sector_seleccionado = request.GET.get('sector', '').strip()
+    if sector_seleccionado:
+        dispositivos = dispositivos.filter(sector_id=sector_seleccionado)
+
     paginator = Paginator(dispositivos, 25)
     pagina = paginator.get_page(request.GET.get('page'))
 
@@ -96,6 +100,8 @@ def lista_dispositivos(request):
         'tipo_seleccionado': tipo_seleccionado,
         'estado_seleccionado': estado_seleccionado,
         'tipos_dispositivo': Dispositivo.Tipo.choices,
+        'sector_seleccionado': sector_seleccionado,
+        'todos_sectores': Sector.objects.all().values_list('pk', 'nombre').order_by('nombre'),
     }
 
     if request.headers.get('HX-Request'):
