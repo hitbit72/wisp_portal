@@ -259,17 +259,21 @@ def nuevo_enlace(request, dispositivo_pk):
 def editar_enlace(request, pk):
     enlace = get_object_or_404(Enlace, pk=pk)
     dispositivo_pk = enlace.dispositivo_origen_id
+    error_msg = ""
 
     if request.method == 'POST':
         form = EnlaceForm(request.POST, instance=enlace, dispositivo_origen=enlace.dispositivo_origen)
         if form.is_valid():
             form.save()
             return redirect('red:detalle_dispositivo', pk=dispositivo_pk)
+        else:
+            # si el formlario no es válido.
+            error_msg = "Por favor, corrige los errores en el formulario."
     else:
         form = EnlaceForm(instance=enlace, dispositivo_origen=enlace.dispositivo_origen)
 
     return render(request, 'red/enlace/form_enlace.html', {
-        'form': form, 'dispositivo': enlace.dispositivo_origen, 'enlace': enlace,
+        'form': form, 'dispositivo': enlace.dispositivo_origen, 'enlace': enlace, 'error_msg': error_msg,
     })
 
 
