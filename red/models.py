@@ -96,7 +96,7 @@ class Dispositivo(models.Model):
     fecha_instalacion = models.DateField(null=True, blank=True)
 
     atributos_extra = models.JSONField(
-        default=dict, blank=True,
+        default=dict, blank=True, null=True,
         verbose_name='Atributos adicionales',
         help_text='Datos específicos de la marca/modelo que no aplican a todos los dispositivos.',
     )
