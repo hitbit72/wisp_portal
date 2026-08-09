@@ -37,7 +37,9 @@
             {{ form.velocidad_mbps }}
         </div>
     </div>
-
+    {% if error_msg %}
+    <div class="alert alert-danger mt-3" role="alert"><strong>{{ error_msg }}</strong></div>
+    {% endif %}
     <div class="mt-4 d-flex gap-2">
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a href="{% url 'red:detalle_dispositivo' dispositivo.pk %}" class="btn btn-outline-secondary">Cancelar</a>

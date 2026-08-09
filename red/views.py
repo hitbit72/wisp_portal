@@ -177,6 +177,7 @@ def eliminar_dispositivo(request, pk):
 @login_required
 def nueva_interfaz(request, dispositivo_pk):
     dispositivo = get_object_or_404(Dispositivo, pk=dispositivo_pk)
+    error_msg = ""
 
     if request.method == 'POST':
         form = InterfazForm(request.POST)
@@ -185,11 +186,14 @@ def nueva_interfaz(request, dispositivo_pk):
             interfaz.dispositivo = dispositivo
             interfaz.save()
             return redirect('red:detalle_dispositivo', pk=dispositivo.pk)
+        else:
+            # si el formlario no es válido.
+            error_msg = "Por favor, corrige los errores en el formulario: " + form.errors.as_text()
     else:
         form = InterfazForm()
 
     return render(request, 'red/interfaz/form_interfaz.html', {
-        'form': form, 'dispositivo': dispositivo, 'interfaz': None,
+        'form': form, 'dispositivo': dispositivo, 'interfaz': None, 'error_msg': error_msg
     })
 
 
