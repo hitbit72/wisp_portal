@@ -25,11 +25,11 @@
     <thead>
         <tr>
             <th>Nombre</th>
+            <th>IP gestión</th>
             <th>Modo</th>
             <th>Tipo</th>
             <th>Marca</th>
             <th>Modelo</th>
-            <th>IP gestión</th>
             <th>Estado</th>
             <th></th>
         </tr>
@@ -38,11 +38,11 @@
         {% for dispositivo in sector.dispositivos.all %}
         <tr>
             <td><a href="{% url 'red:detalle_dispositivo' dispositivo.pk %}">{{ dispositivo.nombre }}</a></td>
+            <td>{{ dispositivo.ip_gestion|default:"—" }}</td>
             <td>{{ dispositivo.get_rol_display }}</td>
             <td>{{ dispositivo.get_tipo_display }}</td>
             <td>{{ dispositivo.get_marca_display }}</td>
             <td>{{ dispositivo.modelo|default:"—" }}</td>
-            <td>{{ dispositivo.ip_gestion|default:"—" }}</td>
             <td>
                 <span class="badge
                     {% if dispositivo.estado == 'activo' %}bg-success
