@@ -67,7 +67,7 @@ class DispositivoForm(BootstrapFormMixin, forms.ModelForm):
         model = Dispositivo
         fields = [
             'nombre', 'rol', 'tipo', 'marca', 'modelo', 'sector', 'cliente',
-            'ip_gestion', 'mac_address', 'firmware_version',
+            'ip_gestion', 'mac_address', 'firmware_version', 'snmp_community',
             'estado', 'fecha_instalacion', 'latitud', 'longitud', 'atributos_extra', 'notas',
         ]
         widgets = {

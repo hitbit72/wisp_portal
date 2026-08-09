@@ -55,9 +55,14 @@
             <label class="form-label">Dirección MAC</label>
             {{ form.mac_address }}
         </div>
-        <div class="col-12">
+        <div class="col-6">
             <label class="form-label">Versión de firmware</label>
             {{ form.firmware_version }}
+        </div>
+        <div class="col-md-12">
+            <label class="form-label">Comunidad SNMP</label>
+            {{ form.snmp_community }}
+            <div class="form-text">Solo aplica a dispositivos que soporten SNMP. Ej. "public"</div>
         </div>
         <div class="col-md-6">
             <label class="form-label">Latitud</label>
