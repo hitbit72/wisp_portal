@@ -42,9 +42,7 @@
         </div>
     </div>
     {% if error_msg %}
-        <div class="alert alert-danger mt-3" role="alert">
-            {{ error_msg }}
-        </div>
+        <div class="alert alert-danger mt-3" role="alert"><p>{{ error_msg }}</p></div>
     {% endif %}
     <div class="mt-4 d-flex gap-2">
         <button type="submit" class="btn btn-primary">Guardar</button>
