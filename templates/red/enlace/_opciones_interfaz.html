@@ -1,0 +1,5 @@
+{% for interfaz in interfaces %}
+<option value="{{ interfaz.pk }}">{{ interfaz.nombre }}</option>
+{% empty %}
+<option value="">— Selecciona un dispositivo destino —</option>
+{% endfor %}

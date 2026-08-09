@@ -1,8 +1,22 @@
 from django import forms
+from django.urls import reverse
 
 from clientes.forms import BootstrapFormMixin
 
 from .models import Dispositivo, Enlace, Interfaz, Sector
+
+
+def _etiqueta_dispositivo(obj):
+    """Etiqueta del selector de dispositivo destino: 'nombre (tipo · IP · sector)'."""
+    ip = obj.ip_gestion or 'sin IP'
+    sector = obj.sector.nombre if obj.sector_id else 'Sin sector'
+    return f'{obj.nombre} ({obj.get_tipo_display()} · {ip} · {sector})'
+
+
+def _etiqueta_interfaz(obj):
+    """Etiqueta de interfaz: solo el nombre, para que coincida con las
+    opciones que se cargan dinámicamente por dispositivo."""
+    return obj.nombre
 
 
 class JSONTextoOpcional(forms.JSONField):
@@ -75,12 +89,36 @@ class InterfazForm(BootstrapFormMixin, forms.ModelForm):
 
 class EnlaceForm(BootstrapFormMixin, forms.ModelForm):
     """'dispositivo_origen' se fija desde la vista; la lista de interfaces
-    origen se restringe a las del dispositivo origen."""
+    origen se restringe a las del dispositivo origen. El destino se etiqueta
+    con 'nombre (tipo · IP · sector)' y sus interfaces se cargan dinámicamente
+    vía HTMX al cambiar el dispositivo destino."""
 
     def __init__(self, *args, dispositivo_origen=None, **kwargs):
         super().__init__(*args, **kwargs)
         if dispositivo_origen is not None:
             self.fields['interfaz_origen'].queryset = dispositivo_origen.interfaces.all()
+
+        destino = self.fields['dispositivo_destino']
+        destino.queryset = Dispositivo.objects.select_related('sector')
+        destino.label_from_instance = _etiqueta_dispositivo
+        destino.widget.attrs.update({
+            'hx-get': reverse('red:opciones_interfaces_dispositivo'),
+            'hx-trigger': 'change',
+            'hx-target': '#id_interfaz_destino',
+            'hx-swap': 'innerHTML',
+            'hx-include': '#id_dispositivo_destino',
+        })
+
+        self.fields['interfaz_destino'].label_from_instance = _etiqueta_interfaz
+
+        if self.is_bound:
+            destino_id = self.data.get('dispositivo_destino')
+            if destino_id:
+                self.fields['interfaz_destino'].queryset = Interfaz.objects.filter(
+                    dispositivo_id=destino_id
+                )
+        elif self.instance and self.instance.dispositivo_destino_id:
+            self.fields['interfaz_destino'].queryset = self.instance.dispositivo_destino.interfaces.all()
 
     class Meta:
         model = Enlace

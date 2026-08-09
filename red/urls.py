@@ -25,4 +25,5 @@ urlpatterns = [
     path('dispositivos/<int:dispositivo_pk>/enlaces/nuevo/', views.nuevo_enlace, name='nuevo_enlace'),
     path('enlaces/<int:pk>/editar/', views.editar_enlace, name='editar_enlace'),
     path('enlaces/<int:pk>/eliminar/', views.eliminar_enlace, name='eliminar_enlace'),
+    path('interfaces/opciones/', views.opciones_interfaces_dispositivo, name='opciones_interfaces_dispositivo'),
 ]

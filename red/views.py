@@ -7,6 +7,20 @@ from .forms import DispositivoForm, EnlaceForm, InterfazForm, SectorForm
 from .models import Dispositivo, Enlace, Interfaz, Sector
 
 
+@login_required
+def opciones_interfaces_dispositivo(request):
+    """Fragmento HTMX con las opciones de interfaz_destino del dispositivo
+    elegido en el formulario de enlaces."""
+    destino_id = request.GET.get('dispositivo_destino', '').strip()
+    if destino_id.isdigit():
+        interfaces = Interfaz.objects.filter(
+            dispositivo_id=destino_id
+        ).order_by('nombre')
+    else:
+        interfaces = Interfaz.objects.none()
+    return render(request, 'red/enlace/_opciones_interfaz.html', {'interfaces': interfaces})
+
+
 # --- Sectores ---------------------------------------------------------------
 
 @login_required
