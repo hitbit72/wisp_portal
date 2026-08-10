@@ -59,8 +59,8 @@ def lista_clientes(request):
     }
 
     if request.headers.get('HX-Request'):
-        return render(request, 'clientes/_tabla.html', contexto, clt_count)
-    return render(request, 'clientes/lista.html', contexto, clt_count)
+        return render(request, 'clientes/_tabla.html', contexto)
+    return render(request, 'clientes/lista.html', contexto)
 
 
 @login_required
