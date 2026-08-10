@@ -45,16 +45,16 @@
             </div>
 
             <div class="col-12 col-sm-6 col-xl-3">
-              <article class="metric-card metric-warning">
+              <article class="metric-card metric-danger">
                 <div class="metric-top">
                   <span class="metric-label">Inactivos</span>
-                  <span class="metric-icon"><i class="bi bi-hourglass-split" aria-hidden="true"></i></span>
+                  <span class="metric-icon"><i class="bi bi-slash-circle" aria-hidden="true"></i></span>
                 </div>
                 <div class="metric-value">{{ clientes_inactivos }}</div>
               </article>
             </div>
           </section>
-          
+
 <section class="row g-3 mt-1">
 <form class="row g-2 mb-3"
       hx-get="{% url 'clientes:lista' %}"
