@@ -19,7 +19,42 @@
           </div>
 
 
+          <section class="row g-3 mt-1" aria-label="User summary">
+            <div class="col-12 col-sm-6 col-xl-3">
+              <article class="metric-card metric-primary">
+                <div class="metric-top">
+                  <span class="metric-label">Total Clientes</span>
+                  <span class="metric-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
+                </div>
+                <div class="metric-value">{{ clientes_totales }}</div>
+                <!-- div class="metric-meta">
+                  <span class="text-success">+5.1%</span>
+                  <span>this month</span>
+                </div -->
+              </article>
+            </div>
 
+            <div class="col-12 col-sm-6 col-xl-3">
+              <article class="metric-card metric-success">
+                <div class="metric-top">
+                  <span class="metric-label">Activos</span>
+                  <span class="metric-icon"><i class="bi bi-check2-circle" aria-hidden="true"></i></span>
+                </div>
+                <div class="metric-value">{{ clientes_activos }}</div>
+              </article>
+            </div>
+
+            <div class="col-12 col-sm-6 col-xl-3">
+              <article class="metric-card metric-warning">
+                <div class="metric-top">
+                  <span class="metric-label">Inactivos</span>
+                  <span class="metric-icon"><i class="bi bi-hourglass-split" aria-hidden="true"></i></span>
+                </div>
+                <div class="metric-value">{{ clientes_inactivos }}</div>
+              </article>
+            </div>
+          </section>
+          
 <section class="row g-3 mt-1">
 <form class="row g-2 mb-3"
       hx-get="{% url 'clientes:lista' %}"
@@ -40,7 +75,7 @@
     </div>
     <div class="col-md-3">
         <select name="estado" id="id_estado" class="form-select">
-            <option value="">Todos</option>
+            <option value="">Todos los estados</option>
             <option value="activos" {% if estado_seleccionado == 'activos' %}selected{% endif %}>Activos</option>
             <option value="inactivos" {% if estado_seleccionado == 'inactivos' %}selected{% endif %}>Inactivos</option>
         </select>

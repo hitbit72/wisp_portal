@@ -15,11 +15,9 @@ def lista_clientes(request):
     de página, devuelve la página completa con el formulario de filtros.
     """
     clientes = Cliente.objects.all()
-    clt_count = {
-        'clientes_totales': clientes.count(),
-        'clientes_activos': clientes.filter(activo=True).count(),
-        'clientes_inactivos': clientes.filter(activo=False).count(),
-    }
+    clientes_totales = clientes.count()
+    clientes_activos = clientes.filter(activo=True).count()
+    clientes_inactivos = clientes.filter(activo=False).count()
 
     busqueda = request.GET.get('q', '').strip()
     if busqueda:
@@ -56,6 +54,9 @@ def lista_clientes(request):
         'poblacion_seleccionada': poblacion_seleccionada,
         'estado_seleccionado': estado_seleccionado,
         'poblaciones': poblaciones,
+        'clientes_totales': clientes_totales,
+        'clientes_activos': clientes_activos,
+        'clientes_inactivos': clientes_inactivos,
     }
 
     if request.headers.get('HX-Request'):
