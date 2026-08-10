@@ -6,9 +6,9 @@
   <meta name="description" content="hitbit72 professional admin dashboard template">
   <title>[x-cloak] { display: none !important; }</title>
 
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="static/assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="static/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+  <link rel="stylesheet" href="static/assets/css/style.css">
 </head>
 
 <body>
@@ -52,7 +52,7 @@
       </nav>
 
       <div class="sidebar-user">
-        <img class="avatar-img avatar-md sidebar-user-avatar" src="assets/images/avatar/avatar.jpg" alt="Admin Hasan">
+        <img class="avatar-img avatar-md sidebar-user-avatar" src="static/assets/images/avatar/avatar.jpg" alt="Admin Hasan">
         <strong>{{ user.get_full_name|default:user.username }}</strong>
         <small>{{ user.get_rol_display }}</small>
       </div>
@@ -104,7 +104,7 @@
 
             <div class="dropdown">
               <button class="profile-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img class="avatar-img avatar-sm" src="assets/images/avatar/avatar.jpg" alt="Admin Hasan">
+                <img class="avatar-img avatar-sm" src="static/assets/images/avatar/avatar.jpg" alt="Admin Hasan">
                 <span class="profile-name d-none d-sm-inline">{{ user.username }}</span>
               </button>
               <ul class="dropdown-menu dropdown-menu-end">
@@ -136,7 +136,7 @@
     </div>
   </div>
 
-  <script src="assets/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/js/main.js"></script>
+  <script src="static/assets/js/bootstrap.bundle.min.js"></script>
+  <script src="static/assets/js/main.js"></script>
 </body>
 </html>
