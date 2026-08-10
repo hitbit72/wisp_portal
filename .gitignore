@@ -5,6 +5,7 @@ docs/
 __pycache__/
 *.pyc
 staticfiles/
+migrations/
 *.sqlite3
 .DS_Store
 run.bat
