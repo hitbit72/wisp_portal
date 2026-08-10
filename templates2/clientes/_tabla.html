@@ -4,10 +4,11 @@
     <thead>
         <tr>
             <th>Nombre</th>
-            <th>Apodo</th>
-            <th>Teléfono</th>
-            <th>Población</th>
             <th>Estado</th>
+            <th>Apodo</th>
+            <th>Población</th>
+            <th>Teléfono</th>
+            <th>eMail</th>
             <th></th>
         </tr>
     </thead>
@@ -16,8 +17,6 @@
         <tr>
             <td><a href="{% url 'clientes:detalle' cliente.pk %}">{{ cliente.nombre_completo }}</a></td>
             <td>{{ cliente.apodo|default:"—" }}</td>
-            <td>{{ cliente.telefono|default:"—" }}</td>
-            <td>{{ cliente.poblacion|default:"—" }}</td>
             <td>
                 {% if cliente.activo %}
                 <span class="badge bg-success">Activo</span>
@@ -25,12 +24,15 @@
                 <span class="badge bg-danger">Inactivo</span>
                 {% endif %}
             </td>
+            <td>{{ cliente.poblacion|default:"—" }}</td>
+            <td>{{ cliente.telefono|default:"—" }}</td>
+            <td>{{ cliente.email|default:"—" }}</td>
             <td class="text-end">
                 <a href="{% url 'clientes:detalle' cliente.pk %}" class="btn btn-sm btn-outline-secondary">Ver</a>
             </td>
         </tr>
         {% empty %}
-        <tr><td colspan="6" class="text-center text-muted py-4">No se encontraron clientes.</td></tr>
+        <tr><td colspan="7" class="text-center text-muted py-4">No se encontraron clientes.</td></tr>
         {% endfor %}
     </tbody>
 </table>
