@@ -16,9 +16,9 @@ def lista_clientes(request):
     """
     clientes = Cliente.objects.all()
     clt_count = {
-        'total': clientes.count(),
-        'activos': clientes.filter(activo=True).count(),
-        'inactivos': clientes.filter(activo=False).count(),
+        'clientes_totales': clientes.count(),
+        'clientes_activos': clientes.filter(activo=True).count(),
+        'clientes_inactivos': clientes.filter(activo=False).count(),
     }
 
     busqueda = request.GET.get('q', '').strip()
@@ -59,7 +59,7 @@ def lista_clientes(request):
     }
 
     if request.headers.get('HX-Request'):
-        return render(request, 'clientes/_tabla.html', contexto)
+        return render(request, 'clientes/_tabla.html', contexto, clt_count)
     return render(request, 'clientes/lista.html', contexto, clt_count)
 
 
