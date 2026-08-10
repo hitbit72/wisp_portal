@@ -1,11 +1,60 @@
 {% extends "base.html" %}
-{% block titulo %}Clientes · Portal WISP{% endblock %}
-{% block contenido %}
-<div class="d-flex justify-content-between align-items-center mb-3">
-    <h2 class="mb-0">Clientes</h2>
-    <a href="{% url 'clientes:nuevo' %}" class="btn btn-primary">+ Nuevo cliente</a>
-</div>
 
+        {% block titulo %}
+          <div class="page-heading">
+            <div class="page-heading-copy">
+              <span class="page-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
+              <div>
+                <p class="eyebrow mb-1">Gestión · Portal WISP</p>
+                <h1 class="h3 mb-1">Clientes</h1>
+                <!-- 
+                <p class="text-muted mb-0">Review accounts, roles, account status, and team ownership.</p>
+                -->
+              </div>
+            </div>
+            <div class="heading-actions"><a class="btn btn-outline-secondary btn-sm" href="tables.html"><i class="bi bi-download" aria-hidden="true"></i> Export</a><a class="btn btn-primary btn-sm" href="{% url 'clientes:nuevo' %}"><i class="bi bi-person-plus" aria-hidden="true"></i> Nuevo Cliente</a></div>
+          </div>
+        {% endblock %}
+
+{% block contenido %}
+
+          <section class="row g-3 mt-1" aria-label="User summary">
+            <div class="col-12 col-sm-6 col-xl-3">
+              <article class="metric-card metric-primary">
+                <div class="metric-top">
+                  <span class="metric-label">Total Clientes</span>
+                  <span class="metric-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
+                </div>
+                <div class="metric-value">{{ clt_count.total }}</div>
+                <!-- div class="metric-meta">
+                  <span class="text-success">+5.1%</span>
+                  <span>this month</span>
+                </div -->
+              </article>
+            </div>
+
+            <div class="col-12 col-sm-6 col-xl-3">
+              <article class="metric-card metric-success">
+                <div class="metric-top">
+                  <span class="metric-label">Activos</span>
+                  <span class="metric-icon"><i class="bi bi-check2-circle" aria-hidden="true"></i></span>
+                </div>
+                <div class="metric-value">{{ clt_count.activos }}</div>
+              </article>
+            </div>
+
+            <div class="col-12 col-sm-6 col-xl-3">
+              <article class="metric-card metric-warning">
+                <div class="metric-top">
+                  <span class="metric-label">Inactivos</span>
+                  <span class="metric-icon"><i class="bi bi-hourglass-split" aria-hidden="true"></i></span>
+                </div>
+                <div class="metric-value">{{ clt_count.inactivos }}</div>
+              </article>
+            </div>
+          </section>
+
+<section class="row g-3 mt-1">
 <form class="row g-2 mb-3"
       hx-get="{% url 'clientes:lista' %}"
       hx-target="#tabla-clientes"
@@ -31,8 +80,11 @@
         </select>
     </div>
 </form>
+</section>
 
+<section class="panel mt-3">
 <div id="tabla-clientes">
     {% include "clientes/_tabla.html" %}
 </div>
+</section>
 {% endblock %}

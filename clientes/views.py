@@ -15,6 +15,11 @@ def lista_clientes(request):
     de página, devuelve la página completa con el formulario de filtros.
     """
     clientes = Cliente.objects.all()
+    clt_count = {
+        'total': clientes.count(),
+        'activos': clientes.filter(activo=True).count(),
+        'inactivos': clientes.filter(activo=False).count(),
+    }
 
     busqueda = request.GET.get('q', '').strip()
     if busqueda:
@@ -55,7 +60,7 @@ def lista_clientes(request):
 
     if request.headers.get('HX-Request'):
         return render(request, 'clientes/_tabla.html', contexto)
-    return render(request, 'clientes/lista.html', contexto)
+    return render(request, 'clientes/lista.html', contexto, clt_count)
 
 
 @login_required
