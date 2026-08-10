@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block titulo %}{% if router %}Editar router{% else %}Nuevo router{% endif %} · Portal WISP{% endblock %}
+{% block contenido %}
+<h2>{% if router %}Editar router{% else %}Nuevo router{% endif %}</h2>
+
+<form method="post" class="mt-3" style="max-width: 760px;">
+    {% csrf_token %}
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label class="form-label">Nombre</label>
+            {{ form.nombre }}
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Modelo</label>
+            {{ form.modelo }}
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Usuario API</label>
+            {{ form.usuario }}
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Contraseña API</label>
+            {{ form.clave }}
+            <div class="form-text">Se guarda cifrada en la base de datos.</div>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">IP del router</label>
+            {{ form.ip }}
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Puerto API</label>
+            {{ form.puerto }}
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Sector</label>
+            {{ form.sector }}
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Lista de activos</label>
+            {{ form.active_list }}
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Perfil desactivados</label>
+            {{ form.ppp_disable }}
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Latitud</label>
+            {{ form.latitud }}
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Longitud</label>
+            {{ form.longitud }}
+        </div>
+        <div class="col-12">
+            <label class="form-label">Notas</label>
+            {{ form.notas }}
+        </div>
+    </div>
+
+    <div class="mt-4 d-flex gap-2">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a href="{% if router %}{% url 'mikrotik:detalle' router.pk %}{% else %}{% url 'mikrotik:lista' %}{% endif %}"
+           class="btn btn-outline-secondary">Cancelar</a>
+    </div>
+</form>
+{% endblock %}
