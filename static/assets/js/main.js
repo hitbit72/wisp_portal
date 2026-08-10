@@ -142,7 +142,7 @@
     }
 
     initValidation();
-    initTableSearch();
+    //initTableSearch();
     initThemeToggle();
 
     if (!sidebarToggle) {
