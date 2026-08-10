@@ -6,9 +6,9 @@
   <meta name="description" content="hitbit72 professional admin dashboard template">
   <title>[x-cloak] { display: none !important; }</title>
 
-  <link rel="stylesheet" href="static/assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="static/assets/vendors/bootstrap-icons/bootstrap-icons.css">
-  <link rel="stylesheet" href="static/assets/css/style.css">
+  <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+  <link rel="stylesheet" href="/static/assets/css/style.css">
 </head>
 
 <body>
@@ -17,7 +17,7 @@
 
     <aside class="admin-sidebar" id="adminSidebar" aria-label="Main navigation">
       <div class="sidebar-header">
-        <a class="brand-mark" href="index.html" aria-label="adminHMD dashboard">
+        <a class="brand-mark" href="/" aria-label="adminHMD dashboard">
           <span class="brand-icon"><i class="bi bi-grid-1x2-fill" aria-hidden="true"></i></span>
           <span class="brand-copy">
             <span class="brand-title">InforCEM</span>
@@ -52,7 +52,7 @@
       </nav>
 
       <div class="sidebar-user">
-        <img class="avatar-img avatar-md sidebar-user-avatar" src="static/assets/images/avatar/avatar.jpg" alt="Admin Hasan">
+        <img class="avatar-img avatar-md sidebar-user-avatar" src="/static/assets/images/avatar/avatar.jpg" alt="user">
         <strong>{{ user.get_full_name|default:user.username }}</strong>
         <small>{{ user.get_rol_display }}</small>
       </div>
@@ -104,14 +104,14 @@
 
             <div class="dropdown">
               <button class="profile-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img class="avatar-img avatar-sm" src="static/assets/images/avatar/avatar.jpg" alt="Admin Hasan">
+                <img class="avatar-img avatar-sm" src="/static/assets/images/avatar/avatar.jpg" alt="user">
                 <span class="profile-name d-none d-sm-inline">{{ user.username }}</span>
               </button>
               <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href="profile.html">Perfil</a></li>
                 <li><a class="dropdown-item" href="settings.html">Configuración</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="login.html">Cerrar sesión</a></li>
+                <li><a class="dropdown-item" href="/login.html">Cerrar sesión</a></li>
               </ul>
             </div>
           </div>
@@ -136,7 +136,7 @@
     </div>
   </div>
 
-  <script src="static/assets/js/bootstrap.bundle.min.js"></script>
-  <script src="static/assets/js/main.js"></script>
+  <script src="/static/assets/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/assets/js/main.js"></script>
 </body>
 </html>
