@@ -17,7 +17,7 @@ class Cliente(models.Model):
     telefono = models.CharField(max_length=20, blank=True)
     telefono_alternativo = models.CharField(max_length=20, blank=True)
     email = models.EmailField(blank=True)
-    poblacion = models.CharField(max_length=255, blank=True)
+    poblacion = models.CharField(max_length=255)
     direccion = models.CharField(max_length=255, blank=True)
     latitud = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
     longitud = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
