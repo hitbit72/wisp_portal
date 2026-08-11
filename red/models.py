@@ -7,7 +7,7 @@ class Sector(models.Model):
     'Torre Centro'). Útil para organizar el inventario y, más adelante, el mapa.
     """
     nombre = models.CharField(max_length=100, unique=True)
-    poblacion = models.CharField(max_length=255, blank=True)
+    poblacion = models.CharField(max_length=255)
     direccion = models.CharField(max_length=255, blank=True)
     descripcion = models.TextField(blank=True)
     latitud = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
@@ -89,7 +89,7 @@ class Dispositivo(models.Model):
     ip_gestion = models.GenericIPAddressField(null=True, blank=True, verbose_name='IP de gestión')
     mac_address = models.CharField(max_length=17, blank=True, verbose_name='Dirección MAC')
     firmware_version = models.CharField(max_length=50, blank=True)
-    snmp_community = models.CharField(max_length=100, blank=True, null=True, verbose_name='Comunidad SNMP', help_text='Solo aplica a dispositivos que soporten SNMP. Ej. "public"')
+    snmp_community = models.CharField(max_length=100, default='public', blank=True, null=True, verbose_name='Comunidad SNMP', help_text='Solo aplica a dispositivos que soporten SNMP. Ej. "public"')
     latitud = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
     longitud = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
 

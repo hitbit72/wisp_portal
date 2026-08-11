@@ -1,0 +1,81 @@
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label class="form-label" for="id_nombre">Nombre</label>
+            {{ form.nombre }}
+            <div class="invalid-feedback">El nombre es obligatorio.</div>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label" for="id_rol">Modo de operación</label>
+            {{ form.rol }}
+            <div class="invalid-feedback">Seleccione el modo de operación.</div>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label" for="id_modelo">Modelo</label>
+            {{ form.modelo }}
+        </div>
+        <div class="col-md-4">
+            <label class="form-label" for="id_tipo">Tipo</label>
+            {{ form.tipo }}
+            <div class="invalid-feedback">Seleccione un tipo</div>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label" for="id_marca">Marca</label>
+            {{ form.marca }}
+            <div class="invalid-feedback">Seleccione una marca</div>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label" for="id_estado">Estado</label>
+            {{ form.estado }}
+            <div class="invalid-feedback">Seleccione el estado</div>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label" for="id_sector">Sector</label>
+            {{ form.sector }}
+        </div>
+        <div class="col-md-6">
+            <label class="form-label" for="id_cliente">Cliente</label>
+            {{ form.cliente }}
+            <div class="form-text">Solo aplica cuando el tipo es "Antena de cliente".</div>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label" for="id_fecha_instalacion">Fecha de instalación</label>
+            {{ form.fecha_instalacion }}
+        </div>
+        <div class="col-md-6">
+            <label class="form-label" for="id_ip_gestion">IP de gestión</label>
+            {{ form.ip_gestion }}
+        </div>
+        <div class="col-md-6">
+            <label class="form-label" for="id_mac_address">Dirección MAC</label>
+            {{ form.mac_address }}
+        </div>
+        <div class="col-6">
+            <label class="form-label" for="id_firmware_version">Versión de firmware</label>
+            {{ form.firmware_version }}
+        </div>
+        <div class="col-md-12">
+            <label class="form-label" for="id_snmp_community">Comunidad SNMP</label>
+            {{ form.snmp_community }}
+            <div class="form-text">Solo aplica a dispositivos que soporten SNMP. Ej. "public"</div>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label" for="id_latitud">Latitud</label>
+            {{ form.latitud }}
+        </div>
+        <div class="col-md-6">
+            <label class="form-label" for="id_longitud">Longitud</label>
+            {{ form.longitud }}
+        </div>
+        <div class="col-12">
+            <label class="form-label" for="id_atributos_extra">Atributos del dispositivo</label>
+            {{ form.atributos_extra }}
+            {% for error in form.atributos_extra.errors %}
+            <div class="text-danger small">{{ error }}</div>
+            {% endfor %}
+            <div class="form-text">Datos específicos de la marca/modelo. Puedes escribir texto suelto o un objeto JSON válido, p. ej. <code>{&quot;banda&quot;: 5}</code>.</div>
+        </div>
+        <div class="col-12">
+            <label class="form-label" for="id_notas">Notas</label>
+            {{ form.notas }}
+        </div>
+    </div>

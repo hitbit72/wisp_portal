@@ -29,14 +29,14 @@ def lista_sectores(request):
     contexto = {'pagina': pagina, 'busqueda': busqueda}
 
     if request.headers.get('HX-Request'):
-        return render(request, 'red/_tabla.html', contexto)
-    return render(request, 'red/lista.html', contexto)
+        return render(request, 'red/sector/_tabla.html', contexto)
+    return render(request, 'red/sector/lista.html', contexto)
 
 
 @login_required
 def detalle_sector(request, pk):
     sector = get_object_or_404(Sector, pk=pk)
-    return render(request, 'red/detalle_sector.html', {'sector': sector})
+    return render(request, 'red/sector/detalle_sector.html', {'sector': sector})
 
 
 @login_required
@@ -51,7 +51,7 @@ def form_sector(request, pk=None):
     else:
         form = SectorForm(instance=sector)
 
-    return render(request, 'red/form_sector.html', {'form': form, 'sector': sector})
+    return render(request, 'red/sector/form_sector.html', {'form': form, 'sector': sector})
 
 
 @login_required
@@ -60,7 +60,7 @@ def eliminar_sector(request, pk):
     if request.method == 'POST':
         sector.delete()
         return redirect('red:lista')
-    return render(request, 'red/confirmar_eliminar_sector.html', {'sector': sector})
+    return render(request, 'red/sector/confirmar_eliminar_sector.html', {'sector': sector})
 
 
 # --- Dispositivos -----------------------------------------------------------
