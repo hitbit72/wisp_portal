@@ -144,6 +144,21 @@ def nuevo_dispositivo(request, sector_pk):
     })
 
 @login_required
+def nuevo_dispositivo_solo(request):
+
+    if request.method == 'POST':
+        form = DispositivoForm(request.POST)
+        if form.is_valid():
+            dispositivo = form.save()
+            return redirect('red:dispositivos')
+    else:
+        form = DispositivoForm()
+
+    return render(request, 'red/dispositivo/form_dispositivo_solo.html', {
+        'form': form, 'dispositivo': None,
+    })
+
+@login_required
 def nuevo_dispositivo_cliente(request, cliente_pk):
     cliente = get_object_or_404(Cliente, pk=cliente_pk)
 

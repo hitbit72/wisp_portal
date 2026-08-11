@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block titulo %}{% if dispositivo %}Editar dispositivo{% else %}Nuevo dispositivo{% endif %} · Portal WISP{% endblock %}
+{% block contenido %}
+<h2>{% if dispositivo %}Editar dispositivo{% else %}Nuevo dispositivo{% endif %}</h2>
+
+<form method="post" class="mt-3" style="max-width: 760px;">
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+    <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+    {% endif %}
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label class="form-label">Nombre</label>
+            {{ form.nombre }}
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Modo de operación</label>
+            {{ form.rol }}
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Modelo</label>
+            {{ form.modelo }}
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Tipo</label>
+            {{ form.tipo }}
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Marca</label>
+            {{ form.marca }}
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Estado</label>
+            {{ form.estado }}
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Sector</label>
+            {{ form.sector }}
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Cliente</label>
+            {{ form.cliente }}
+            <div class="form-text">Solo aplica cuando el tipo es "Antena de cliente".</div>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Fecha de instalación</label>
+            {{ form.fecha_instalacion }}
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">IP de gestión</label>
+            {{ form.ip_gestion }}
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Dirección MAC</label>
+            {{ form.mac_address }}
+        </div>
+        <div class="col-6">
+            <label class="form-label">Versión de firmware</label>
+            {{ form.firmware_version }}
+        </div>
+        <div class="col-md-12">
+            <label class="form-label">Comunidad SNMP</label>
+            {{ form.snmp_community }}
+            <div class="form-text">Solo aplica a dispositivos que soporten SNMP. Ej. "public"</div>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Latitud</label>
+            {{ form.latitud }}
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Longitud</label>
+            {{ form.longitud }}
+        </div>
+        <div class="col-12">
+            <label class="form-label">Atributos del dispositivo</label>
+            {{ form.atributos_extra }}
+            {% for error in form.atributos_extra.errors %}
+            <div class="text-danger small">{{ error }}</div>
+            {% endfor %}
+            <div class="form-text">Datos específicos de la marca/modelo. Puedes escribir texto suelto o un objeto JSON válido, p. ej. <code>{&quot;banda&quot;: 5}</code>.</div>
+        </div>
+        <div class="col-12">
+            <label class="form-label">Notas</label>
+            {{ form.notas }}
+        </div>
+    </div>
+
+    <div class="mt-4 d-flex gap-2">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a href="{% if dispositivo %}{% url 'red:detalle_dispositivo' dispositivo.pk %}{% else %}{% url 'red:dispositivos' %}{% endif %}"
+           class="btn btn-outline-secondary">Cancelar</a>
+    </div>
+</form>
+{% endblock %}
