@@ -107,12 +107,7 @@
         <tr>
             <td><a href="{% url 'red:detalle_dispositivo' dispositivo.pk %}">{{ dispositivo.nombre }}</a></td>
             <td>
-                <span class="badge
-                    {% if dispositivo.estado == 'activo' %}bg-success
-                    {% elif dispositivo.estado == 'mantenimiento' %}bg-warning text-dark
-                    {% else %}bg-secondary{% endif %}">
-                    {{ dispositivo.get_estado_display }}
-                </span>
+                {% include "/red/dispositivo/comun/estado.html" %}
             </td>
             <td>{{ dispositivo.ip_gestion|default:"—" }}</td>
             <td>{{ dispositivo.get_tipo_display }}</td>

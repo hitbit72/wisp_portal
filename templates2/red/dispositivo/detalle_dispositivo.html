@@ -22,12 +22,8 @@
             <div class="card-body">
                 <h5 class="card-title">Datos del equipo</h5>
                 <p class="mb-1"><strong>Estado:</strong>
-                    <span class="badge
-                        {% if dispositivo.estado == 'activo' %}bg-success
-                        {% elif dispositivo.estado == 'mantenimiento' %}bg-warning text-dark
-                        {% else %}bg-secondary{% endif %}">
-                        {{ dispositivo.get_estado_display }}
-                    </span></p>
+                    {% include "/red/dispositivo/comun/estado.html" %}
+                </p>
                 <p class="mb-1"><strong>Modo:</strong> {{ dispositivo.get_rol_display|default:"—" }}</p>
                 <p class="mb-1"><strong>IP de gestión:</strong> {{ dispositivo.ip_gestion|default:"—" }}</p>
                 <p class="mb-1"><strong>MAC:</strong> {{ dispositivo.mac_address|default:"—" }}</p>
