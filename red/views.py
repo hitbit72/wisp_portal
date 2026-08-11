@@ -69,7 +69,7 @@ def lista_dispositivos(request):
     y filtros. Es una segunda vía de acceso: los dispositivos también se ven
     desde el detalle de su sector."""
     dispositivos = Dispositivo.objects.select_related('sector', 'cliente')
-
+    
     busqueda = request.GET.get('q', '').strip()
     if busqueda:
         dispositivos = dispositivos.filter(
