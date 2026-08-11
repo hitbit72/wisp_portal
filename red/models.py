@@ -42,6 +42,7 @@ class Dispositivo(models.Model):
         OLT = 'olt', 'OLT'
         ONU = 'onu', 'ONU'
         ANTENA_CLIENTE = 'antena_cliente', 'Antena de cliente',
+        TERMINAL_CLIENTE = 'terminal_cliente', 'Terminal de cliente',
         OTROS = 'otros', 'Otros'
 
     class Marca(models.TextChoices):
@@ -82,7 +83,6 @@ class Dispositivo(models.Model):
     cliente = models.ForeignKey(
         'clientes.Cliente', on_delete=models.SET_NULL, null=True, blank=True,
         related_name='dispositivos',
-        help_text='Solo aplica cuando el tipo es "Antena de cliente".',
     )
 
     ip_gestion = models.GenericIPAddressField(null=True, blank=True, verbose_name='IP de gestión')
