@@ -8,6 +8,12 @@
 <form method="post" class="panel needs-validation" style="max-width: 760px;" novalidate>
     {% csrf_token %}
     <div class="row g-3">
+        <div class="col-md-8 d-flex align-items-end pb-2">
+            <div class="form-check">
+                {{ form.activo }}
+                <label class="form-check-label" for="id_activo">Cliente activo</label>
+            </div>
+        </div>
         <div class="col-md-8">
             <label class="form-label" for="id_nombre_completo">Nombre completo / Razón social</label>
             {{ form.nombre_completo }}
@@ -17,19 +23,13 @@
             <label class="form-label" for="id_apodo">Apodo / Mote</label>
             {{ form.apodo }}
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <label class="form-label" for="id_tipo_documento">Tipo de documento</label>
             {{ form.tipo_documento }}
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <label class="form-label" for="id_numero_documento">Número de documento</label>
             {{ form.numero_documento }}
-        </div>
-        <div class="col-md-4 d-flex align-items-end pb-2">
-            <div class="form-check">
-                {{ form.activo }}
-                <label class="form-check-label" for="id_activo">Cliente activo</label>
-            </div>
         </div>
         <div class="col-md-4">
             <label class="form-label" for="id_telefono">Teléfono</label>
