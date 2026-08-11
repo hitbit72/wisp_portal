@@ -7,7 +7,6 @@
             <th>Modo</th>
             <th>Tipo</th>
             <th>Marca</th>
-            <th>Modelo</th>
             <th>Sector</th>
             <th>IP gestión</th>
             <th>Estado</th>
@@ -21,8 +20,7 @@
             <td>{{ dispositivo.cliente.nombre|default:"—" }}</td>
             <td>{{ dispositivo.get_rol_display }}</td>
             <td>{{ dispositivo.get_tipo_display }}</td>
-            <td>{{ dispositivo.get_marca_display }}</td>
-            <td>{{ dispositivo.modelo|default:"—" }}</td>
+            <td>{{ dispositivo.get_marca_display }} {{ dispositivo.modelot }}</td>
             <td>{% if dispositivo.sector %}<a href="{% url 'red:detalle_sector' dispositivo.sector.pk %}">{{ dispositivo.sector.nombre }}</a>{% else %}—{% endif %}</td>
             <td>{{ dispositivo.ip_gestion|default:"—" }}</td>
             <td>
