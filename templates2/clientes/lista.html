@@ -24,7 +24,7 @@
 			      <div class="col-12 col-sm-6 col-xl-3"><div class="alert alert-primary" role="alert"><strong>Inactivos:</strong> {{ clientes_inactivos }}</div></div>
 		      </section>
 
-<section class="row g-3 mt-1">
+<section class="panel row g-3 mt-1">
 <form class="row g-2 mb-3"
       hx-get="{% url 'clientes:lista' %}"
       hx-target="#tabla-clientes"
@@ -52,7 +52,7 @@
 </form>
 </section>
 
-<section class="panel mt-3">
+<section class="panel mt-1">
 <div id="tabla-clientes">
     {% include "clientes/_tabla.html" %}
 </div>
