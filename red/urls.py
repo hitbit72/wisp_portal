@@ -15,6 +15,7 @@ urlpatterns = [
     path('dispositivos/', views.lista_dispositivos, name='lista_dispositivos'),
     path('sectores/<int:sector_pk>/dispositivos/nuevo/', views.nuevo_dispositivo, name='nuevo_dispositivo'),
     path('dispositivos/<int:cliente_pk>/nuevo/', views.nuevo_dispositivo_cliente, name='nuevo_dispositivo_cliente'),
+    path('dispositivos/nuevo/', views.nuevo_dispositivo_solo, name='nuevo_dispositivo_solo'),
     path('dispositivos/<int:pk>/', views.detalle_dispositivo, name='detalle_dispositivo'),
     path('dispositivos/<int:pk>/editar/', views.editar_dispositivo, name='editar_dispositivo'),
     path('dispositivos/<int:pk>/eliminar/', views.eliminar_dispositivo, name='eliminar_dispositivo'),
