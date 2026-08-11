@@ -6,7 +6,7 @@
 
 <section class="row">
 
-<form method="post" class="panel needs-validation" style="max-width: 760px;" x-data="{ conexion: '{{ form.conexion.value|default:'dhcp' }}' }">
+<form method="post" class="panel needs-validation" style="max-width: 760px;" x-data="{ conexion: '{{ form.conexion.value|default:'dhcp' }}' }" novalidate>
     {% csrf_token %}
     <div class="row g-3">
         <div class="col-md-12">
