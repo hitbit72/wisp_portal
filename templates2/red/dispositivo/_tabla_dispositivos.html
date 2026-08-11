@@ -20,7 +20,7 @@
             <td>{{ dispositivo.cliente.nombre|default:"—" }}</td>
             <td>{{ dispositivo.get_rol_display }}</td>
             <td>{{ dispositivo.get_tipo_display }}</td>
-            <td>{{ dispositivo.get_marca_display }} {{ dispositivo.modelot }}</td>
+            <td>{{ dispositivo.get_marca_display }} {{ dispositivo.modelo }}</td>
             <td>{% if dispositivo.sector %}<a href="{% url 'red:detalle_sector' dispositivo.sector.pk %}">{{ dispositivo.sector.nombre }}</a>{% else %}—{% endif %}</td>
             <td>{{ dispositivo.ip_gestion|default:"—" }}</td>
             <td>
