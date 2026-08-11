@@ -129,17 +129,18 @@ def nuevo_dispositivo(request, sector_pk):
 
 @login_required
 def nuevo_dispositivo_cliente(request, cliente_pk):
-    
+    cliente = get_object_or_404(Cliente, pk=cliente_pk)
+
     if request.method == 'POST':
         form = DispositivoForm(request.POST)
         if form.is_valid():
             dispositivo = form.save()
-            return redirect('clientes:detalle', pk=cliente_pk)
+            return redirect('clientes:detalle', pk=cliente.pk)
     else:
-        form = DispositivoForm(initial={'sector': 0})
+        form = DispositivoForm(initial={'cliente': cliente})
 
-    return render(request, 'red/dispositivo/form_dispositivo.html', {
-        'form': form, 'sector': 0, 'dispositivo': None,
+    return render(request, 'red/dispositivo/form_dispositivo_cliente.html', {
+        'form': form, 'cliente': cliente, 'dispositivo': None,
     })
 
 @login_required
