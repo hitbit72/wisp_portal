@@ -3,69 +3,74 @@
 {% block contenido %}
 <h2>{% if cliente %}Editar cliente{% else %}Nuevo cliente{% endif %}</h2>
 
-<form method="post" class="mt-3" style="max-width: 760px;">
+<section class="row">
+
+<form method="post" class="panel needs-validation" style="max-width: 760px;" novalidate>
     {% csrf_token %}
     <div class="row g-3">
         <div class="col-md-8">
-            <label class="form-label">Nombre completo / Razón social</label>
+            <label class="form-label" for="id_nombre_completo">Nombre completo / Razón social</label>
             {{ form.nombre_completo }}
+            <div class="invalid-feedback">El nombre completo es obligatorio.</div>
         </div>
         <div class="col-md-4">
-            <label class="form-label">Apodo / Mote</label>
+            <label class="form-label" for="id_apodo">Apodo / Mote</label>
             {{ form.apodo }}
         </div>
         <div class="col-md-4">
-            <label class="form-label">Tipo de documento</label>
+            <label class="form-label" for="id_tipo_documento">Tipo de documento</label>
             {{ form.tipo_documento }}
         </div>
         <div class="col-md-4">
-            <label class="form-label">Número de documento</label>
+            <label class="form-label" for="id_numero_documento">Número de documento</label>
             {{ form.numero_documento }}
         </div>
         <div class="col-md-4 d-flex align-items-end pb-2">
             <div class="form-check">
                 {{ form.activo }}
-                <label class="form-check-label">Cliente activo</label>
+                <label class="form-check-label" for="id_activo">Cliente activo</label>
             </div>
         </div>
         <div class="col-md-4">
-            <label class="form-label">Teléfono</label>
+            <label class="form-label" for="id_telefono">Teléfono</label>
             {{ form.telefono }}
         </div>
         <div class="col-md-4">
-            <label class="form-label">Teléfono alternativo</label>
+            <label class="form-label" for="id_telefono_alternativo">Teléfono alternativo</label>
             {{ form.telefono_alternativo }}
         </div>
         <div class="col-md-4">
-            <label class="form-label">Email</label>
+            <label class="form-label" for="id_email">Email</label>
             {{ form.email }}
         </div>
         <div class="col-md-6">
-            <label class="form-label">Población</label>
+            <label class="form-label" for="id_poblacion">Población</label>
             {{ form.poblacion }}
         </div>
         <div class="col-md-6">
-            <label class="form-label">Dirección</label>
+            <label class="form-label" for="id_direccion">Dirección</label>
             {{ form.direccion }}
         </div>
         <div class="col-md-6">
-            <label class="form-label">Latitud</label>
+            <label class="form-label" for="id_latitud">Latitud</label>
             {{ form.latitud }}
         </div>
         <div class="col-md-6">
-            <label class="form-label">Longitud</label>
+            <label class="form-label" for="id_longitud">Longitud</label>
             {{ form.longitud }}
         </div>
         <div class="col-12">
-            <label class="form-label">Notas</label>
+            <label class="form-label" for="id_notas">Notas</label>
             {{ form.notas }}
         </div>
     </div>
 
     <div class="mt-4 d-flex gap-2">
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="submit" class="btn btn-primary"><i class="bi bi-send" aria-hidden="true"></i> Guardar</button>
         <a href="{% if cliente %}{% url 'clientes:detalle' cliente.pk %}{% else %}{% url 'clientes:lista' %}{% endif %}"
-           class="btn btn-outline-secondary">Cancelar</a>
+           class="btn btn-outline-secondary"><i class="bi bi-x" aria-hidden="true"></i> Cancelar</a>
     </div>
 </form>
+
+</section>
 {% endblock %}
