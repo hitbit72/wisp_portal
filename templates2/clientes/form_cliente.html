@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 {% block titulo %}{% if cliente %}Editar cliente{% else %}Nuevo cliente{% endif %} · Portal WISP{% endblock %}
 {% block contenido %}
-<h2>{% if cliente %}<i class="bi bi-person" aria-hidden="true"></i> Editar cliente{% else %}<i class="bi bi-person-add" aria-hidden="true"></i> Nuevo cliente{% endif %}</h2>
+<h2>{% if cliente %}
+<i class="bi bi-person" aria-hidden="true"></i> Editar cliente
+{% else %}
+<i class="bi bi-person-add" aria-hidden="true"></i> Nuevo cliente
+{% endif %}</h2>
 
 <section class="row">
 
