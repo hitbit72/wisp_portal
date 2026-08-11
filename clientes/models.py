@@ -51,7 +51,7 @@ class Contrato(models.Model):
         WIFI = 'wifi', 'WIFI'
 
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, related_name='contratos')
-    nombre = models.CharField(max_length=100, null=True, blank=True, verbose_name='Nombre del contrato')
+    nombre = models.CharField(max_length=100, verbose_name='Nombre del contrato')
     plan = models.ForeignKey('mikrotik.Plan', on_delete=models.PROTECT, related_name='contratos', verbose_name='Plan')
     precio_mensual = models.DecimalField(max_digits=8, decimal_places=2)
     estado = models.CharField(max_length=20, choices=Estado.choices, default=Estado.PENDIENTE)
