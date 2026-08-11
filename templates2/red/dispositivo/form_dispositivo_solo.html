@@ -87,8 +87,7 @@
 
     <div class="mt-4 d-flex gap-2">
         <button type="submit" class="btn btn-primary">Guardar</button>
-        <a href="{% if dispositivo %}{% url 'red:detalle_dispositivo' dispositivo.pk %}{% else %}{% url 'red:dispositivos' %}{% endif %}"
-           class="btn btn-outline-secondary">Cancelar</a>
+        <a href="{% url 'red:dispositivos' %}" class="btn btn-outline-secondary">Cancelar</a>
     </div>
 </form>
 {% endblock %}
