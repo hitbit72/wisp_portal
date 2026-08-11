@@ -3,6 +3,8 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 
+from clientes.models import Cliente
+
 from .forms import DispositivoForm, EnlaceForm, InterfazForm, SectorForm
 from .models import Dispositivo, Enlace, Interfaz, Sector
 
@@ -125,6 +127,20 @@ def nuevo_dispositivo(request, sector_pk):
         'form': form, 'sector': sector, 'dispositivo': None,
     })
 
+@login_required
+def nuevo_dispositivo_cliente(request, cliente_pk):
+    
+    if request.method == 'POST':
+        form = DispositivoForm(request.POST)
+        if form.is_valid():
+            dispositivo = form.save()
+            return redirect('clientes:detalle', pk=cliente_pk)
+    else:
+        form = DispositivoForm(initial={'sector': 0})
+
+    return render(request, 'red/dispositivo/form_dispositivo.html', {
+        'form': form, 'sector': 0, 'dispositivo': None,
+    })
 
 @login_required
 def detalle_dispositivo(request, pk):
