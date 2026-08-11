@@ -18,7 +18,7 @@
             </div>
           </div>
 
-		      <section class="panel row g-3 mt-1" style="background-color: var(--bs-primary);">
+		      <section class="row g-3 mt-1" style="background-color: var(--bs-primary); border-radius: 8px;">
 			      <div class="col-12 col-sm-6 col-xl-3"><div class="alert alert-primary" role="alert"><strong>Total clientes:</strong> {{ clientes_totales }}</div></div>
 			      <div class="col-12 col-sm-6 col-xl-3"><div class="alert alert-primary" role="alert"><strong>Activos:</strong> {{ clientes_activos }}</div></div>
 			      <div class="col-12 col-sm-6 col-xl-3"><div class="alert alert-primary" role="alert"><strong>Inactivos:</strong> {{ clientes_inactivos }}</div></div>
@@ -52,7 +52,7 @@
 </form>
 
 <section class="panel mt-1">
-  <div id="tabla-clientes">
+  <div id="tabla-clientes" class="table-responsive">
     {% include "clientes/_tabla.html" %}
   </div>
 </section>
