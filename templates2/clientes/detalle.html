@@ -107,7 +107,7 @@
         <tr>
             <td><a href="{% url 'red:detalle_dispositivo' dispositivo.pk %}">{{ dispositivo.nombre }}</a></td>
             <td>
-                {% include "/red/dispositivo/comun/estado.html" %}
+                {% include "red/dispositivo/comun/estado.html" %}
             </td>
             <td>{{ dispositivo.ip_gestion|default:"—" }}</td>
             <td>{{ dispositivo.get_tipo_display }}</td>

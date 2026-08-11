@@ -22,7 +22,7 @@
             <div class="card-body">
                 <h5 class="card-title">Datos del equipo</h5>
                 <p class="mb-1"><strong>Estado:</strong>
-                    {% include "/red/dispositivo/comun/estado.html" %}
+                    {% include "red/dispositivo/comun/estado.html" %}
                 </p>
                 <p class="mb-1"><strong>Modo:</strong> {{ dispositivo.get_rol_display|default:"—" }}</p>
                 <p class="mb-1"><strong>IP de gestión:</strong> {{ dispositivo.ip_gestion|default:"—" }}</p>
