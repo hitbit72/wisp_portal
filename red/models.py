@@ -64,7 +64,8 @@ class Dispositivo(models.Model):
         ACTIVO = 'activo', 'Activo'
         INACTIVO = 'inactivo', 'Inactivo'
         MANTENIMIENTO = 'mantenimiento', 'En mantenimiento',
-        INSTALACION = 'instalacion', 'En instalación'
+        INSTALACION = 'instalacion', 'En instalación',
+        RETIRADO = 'retirado', 'Retirado'
 
     class Rol(models.TextChoices):
         MAIN = 'main', 'Principal'
