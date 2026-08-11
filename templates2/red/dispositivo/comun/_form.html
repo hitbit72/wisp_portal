@@ -1,27 +1,27 @@
     <div class="row g-3">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <label class="form-label" for="id_nombre">Nombre</label>
             {{ form.nombre }}
             <div class="invalid-feedback">El nombre es obligatorio.</div>
         </div>
         <div class="col-md-6">
-            <label class="form-label" for="id_rol">Modo de operación</label>
-            {{ form.rol }}
-            <div class="invalid-feedback">Seleccione el modo de operación.</div>
+            <label class="form-label" for="id_marca">Marca</label>
+            {{ form.marca }}
+            <div class="invalid-feedback">Seleccione una marca</div>
         </div>
         <div class="col-md-6">
             <label class="form-label" for="id_modelo">Modelo</label>
             {{ form.modelo }}
         </div>
         <div class="col-md-4">
+            <label class="form-label" for="id_rol">Modo de operación</label>
+            {{ form.rol }}
+            <div class="invalid-feedback">Seleccione el modo de operación.</div>
+        </div>
+        <div class="col-md-4">
             <label class="form-label" for="id_tipo">Tipo</label>
             {{ form.tipo }}
             <div class="invalid-feedback">Seleccione un tipo</div>
-        </div>
-        <div class="col-md-4">
-            <label class="form-label" for="id_marca">Marca</label>
-            {{ form.marca }}
-            <div class="invalid-feedback">Seleccione una marca</div>
         </div>
         <div class="col-md-4">
             <label class="form-label" for="id_estado">Estado</label>
@@ -42,6 +42,11 @@
             {{ form.fecha_instalacion }}
         </div>
         <div class="col-md-6">
+            <label class="form-label" for="id_snmp_community">Comunidad SNMP</label>
+            {{ form.snmp_community }}
+            <div class="form-text">Solo aplica a dispositivos que soporten SNMP. Ej. "public"</div>
+        </div>
+        <div class="col-md-6">
             <label class="form-label" for="id_ip_gestion">IP de gestión</label>
             {{ form.ip_gestion }}
         </div>
@@ -52,11 +57,6 @@
         <div class="col-6">
             <label class="form-label" for="id_firmware_version">Versión de firmware</label>
             {{ form.firmware_version }}
-        </div>
-        <div class="col-md-12">
-            <label class="form-label" for="id_snmp_community">Comunidad SNMP</label>
-            {{ form.snmp_community }}
-            <div class="form-text">Solo aplica a dispositivos que soporten SNMP. Ej. "public"</div>
         </div>
         <div class="col-md-6">
             <label class="form-label" for="id_latitud">Latitud</label>
