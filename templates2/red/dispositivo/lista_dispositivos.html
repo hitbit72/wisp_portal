@@ -1,10 +1,23 @@
 {% extends "base.html" %}
 {% block titulo %}Red · Dispositivos · Portal WISP{% endblock %}
 {% block contenido %}
-<div class="d-flex justify-content-between align-items-center mb-3">
-    <h2 class="mb-0">Dispositivos</h2>
-    <a href="{% url 'red:lista' %}" class="btn btn-outline-secondary">Ver por sectores</a>
-</div>
+          <div class="page-heading">
+            <div class="page-heading-copy">
+              <span class="page-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
+              <div>
+                <p class="eyebrow mb-1">Gestión · Portal WISP</p>
+                <h1 class="h3 mb-1">Dispositivos</h1>
+                <!-- 
+                <p class="text-muted mb-0">Review accounts, roles, account status, and team ownership.</p>
+                -->
+              </div>
+            </div>
+            <div class="heading-actions">
+                <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-download" aria-hidden="true"></i> Exportar</a>
+                <a class="btn btn-primary btn-sm" href="{% url 'red:lista' %}" class="btn btn-outline-secondary">Ver por sectores</a>
+                <a class="btn btn-primary btn-sm" href="{% url 'red:nuevo_dispositivo' sector_seleccionado %}"><i class="bi bi-person-plus" aria-hidden="true"></i> Nuevo Dispositivo</a>
+            </div>
+          </div>
 
 <form class="row g-2 mb-3"
       hx-get="{% url 'red:lista_dispositivos' %}"
@@ -36,9 +49,9 @@
     <div class="col-md-2">
         <select name="estado" id="id_estado" class="form-select">
             <option value="">Todos los estados</option>
-            <option value="activo" {% if estado_seleccionado == 'activo' %}selected{% endif %}>Activo</option>
-            <option value="inactivo" {% if estado_seleccionado == 'inactivo' %}selected{% endif %}>Inactivo</option>
-            <option value="mantenimiento" {% if estado_seleccionado == 'mantenimiento' %}selected{% endif %}>En mantenimiento</option>
+            {% for valor, etiqueta in tipos_estado %}
+            <option value="{{ valor }}" {% if valor == estado_seleccionado %}selected{% endif %}>{{ etiqueta }}</option>
+            {% endfor %}
         </select>
     </div>
 </form>

@@ -93,6 +93,13 @@ def lista_dispositivos(request):
     if sector_seleccionado:
         dispositivos = dispositivos.filter(sector_id=sector_seleccionado)
 
+    dis_totales = dispositivos.count()
+    dis_activos = dispositivos.filter(estado='activo').count()
+    dis_inactivos = dispositivos.filter(estado='inactivo').count()
+    dis_mantenimiento = dispositivos.filter(estado='mantenimiento').count()
+    dis_instalacion = dispositivos.filter(estado='instalacion').count()
+    dis_retirados = dispositivos.filter(estado='retirado').count()
+
     paginator = Paginator(dispositivos, 25)
     pagina = paginator.get_page(request.GET.get('page'))
 
@@ -102,8 +109,17 @@ def lista_dispositivos(request):
         'tipo_seleccionado': tipo_seleccionado,
         'estado_seleccionado': estado_seleccionado,
         'tipos_dispositivo': Dispositivo.Tipo.choices,
+        'tipos_estado': Dispositivo.Estado.choices,
         'sector_seleccionado': sector_seleccionado,
         'todos_sectores': Sector.objects.all().values_list('pk', 'nombre').order_by('nombre'),
+        'totales': {
+            'total': dis_totales,
+            'activos': dis_activos,
+            'inactivos': dis_inactivos,
+            'mantenimiento': dis_mantenimiento,
+            'instalacion': dis_instalacion,
+            'retirados': dis_retirados,
+        },
     }
 
     if request.headers.get('HX-Request'):
