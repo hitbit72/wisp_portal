@@ -3,6 +3,7 @@
     <thead>
         <tr>
             <th>Nombre</th>
+            <th>Cliente</td>
             <th>Modo</th>
             <th>Tipo</th>
             <th>Marca</th>
@@ -17,6 +18,7 @@
         {% for dispositivo in pagina %}
         <tr>
             <td><a href="{% url 'red:detalle_dispositivo' dispositivo.pk %}">{{ dispositivo.nombre }}</a></td>
+            <td>{{ dispositivo.cliente.nombre|default:"—" }}</td>
             <td>{{ dispositivo.get_rol_display }}</td>
             <td>{{ dispositivo.get_tipo_display }}</td>
             <td>{{ dispositivo.get_marca_display }}</td>
