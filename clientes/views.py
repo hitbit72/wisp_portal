@@ -98,6 +98,7 @@ def alternar_activo_cliente(request, pk):
 @login_required
 def nuevo_contrato(request, cliente_pk):
     cliente = get_object_or_404(Cliente, pk=cliente_pk)
+    error_msg = ""
 
     if request.method == 'POST':
         form = ContratoForm(request.POST)
@@ -106,11 +107,14 @@ def nuevo_contrato(request, cliente_pk):
             contrato.cliente = cliente
             contrato.save()
             return redirect('clientes:detalle', pk=cliente.pk)
+        else:
+            # si el formlario no es válido.
+            error_msg = "Por favor, corrige los errores en el formulario: " + form.errors.as_text()
     else:
         form = ContratoForm()
 
     return render(request, 'clientes/form_contrato.html', {
-        'form': form, 'cliente': cliente, 'contrato': None,
+        'form': form, 'cliente': cliente, 'contrato': None, 'error_msg': error_msg
     })
 
 
@@ -118,17 +122,21 @@ def nuevo_contrato(request, cliente_pk):
 def editar_contrato(request, pk):
     contrato = get_object_or_404(Contrato, pk=pk)
     cliente = contrato.cliente
+    error_msg = ""
 
     if request.method == 'POST':
         form = ContratoForm(request.POST, instance=contrato)
         if form.is_valid():
             form.save()
             return redirect('clientes:detalle', pk=cliente.pk)
+        else:
+            # si el formlario no es válido.
+            error_msg = "Por favor, corrige los errores en el formulario: " + form.errors.as_text
     else:
         form = ContratoForm(instance=contrato)
 
     return render(request, 'clientes/form_contrato.html', {
-        'form': form, 'cliente': cliente, 'contrato': contrato,
+        'form': form, 'cliente': cliente, 'contrato': contrato, 'error_msg': error_msg
     })
 
 
