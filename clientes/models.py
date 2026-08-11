@@ -55,7 +55,7 @@ class Contrato(models.Model):
     plan = models.ForeignKey('mikrotik.Plan', on_delete=models.PROTECT, related_name='contratos', verbose_name='Plan')
     precio_mensual = models.DecimalField(max_digits=8, decimal_places=2)
     estado = models.CharField(max_length=20, choices=Estado.choices, default=Estado.PENDIENTE)
-    fecha_inicio = models.DateField(null=True, blank=True)
+    fecha_inicio = models.DateField()
     fecha_cancelacion = models.DateField(null=True, blank=True)
 
     # Campos pensados para la integración futura con el servicio MikroTik.
