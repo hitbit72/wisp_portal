@@ -57,6 +57,7 @@ def lista_clientes(request):
         'clientes_totales': clientes_totales,
         'clientes_activos': clientes_activos,
         'clientes_inactivos': clientes_inactivos,
+        'sector': 0,
     }
 
     if request.headers.get('HX-Request'):
