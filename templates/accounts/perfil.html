@@ -17,7 +17,7 @@
 
 <section class="panel row g-1 mt-1">
 <!-- <section class="row"> -->
-    <div class="col-md-6">
+    <div class="col-md-8">
         <div class="card mb-1">
             <div class="card-body">
                 <h5 class="card-title">Datos de acceso</h5>
@@ -28,28 +28,28 @@
     </div>
 </section>
 
-<section class="panel mt-1 md-8">
+<section class="panel mt-1">
   <div class="col-md-8">
     <form method="post" class="panel needs-validation" style="max-width: 760px;" novalidate>
         {% csrf_token %}
         <div class="row g-3">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <label class="form-label" for="id_first_name">Nombre</label>
                 {{ form.first_name }}
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <label class="form-label" for="id_last_name">Apellidos</label>
                 {{ form.last_name }}
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <label class="form-label" for="id_email">Email</label>
                 {{ form.email }}
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <label class="form-label" for="id_telefono">Teléfono</label>
                 {{ form.telefono }}
             </div>
-            <div class="col-12">
+            <div class="col-8">
                 <div class="form-check form-switch">
                     {{ form.activo_en_campo }}
                     <label class="form-check-label" for="id_activo_en_campo">
