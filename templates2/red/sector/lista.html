@@ -32,9 +32,10 @@
                 onclick="document.getElementById('id_q').value=''; htmx.trigger(document.querySelector('#id_q'), 'input');">Limpiar</button>
     </div>
 </form>
-
+<section class="panel mt-1">
 <div id="tabla-sectores" class="table-responsive">
     {% include "red/sector/_tabla.html" %}
 </div>
+</section>
 </section>
 {% endblock %}
