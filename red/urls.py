@@ -18,7 +18,7 @@ urlpatterns = [
     path('dispositivos/nuevo/', views.nuevo_dispositivo_solo, name='nuevo_dispositivo_solo'),
     path('dispositivos/<int:pk>/', views.detalle_dispositivo, name='detalle_dispositivo'),
     path('dispositivos/<int:pk>/editar/', views.editar_dispositivo, name='editar_dispositivo'),
-    path('dispositivos/<int:pk>/editar/', views.editar_dispositivo_cliente, name='editar_dispositivo_cliente'),
+    path('dispositivos/<int:pk>/editar/dispositivo/', views.editar_dispositivo_cliente, name='editar_dispositivo_cliente'),
     path('dispositivos/<int:pk>/eliminar/', views.eliminar_dispositivo, name='eliminar_dispositivo'),
     # Interfaces
     path('dispositivos/<int:dispositivo_pk>/interfaces/nueva/', views.nueva_interfaz, name='nueva_interfaz'),
