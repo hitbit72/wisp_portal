@@ -48,7 +48,7 @@ def lista_routers(request):
 def detalle_router(request, pk):
     router = get_object_or_404(Router.objects.prefetch_related('planes'), pk=pk)
     # Obtiene la URL anterior, o asigna una ruta por defecto si no existe
-    url_anterior = request.META.get('HTTP_REFERER', '/mikrotik/')
+    url_anterior = request.META.get('HTTP_REFERER', 'mikrotik:lista')
     return render(request, 'mikrotik/detalle.html', {'router': router, 'url_anterior': url_anterior})
 
 
