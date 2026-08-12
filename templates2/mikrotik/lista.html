@@ -1,11 +1,24 @@
 {% extends "base.html" %}
 {% block titulo %}Routers · Portal WISP{% endblock %}
 {% block contenido %}
-<div class="d-flex justify-content-between align-items-center mb-3">
-    <h2 class="mb-0">Routers MikroTik</h2>
-    <a href="{% url 'mikrotik:nuevo' %}" class="btn btn-primary">+ Nuevo router</a>
-</div>
+          <div class="page-heading">
+            <div class="page-heading-copy">
+              <span class="page-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
+              <div>
+                <p class="eyebrow mb-1">Gestión · Portal WISP</p>
+                <h1 class="h3 mb-1">Routers MikroTik</h1>
+                <!-- 
+                <p class="text-muted mb-0">Review accounts, roles, account status, and team ownership.</p>
+                -->
+              </div>
+            </div>
+            <div class="heading-actions">
+                <a class="btn btn-outline-secondary btn-sm" href="/"><i class="bi bi-download" aria-hidden="true"></i> Exportar</a>
+                <a class="btn btn-primary btn-sm" href="{% url 'mikrotik:nuevo' %}"><i class="bi bi-person-plus" aria-hidden="true"></i> Nuevo Cliente</a>
+            </div>
+          </div>
 
+<section class="panel row g-3 mt-1">
 <form class="row g-2 mb-3"
       hx-get="{% url 'mikrotik:lista' %}"
       hx-target="#tabla-routers"
@@ -25,7 +38,8 @@
     </div>
 </form>
 
-<div id="tabla-routers">
+<div id="tabla-routers" class="table-responsive">
     {% include "mikrotik/_tabla.html" %}
 </div>
+</section>
 {% endblock %}
