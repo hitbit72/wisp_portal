@@ -71,7 +71,7 @@ class DispositivoForm(BootstrapFormMixin, forms.ModelForm):
             'estado', 'fecha_instalacion', 'latitud', 'longitud', 'atributos_extra', 'notas',
         ]
         widgets = {
-            'fecha_instalacion': forms.DateInput(attrs={'type': 'date'}),
+            'fecha_instalacion': forms.DateInput(format='%Y-%m-%d', attrs={'type': 'date'}),
             'notas': forms.Textarea(attrs={'rows': 3}),
         }
 

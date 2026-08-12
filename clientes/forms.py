@@ -41,8 +41,8 @@ class ContratoForm(BootstrapFormMixin, forms.ModelForm):
             'conexion', 'identificador_mikrotik', 'pppoe_clave', 'ip_asignada', 'notas',
         ]
         widgets = {
-            'fecha_inicio': forms.DateInput(attrs={'type': 'date'}),
-            'fecha_cancelacion': forms.DateInput(attrs={'type': 'date'}),
+            'fecha_inicio': forms.DateInput(format='%Y-%m-%d', attrs={'type': 'date'}),
+            'fecha_cancelacion': forms.DateInput(format='%Y-%m-%d', attrs={'type': 'date'}),
             'conexion': forms.Select(attrs={'x-on:change': 'conexion = $event.target.value'}),
             'notas': forms.Textarea(attrs={'rows': 3}),
         }
