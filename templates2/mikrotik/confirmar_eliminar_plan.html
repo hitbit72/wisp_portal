@@ -5,8 +5,8 @@
 
 <div class="alert alert-warning" style="max-width: 640px;">
     {% if plan.contratos.count %}
-    <p class="mb-0 mt-2">Está asignado a <strong>{{ plan.contratos.count }} contrato(s)</strong>.
-    Esta operación está protegida: si hay contratos que lo usan, no se podrá eliminar.</p>
+    <p class="mb-0 mt-2">Este plan esta asignado a <strong>{{ plan.contratos.count }} contrato(s)</strong>.
+    Esta operación está protegida: si hay contratos que lo usan, no se puede eliminar.</p>
     {% else %}
     ¿Seguro que quieres eliminar el plan <strong>{{ plan.nombre }}</strong>
     del router <strong>{{ plan.router.nombre }}</strong>?
