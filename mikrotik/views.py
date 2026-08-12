@@ -137,6 +137,7 @@ def editar_plan(request, pk):
 def eliminar_plan(request, pk):
     plan = get_object_or_404(Plan, pk=pk)
     router_pk = plan.router_id
+    #num_contratos = plan.contratos.count()
 
     if request.method == 'POST':
         plan.delete()
