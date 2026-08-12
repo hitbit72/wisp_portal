@@ -239,13 +239,13 @@ def editar_dispositivo(request, pk):
 def editar_dispositivo_cliente(request, pk, pk2):
     dispositivo = get_object_or_404(Dispositivo, pk=pk)
     cliente = get_object_or_404(Cliente, pk=dispositivo.cliente.pk)
-    cliente_pk = cliente.pk
+    cliente_pk = dispositivo.cliente.pk
 
     if request.method == 'POST':
         form = DispositivoForm(request.POST, instance=dispositivo)
         if form.is_valid():
             dispositivo = form.save()
-            return redirect('cliente:detalle', pk=cliente.pk or cliente_pk)
+            return redirect('cliente:detalle', pk=dispositivo.cliente.pk or cliente_pk)
     else:
         form = DispositivoForm(instance=dispositivo)
 
