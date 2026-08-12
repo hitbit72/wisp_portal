@@ -43,8 +43,8 @@
 </table>
 
 {% if pagina.paginator.num_pages > 1 %}
-<nav>
-    <ul class="pagination">
+<nav aria-label="User pagination">
+    <ul class="pagination pagination-sm mb-0">
         {% for numero in pagina.paginator.page_range %}
         <li class="page-item {% if numero == pagina.number %}active{% endif %}">
             <a class="page-link"
