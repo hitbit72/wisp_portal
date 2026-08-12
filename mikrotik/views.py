@@ -7,7 +7,7 @@ from red.models import Sector
 
 from .forms import PlanForm, RouterForm
 from .models import Plan, Router
-
+from .urls import mikrotik
 
 @login_required
 def lista_routers(request):
@@ -48,7 +48,9 @@ def lista_routers(request):
 @login_required
 def detalle_router(request, pk):
     router = get_object_or_404(Router.objects.prefetch_related('planes'), pk=pk)
-    return render(request, 'mikrotik/detalle.html', {'router': router})
+    # Obtiene la URL anterior, o asigna una ruta por defecto si no existe
+    url_anterior = request.META.get('HTTP_REFERER', mikrotik:lista)
+    return render(request, 'mikrotik/detalle.html', {'router': router, 'url_anterior': url_anterior})
 
 
 @login_required
