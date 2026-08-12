@@ -13,10 +13,7 @@
   <button class="icon-button theme-toggle auth-theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme" title="Switch color theme">
     <i class="bi bi-moon-stars" data-theme-icon aria-hidden="true"></i>
   </button>
-
-
 {% block contenido %}
-
   <main class="auth-page">
     <section class="auth-card">
       <a class="auth-brand" href="/"><span class="brand-icon"><i class="bi bi-grid-1x2-fill" aria-hidden="true"></i></span><span><strong>InforCEM</strong><small>Acceso a su espacio de trabajo.</small></span></a>
@@ -55,33 +52,8 @@
       -->
     </section>
   </main>
-
-
-<div class="row justify-content-center">
-    <div class="col-md-4">
-        <div class="card shadow-sm mt-5">
-            <div class="card-body">
-                <h4 class="card-title mb-3">Iniciar sesión</h4>
-                {% if form.errors %}
-                <div class="alert alert-danger">Usuario o contraseña incorrectos.</div>
-                {% endif %}
-                <form method="post">
-                    {% csrf_token %}
-                    <div class="mb-3">
-                        <label class="form-label">Usuario</label>
-                        {{ form.username }}
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Contraseña</label>
-                        {{ form.password }}
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100">Entrar</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 {% endblock %}
-
+  <script src="/static/assets/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/assets/js/main.js"></script>
 </body>
 </html>
