@@ -18,18 +18,18 @@ def http_ruta(ruta):
     """
     print(f'Entrada: {ruta}')
     if 'editar' in ruta:
-        print(f'Salida: {ruta}')
+        print(f'Salida1: {ruta}')
         return 'red/dispositivos'
     if 'nuevo' in ruta:
-        print(f'Salida: {ruta}')
+        print(f'Salida2: {ruta}')
         return 'red/dispositivos'
     if 'eliminar' in ruta:
-        print(f'Salida: {ruta}')
+        print(f'Salida3: {ruta}')
         return 'red/dispositivos'
     if 'nuevo' in ruta:
-        print(f'Salida: {ruta}')
+        print(f'Salida4: {ruta}')
         return 'red/dispositivos'
-    print(f'Salida: {ruta}')
+    print(f'Salida5: {ruta}')
     return ruta # Devuelve la ruta original
 
 # --- Sectores ---------------------------------------------------------------
@@ -201,6 +201,7 @@ def detalle_dispositivo(request, pk):
     # Obtiene la URL anterior, o asigna una ruta por defecto si no existe
     url_anterior = request.META.get('HTTP_REFERER', 'red:lista_dispositivos')
     url_anterior = http_ruta(url_anterior)  # Cambia la ruta si es necesario
+    print(f'Url_Final: {url_anterior}')
 
     dispositivo = get_object_or_404(
         Dispositivo.objects.prefetch_related('interfaces', 'enlaces_origen', 'enlaces_destino'),
