@@ -15,7 +15,7 @@
 
 <form method="post">
     {% csrf_token %}
-    {% if plan.contratos.count %}
+    {% if not plan.contratos.count %}
     <button type="submit" class="btn btn-sm btn-danger">Sí, eliminar</button>
     {% endif %}
     <a href="{% url 'mikrotik:detalle' plan.router.pk %}" class="btn btn-sm btn-outline-primary">Cancelar</a>
