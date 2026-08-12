@@ -58,7 +58,8 @@
     <a href="{% url 'red:nueva_interfaz' dispositivo.pk %}" class="btn btn-primary btn-sm">+ Nueva interfaz</a>
 </div>
 
-<table class="table table-hover align-middle bg-white">
+<div id="tabla-iface" class="table-responsive">
+<table class="table table-hover align-middle" id="ifaceTable" data-searchable-table>
     <thead>
         <tr>
             <th>Nombre</th>
@@ -98,6 +99,7 @@
         {% endfor %}
     </tbody>
 </table>
+</div>
 </section>
 
 <section class="panel mt-1">
@@ -106,7 +108,8 @@
     <a href="{% url 'red:nuevo_enlace' dispositivo.pk %}" class="btn btn-primary btn-sm">+ Nuevo enlace</a>
 </div>
 
-<table class="table table-hover align-middle bg-white">
+<div id="tabla-enlace" class="table-responsive">
+<table class="table table-hover align-middle" id="enlaceTable" data-searchable-table>
     <thead>
         <tr>
             <th>Desde</th>
@@ -149,12 +152,13 @@
         {% endfor %}
     </tbody>
 </table>
+</div>
 </section>
 
 <div style="margin-top: 0.5rem;">
 <a href="{{ url_anterior }}" class="btn btn-outline-secondary"><i class="bi bi-box-arrow-in-left"></i> Volver</a>
 {% if dispositivo.sector %}
-| <a href="{% url 'red:detalle_sector' dispositivo.sector.pk %}" class="btn btn-link ps-0"><i class="bi bi-box-arrow-in-left"></i> Sector</a>
+| <a href="{% url 'red:detalle_sector' dispositivo.sector.pk %}" class="btn btn-outline-secondary"><i class="bi bi-box-arrow-in-left"></i> Sector</a>
 {% endif %}
 </div>
 {% endblock %}
