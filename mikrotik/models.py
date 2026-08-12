@@ -66,7 +66,7 @@ class Plan(models.Model):
     plan asignado al cliente no queden desincronizados.
     """
 
-    router = models.ForeignKey(Router, on_delete=models.CASCADE, related_name='planes')
+    router = models.ForeignKey(Router, on_delete=models.SET_NULL, null=True, related_name='planes')
     nombre = models.CharField(max_length=100)
     velocidad_bajada = models.PositiveIntegerField(
         verbose_name='Velocidad de bajada (Mbps)',
