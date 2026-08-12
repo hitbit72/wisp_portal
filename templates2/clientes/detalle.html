@@ -115,13 +115,14 @@
         {% for dispositivo in cliente.dispositivos.all %}
         <tr>
             <td><a href="{% url 'red:detalle_dispositivo' dispositivo.pk %}">{{ dispositivo.nombre }}</a></td>
-            <td>
-                {% include "red/dispositivo/comun/estado.html" %}
-            </td>
+            <td>{% include "red/dispositivo/comun/estado.html" %}</td>
             <td>{{ dispositivo.ip_gestion|default:"—" }}</td>
             <td>{{ dispositivo.get_tipo_display }}</td>
             <td>{{ dispositivo.get_marca_display }} {{ dispositivo.modelo }}</td>
-            <td class="text-end"></td>
+            <td class="text-end">
+                <a href="{% url 'red:detalle_dispositivo' dispositivo.pk %}" class="btn btn-sm btn-outline-secondary">Ver</a>
+                <a href="{% url 'red:editar_dispositivo' dispositivo.pk %}" class="btn btn-sm btn-outline-primary">Editar</a>
+            </td>
         </tr>
         {% empty %}
         <tr><td colspan="5" class="text-center text-muted py-3">Este cliente todavía no tiene dispositivos.</td></tr>
