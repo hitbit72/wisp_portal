@@ -147,6 +147,6 @@
     </tbody>
 </table>
 
-<a href="{% url 'red:lista_dispositivos' %}" class="btn btn-link ps-0">&larr; Volver al listado de dispositivos</a>
+<a href="{{ url_anterior }}" class="btn btn-outline-secondary"><i class="bi bi-box-arrow-in-left"></i> Volver</a>
 | <a href="{% if dispositivo.sector %}{% url 'red:detalle_sector' dispositivo.sector.pk %}{% endif %}" class="btn btn-link ps-0">Volver al sector</a>
 {% endblock %}

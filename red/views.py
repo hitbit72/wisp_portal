@@ -176,6 +176,9 @@ def nuevo_dispositivo_cliente(request, cliente_pk):
 
 @login_required
 def detalle_dispositivo(request, pk):
+    # Obtiene la URL anterior, o asigna una ruta por defecto si no existe
+    url_anterior = request.META.get('HTTP_REFERER', 'red:lista_dispositivos')
+    
     dispositivo = get_object_or_404(
         Dispositivo.objects.prefetch_related('interfaces', 'enlaces_origen', 'enlaces_destino'),
         pk=pk,
@@ -187,6 +190,7 @@ def detalle_dispositivo(request, pk):
     return render(request, 'red/dispositivo/detalle_dispositivo.html', {
         'dispositivo': dispositivo,
         'enlaces': enlaces,
+        'url_anterior': url_anterior,
     })
 
 
