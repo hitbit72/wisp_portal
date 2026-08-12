@@ -16,6 +16,7 @@ class Usuario(AbstractUser):
     class Rol(models.TextChoices):
         ADMINISTRADOR = 'administrador', 'Administrador'
         TECNICO = 'tecnico', 'Técnico de campo'
+        COMERCIAL = 'comercial', 'Comercial'
 
     rol = models.CharField(
         max_length=20,
