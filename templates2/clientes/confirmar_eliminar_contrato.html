@@ -16,7 +16,7 @@
 
 <form method="post">
     {% csrf_token %}
-    <button type="submit" class="btn btn-danger">Sí, eliminar</button>
-    <a href="{% url 'clientes:detalle' contrato.cliente.pk %}" class="btn btn-outline-secondary">Cancelar</a>
+    <button type="submit" class="btn btn-sm btn-danger">Sí, eliminar</button>
+    <a href="{% url 'clientes:detalle' contrato.cliente.pk %}" class="btn btn-sm btn-outline-primary">Cancelar</a>
 </form>
 {% endblock %}
