@@ -35,19 +35,19 @@
           <span class="nav-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
           <span class="nav-text">Dashboard</span>
         </a>
-        <a class="nav-link {% if request.path == '/mikrotik/' %}active{% endif %}" href="{% url 'mikrotik:lista' %}">
+        <a class="nav-link {% if '/mikrotik/' in request.path  %}active{% endif %}" href="{% url 'mikrotik:lista' %}">
           <span class="nav-icon"><i class="bi bi-router" aria-hidden="true"></i></span>
           <span class="nav-text">Routers</span>
         </a>
-        <a class="nav-link {% if request.path == '/red/' %}active{% endif %}" href="{% url 'red:lista' %}">
+        <a class="nav-link {% if '/red/' in request.path %}active{% endif %}" href="{% url 'red:lista' %}">
           <span class="nav-icon"><i class="bi bi-hdd-network" aria-hidden="true"></i></span>
           <span class="nav-text">Red</span>
         </a>
-        <a class="nav-link {% if request.path == '/red/dispositivos/' %}active{% endif %}" href="{% url 'red:lista_dispositivos' %}">
+        <a class="nav-link {% if '/dispositivos/' in request.path %}active{% endif %}" href="{% url 'red:lista_dispositivos' %}">
           <span class="nav-icon"><i class="bi bi-box-seam" aria-hidden="true"></i></span>
           <span class="nav-text">Dispositivos</span>
         </a>
-        <a class="nav-link {% if request.path == '/clientes/' %}active{% endif %}" href="{% url 'clientes:lista' %}">
+        <a class="nav-link {% if '/clientes/' in request.path %}active{% endif %}" href="{% url 'clientes:lista' %}">
           <span class="nav-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
           <span class="nav-text">Clientes</span>
         </a>
