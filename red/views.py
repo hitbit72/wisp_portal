@@ -235,6 +235,23 @@ def editar_dispositivo(request, pk):
         'form': form, 'sector': dispositivo.sector, 'dispositivo': dispositivo,
     })
 
+@login_required
+def editar_dispositivo_cliente(request, pk, pk2):
+    dispositivo = get_object_or_404(Dispositivo, pk=pk)
+    cliente = get_object_or_404(Cliente, pk=pk2)
+    cliente_pk = cliente.pk
+
+    if request.method == 'POST':
+        form = DispositivoForm(request.POST, instance=dispositivo)
+        if form.is_valid():
+            dispositivo = form.save()
+            return redirect('cliente:detalle', pk=cliente.pk or cliente_pk)
+    else:
+        form = DispositivoForm(instance=dispositivo)
+
+    return render(request, 'red/dispositivo/form_dispositivo_cliente.html', {
+        'form': form, 'sector': dispositivo.sector, 'dispositivo': dispositivo, 'cliente': cliente
+    })
 
 @login_required
 def eliminar_dispositivo(request, pk):

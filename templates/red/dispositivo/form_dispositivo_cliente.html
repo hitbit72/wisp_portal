@@ -19,7 +19,7 @@
     {% include "red/dispositivo/comun/_form.html" %}
     <div class="mt-4 d-flex gap-2">
         <button type="submit" class="btn btn-primary"><i class="bi bi-send" aria-hidden="true"></i> Guardar</button>
-        <a href="{% if dispositivo %}{% url 'red:detalle_dispositivo' dispositivo.pk %}{% else %}{% url 'clientes:detalle' cliente.pk %}{% endif %}"
+        <a href="{% if cliente %}{% url 'clientes:detalle' cliente.pk %}{% else %}{% url 'red:detalle_dispositivo' dispositivo.pk %}{% endif %}"
            class="btn btn-outline-secondary"><i class="bi bi-x" aria-hidden="true"></i> Cancelar</a>
     </div>
 </form>

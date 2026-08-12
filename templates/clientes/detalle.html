@@ -120,7 +120,7 @@
             <td>{{ dispositivo.get_tipo_display }}</td>
             <td>{{ dispositivo.get_marca_display }} {{ dispositivo.modelo }}</td>
             <td class="text-end">
-                <a href="{% url 'red:editar_dispositivo' dispositivo.pk %}" class="btn btn-sm btn-outline-primary">Editar</a>
+                <a href="{% url 'red:editar_dispositivo_cliente' dispositivo.pk dispositivo.cliente.pk %}" class="btn btn-sm btn-outline-primary">Editar</a>
                 <a href="{% url 'red:eliminar_dispositivo' dispositivo.pk %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
             </td>
         </tr>
