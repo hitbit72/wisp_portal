@@ -97,9 +97,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'inicio'
-LOGOUT_REDIRECT_URL = 'login'
+LOGIN_URL = 'accounts:login'
+LOGIN_REDIRECT_URL = 'accounts:inicio'
+LOGOUT_REDIRECT_URL = 'accounts:login'
 
 # --- Internacionalización --------------------------------------------------
 LANGUAGE_CODE = 'es'

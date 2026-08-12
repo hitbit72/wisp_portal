@@ -12,57 +12,57 @@
     {% csrf_token %}
     <div class="row g-3">
         <div class="col-md-12">
-            <label class="form-label" for="id_sector">Sector</label>
+            <label class="form-label" for="{{ form.sector.id_for_label }}">Sector</label>
             {{ form.sector }}
             <div class="invalid-feedback">El sector es obligatorio.</div>
         </div>
         <div class="col-md-6">
-            <label class="form-label" for="id_nombre">Nombre</label>
+            <label class="form-label" for="{{ form.nombre.id_for_label }}">Nombre</label>
             {{ form.nombre }}
             <div class="invalid-feedback">El nombre es obligatorio.</div>
         </div>
         <div class="col-md-6">
-            <label class="form-label" for="id_modelo">Modelo</label>
+            <label class="form-label" for="{{ form.modelo.id_for_label }}">Modelo</label>
             {{ form.modelo }}
         </div>
         <div class="col-md-6">
-            <label class="form-label" for="id_usuario">Usuario API</label>
+            <label class="form-label" for="{{ form.usuario.id_for_label }}">Usuario API</label>
             {{ form.usuario }}
             <div class="invalid-feedback">El nombre de usuario es obligatorio.</div>
         </div>
         <div class="col-md-6">
-            <label class="form-label" for="id_clave">Contraseña API</label>
+            <label class="form-label" for="{{ form.clave.id_for_label }}">Contraseña API</label>
             {{ form.clave }}
             <!-- div class="form-text">Se guarda cifrada en la base de datos.</div -->
             <div class="invalid-feedback">La contraseña es obligatoria.</div>
         </div>
         <div class="col-md-6">
-            <label class="form-label" for="id_ip">IP del router</label>
+            <label class="form-label" for="{{ form.ip.id_for_label }}">IP del router</label>
             {{ form.ip }}
             <div class="invalid-feedback">La dirección IP es obligatoria.</div>
         </div>
         <div class="col-md-6">
-            <label class="form-label" for="id_puerto">Puerto API</label>
+            <label class="form-label" for="{{ form.puerto.id_for_label }}">Puerto API</label>
             {{ form.puerto }}
         </div>
         <div class="col-md-6">
-            <label class="form-label" for="id_active_list">Lista de activos</label>
+            <label class="form-label" for="{{ form.active_list.id_for_label }}">Lista de activos</label>
             {{ form.active_list }}
         </div>
         <div class="col-md-6">
-            <label class="form-label" for="id_ppp_disable">Perfil desactivados</label>
+            <label class="form-label" for="{{ form.ppp_disable.id_for_label }}">Perfil desactivados</label>
             {{ form.ppp_disable }}
         </div>
         <div class="col-md-6">
-            <label class="form-label" for="id_latitud">Latitud</label>
+            <label class="form-label" for="{{ form.latitud.id_for_label }}">Latitud</label>
             {{ form.latitud }}
         </div>
         <div class="col-md-6">
-            <label class="form-label" for="id_longitud">Longitud</label>
+            <label class="form-label" for="{{ form.longitud.id_for_label }}">Longitud</label>
             {{ form.longitud }}
         </div>
         <div class="col-12">
-            <label class="form-label" for="id_notas">Notas</label>
+            <label class="form-label" for="{{ form.notas.id_for_label }}">Notas</label>
             {{ form.notas }}
         </div>
     </div>

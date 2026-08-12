@@ -1,28 +1,24 @@
 from django import forms
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
+
+from clientes.forms import BootstrapFormMixin
+
 from .models import Usuario
 
 
-class BootstrapFormMixin:
-    """Agrega automáticamente las clases de Bootstrap a cada campo, para no
-    tener que repetirlas a mano en cada formulario."""
+class LoginForm(BootstrapFormMixin, AuthenticationForm):
+    """Login con estilos Bootstrap. Se usa como `authentication_form`
+    en el LoginView."""
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for campo in self.fields.values():
-            widget = campo.widget
-            if isinstance(widget, forms.CheckboxInput):
-                css_extra = 'form-check-input'
-            elif isinstance(widget, (forms.Select, forms.SelectMultiple)):
-                css_extra = 'form-select'
-            else:
-                css_extra = 'form-control'
-            actual = widget.attrs.get('class', '')
-            widget.attrs['class'] = f'{actual} {css_extra}'.strip()
 
-class LoginForm(BootstrapFormMixin, forms.ModelForm):
+class FormPasswordCambio(BootstrapFormMixin, PasswordChangeForm):
+    """Cambio de contraseña del usuario autenticado, con estilos Bootstrap."""
+
+
+class PerfilForm(BootstrapFormMixin, forms.ModelForm):
+    """Datos editables del propio usuario autenticado. El 'username' y el
+    'rol' no se tocan desde aquí (los gestiona el administrador)."""
+
     class Meta:
         model = Usuario
-        fields = ['username', 'password']
-        widgets = {
-            'password': forms.PasswordInput(render_value=True),
-        }
+        fields = ['first_name', 'last_name', 'email', 'telefono', 'activo_en_campo']
