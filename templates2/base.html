@@ -31,7 +31,7 @@
 	{% if user.is_authenticated %}
 	
       <nav class="sidebar-nav">
-        <a class="nav-link {% if request.path == '/dashboard/' %}active{% endif %}" href="/" aria-current="page">
+        <a class="nav-link {% if request.path == '' %}active{% endif %}" href="/" aria-current="page">
           <span class="nav-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
           <span class="nav-text">Dashboard</span>
         </a>
