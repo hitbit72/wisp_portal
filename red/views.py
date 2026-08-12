@@ -16,7 +16,7 @@ def http_ruta(ruta):
     evitar que al editar o crear un router/plan, la página de detalle redirija
     correctamente a la lista de routers en lugar de volver a la página de edición.
     """
-    print(f'Entrada: {ruta}')
+    #print(f'Entrada: {ruta}')
     if 'editar' in ruta:
         #print(f'Salida1: {ruta}')
         return '/red/dispositivos'
