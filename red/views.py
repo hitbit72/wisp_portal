@@ -245,7 +245,7 @@ def editar_dispositivo_cliente(request, pk):
         form = DispositivoForm(request.POST, instance=dispositivo)
         if form.is_valid():
             dispositivo = form.save()
-            return redirect('cliente:detalle', pk=dispositivo.cliente.pk or cliente_pk)
+            return redirect('clientes:detalle', pk=dispositivo.cliente.pk or cliente_pk)
     else:
         form = DispositivoForm(instance=dispositivo)
 
