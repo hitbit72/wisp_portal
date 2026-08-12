@@ -17,13 +17,13 @@ def http_ruta(ruta):
     correctamente a la lista de routers en lugar de volver a la página de edición.
     """
     if 'editar' in ruta:
-        return 'red:lista_dispositivos'
+        return 'red/dispositivos'
     if 'nuevo' in ruta:
-        return 'red:lista_dispositivos'
+        return 'red/dispositivos'
     if 'eliminar' in ruta:
-        return 'red:lista_dispositivos'
+        return 'red/dispositivos'
     if 'nuevo' in ruta:
-        return 'red:lista_dispositivos'
+        return 'red/dispositivos'
     return ruta # Devuelve la ruta original
 
 # --- Sectores ---------------------------------------------------------------
