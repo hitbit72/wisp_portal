@@ -12,7 +12,7 @@
 
 <form method="post">
     {% csrf_token %}
-    <button type="submit" class="btn btn-sm btn-danger">Sí, eliminar</button>
+    <button type="submit" class="btn btn-sm btn-outline-danger">Sí, eliminar</button>
     <a href="{% url 'red:detalle_dispositivo' enlace.dispositivo_origen.pk %}" class="btn btn-sm btn-outline-primary">Cancelar</a>
 </form>
 {% endblock %}

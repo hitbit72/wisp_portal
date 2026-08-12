@@ -90,7 +90,7 @@
             <td>{{ interfaz.vlan_id|default:"—" }}</td>
             <td>{% firstof interfaz.velocidad_mbps "—" %} {% if interfaz.velocidad_mbps %}Mbps{% endif %}</td>
             <td class="text-end">
-                <a href="{% url 'red:editar_interfaz' interfaz.pk %}" class="btn btn-sm btn-outline-secondary">Editar</a>
+                <a href="{% url 'red:editar_interfaz' interfaz.pk %}" class="btn btn-sm btn-outline-primary">Editar</a>
                 <a href="{% url 'red:eliminar_interfaz' interfaz.pk %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
             </td>
         </tr>
@@ -143,7 +143,7 @@
             <td>{% if enlace.distancia_km %}{{ enlace.distancia_km }} km{% else %}—{% endif %}</td>
             <td>{% if enlace.frecuencia_ghz %}{{ enlace.frecuencia_ghz }} GHz{% else %}—{% endif %}</td>
             <td class="text-end">
-                <a href="{% url 'red:editar_enlace' enlace.pk %}" class="btn btn-sm btn-outline-secondary">Editar</a>
+                <a href="{% url 'red:editar_enlace' enlace.pk %}" class="btn btn-sm btn-outline-primary">Editar</a>
                 <a href="{% url 'red:eliminar_enlace' enlace.pk %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
             </td>
         </tr>
@@ -156,9 +156,9 @@
 </section>
 
 <div style="margin-top: 0.5rem;">
-<a href="{{ url_anterior }}" class="btn btn-outline-secondary"><i class="bi bi-box-arrow-in-left"></i> Volver</a>
+<a href="{{ url_anterior }}" class="btn btn-sm btn-outline-primary"><i class="bi bi-box-arrow-in-left"></i> Volver</a>
 {% if dispositivo.sector %}
-| <a href="{% url 'red:detalle_sector' dispositivo.sector.pk %}" class="btn btn-outline-secondary"><i class="bi bi-box-arrow-in-left"></i> Sector</a>
+| <a href="{% url 'red:detalle_sector' dispositivo.sector.pk %}" class="btn btn-sm btn-outline-primary"><i class="bi bi-box-arrow-in-left"></i> Sector</a>
 {% endif %}
 </div>
 {% endblock %}
