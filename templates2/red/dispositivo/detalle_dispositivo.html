@@ -3,7 +3,7 @@
 {% block contenido %}
 <div class="d-flex justify-content-between align-items-start mb-3">
     <div>
-        <h2 class="mb-0">{{ dispositivo.nombre }}</h2>
+        <h2 class="mb-0">{{ dispositivo.get_marca_display }} {% if dispositivo.modelo %} · {{ dispositivo.modelo }}{% endif %} ({{ dispositivo.nombre }})</h2>
         <div class="text-muted">
             {{ dispositivo.get_tipo_display }} · {{ dispositivo.get_rol_display }} · {{ dispositivo.get_marca_display }}
             {% if dispositivo.modelo %} · {{ dispositivo.modelo }}{% endif %}
