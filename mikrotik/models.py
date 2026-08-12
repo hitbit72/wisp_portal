@@ -31,7 +31,7 @@ class Router(models.Model):
         help_text='8728 por defecto (API), 8729 si el router usa API-SSL.',
     )
     sector = models.ForeignKey(
-        'red.Sector', on_delete=models.SET_NULL, null=True, blank=True, related_name='routers_mikrotik',
+        'red.Sector', on_delete=models.SET_NULL, related_name='routers_mikrotik',
     )
     active_list = models.CharField(
         max_length=100, verbose_name='Lista usuarios activos',

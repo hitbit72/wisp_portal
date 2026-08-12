@@ -11,6 +11,11 @@
 <form method="post" class="panel needs-validation" style="max-width: 760px;" novalidate>
     {% csrf_token %}
     <div class="row g-3">
+        <div class="col-md-12">
+            <label class="form-label" for="id_sector">Sector</label>
+            {{ form.sector }}
+            <div class="invalid-feedback">El sector es obligatorio.</div>
+        </div>
         <div class="col-md-6">
             <label class="form-label" for="id_nombre">Nombre</label>
             {{ form.nombre }}
@@ -28,7 +33,7 @@
         <div class="col-md-6">
             <label class="form-label" for="id_clave">Contraseña API</label>
             {{ form.clave }}
-            <div class="form-text">Se guarda cifrada en la base de datos.</div>
+            <!-- div class="form-text">Se guarda cifrada en la base de datos.</div -->
             <div class="invalid-feedback">La contraseña es obligatoria.</div>
         </div>
         <div class="col-md-6">
@@ -39,10 +44,6 @@
         <div class="col-md-6">
             <label class="form-label" for="id_puerto">Puerto API</label>
             {{ form.puerto }}
-        </div>
-        <div class="col-md-6">
-            <label class="form-label" for="id_sector">Sector</label>
-            {{ form.sector }}
         </div>
         <div class="col-md-6">
             <label class="form-label" for="id_active_list">Lista de activos</label>
