@@ -1,59 +1,68 @@
 {% extends "base.html" %}
 {% block titulo %}{% if plan %}Editar plan{% else %}Nuevo plan{% endif %} · Portal WISP{% endblock %}
 {% block contenido %}
-<h2>{% if plan %}Editar plan{% else %}Nuevo plan{% endif %}</h2>
+<h2>{% if plan %}
+<i class="bi bi-router" aria-hidden="true"></i> Editar plan
+{% else %}
+<i class="bi bi-router" aria-hidden="true"></i> Nuevo plan
+{% endif %}</h2>
 <div class="text-muted mb-3">Router: <strong>{{ router.nombre }}</strong> ({{ router.ip }})</div>
 
-<form method="post" class="mt-3" style="max-width: 760px;">
+<section class="row">
+<form method="post" class="panel needs-validation" style="max-width: 760px;" novalidate>
     {% csrf_token %}
     <div class="row g-3">
         <div class="col-md-6">
-            <label class="form-label">Nombre</label>
+            <label class="form-label" for="id_nombre">Nombre</label>
             {{ form.nombre }}
+            <div class="invalid-feedback">El nombre descriptivo es obligatorio.</div>
         </div>
         <div class="col-md-3">
-            <label class="form-label">Bajada (Mbps)</label>
+            <label class="form-label" for="id_velocidad_bajada">Bajada (Mbps)</label>
             {{ form.velocidad_bajada }}
+            <div class="invalid-feedback">La velocidad de bajada es obligatoria.</div>
         </div>
         <div class="col-md-3">
-            <label class="form-label">Subida (Mbps)</label>
+            <label class="form-label" for="id_velocidad_subida">Subida (Mbps)</label>
             {{ form.velocidad_subida }}
+            <div class="invalid-feedback">La velocidad de subida es obligatoria.</div>
         </div>
         <div class="col-md-6">
-            <label class="form-label">Parent</label>
+            <label class="form-label" for="id_parent">Parent</label>
             {{ form.parent }}
             <div class="form-text">Interfaz o cola padre en el Queue Tree del router.</div>
         </div>
         <div class="col-md-6">
-            <label class="form-label">Insertar antes de</label>
+            <label class="form-label" for="id_before">Insertar antes de</label>
             {{ form.before }}
             <div class="form-text">Cola existente antes de la cual se inserta esta.</div>
         </div>
         <div class="col-md-6">
-            <label class="form-label">Address list</label>
+            <label class="form-label" for="id_addr_list">Address list</label>
             {{ form.addr_list }}
         </div>
         <div class="col-md-3">
-            <label class="form-label">Límite bajada (Mbps)</label>
+            <label class="form-label" for="id_limit_down">Límite bajada (Mbps)</label>
             {{ form.limit_down }}
         </div>
         <div class="col-md-3">
-            <label class="form-label">Límite subida (Mbps)</label>
+            <label class="form-label" for="id_limit_up">Límite subida (Mbps)</label>
             {{ form.limit_up }}
         </div>
         <div class="col-md-3">
-            <label class="form-label">Prioridad bajada (1-8)</label>
+            <label class="form-label" for="id_priority_down">Prioridad bajada (1-8)</label>
             {{ form.priority_down }}
         </div>
         <div class="col-md-3">
-            <label class="form-label">Prioridad subida (1-8)</label>
+            <label class="form-label" for="id_priority_up">Prioridad subida (1-8)</label>
             {{ form.priority_up }}
         </div>
     </div>
 
     <div class="mt-4 d-flex gap-2">
-        <button type="submit" class="btn btn-primary">Guardar</button>
-        <a href="{% url 'mikrotik:detalle' router.pk %}" class="btn btn-outline-secondary">Cancelar</a>
+        <button type="submit" class="btn btn-primary"><i class="bi bi-send" aria-hidden="true"></i> Guardar</button>
+        <a href="{% url 'mikrotik:detalle' router.pk %}" class="btn btn-outline-secondary"><i class="bi bi-x" aria-hidden="true"></i> Cancelar</a>
     </div>
 </form>
+</section>
 {% endblock %}

@@ -1,66 +1,76 @@
 {% extends "base.html" %}
 {% block titulo %}{% if router %}Editar router{% else %}Nuevo router{% endif %} · Portal WISP{% endblock %}
 {% block contenido %}
-<h2>{% if router %}Editar router{% else %}Nuevo router{% endif %}</h2>
+<h2>{% if router %}
+<i class="bi bi-router" aria-hidden="true"></i> Editar router
+{% else %}
+<i class="bi bi-router" aria-hidden="true"></i> Nuevo router
+{% endif %}</h2>
 
-<form method="post" class="mt-3" style="max-width: 760px;">
+<section class="row">
+<form method="post" class="panel needs-validation" style="max-width: 760px;" novalidate>
     {% csrf_token %}
     <div class="row g-3">
         <div class="col-md-6">
-            <label class="form-label">Nombre</label>
+            <label class="form-label" for="id_nombre">Nombre</label>
             {{ form.nombre }}
+            <div class="invalid-feedback">El nombre es obligatorio.</div>
         </div>
         <div class="col-md-6">
-            <label class="form-label">Modelo</label>
+            <label class="form-label" for="id_modelo">Modelo</label>
             {{ form.modelo }}
         </div>
         <div class="col-md-6">
-            <label class="form-label">Usuario API</label>
+            <label class="form-label" for="id_usuario">Usuario API</label>
             {{ form.usuario }}
+            <div class="invalid-feedback">El nombre de usuario es obligatorio.</div>
         </div>
         <div class="col-md-6">
-            <label class="form-label">Contraseña API</label>
+            <label class="form-label" for="id_clave">Contraseña API</label>
             {{ form.clave }}
             <div class="form-text">Se guarda cifrada en la base de datos.</div>
+            <div class="invalid-feedback">La contraseña es obligatoria.</div>
         </div>
         <div class="col-md-6">
-            <label class="form-label">IP del router</label>
+            <label class="form-label" for="id_ip">IP del router</label>
             {{ form.ip }}
+            <div class="invalid-feedback">La dirección IP es obligatoria.</div>
         </div>
         <div class="col-md-6">
-            <label class="form-label">Puerto API</label>
+            <label class="form-label" for="id_puerto">Puerto API</label>
             {{ form.puerto }}
         </div>
         <div class="col-md-6">
-            <label class="form-label">Sector</label>
+            <label class="form-label" for="id_sector">Sector</label>
             {{ form.sector }}
         </div>
         <div class="col-md-6">
-            <label class="form-label">Lista de activos</label>
+            <label class="form-label" for="id_active_list">Lista de activos</label>
             {{ form.active_list }}
         </div>
         <div class="col-md-6">
-            <label class="form-label">Perfil desactivados</label>
+            <label class="form-label" for="id_ppp_disable">Perfil desactivados</label>
             {{ form.ppp_disable }}
         </div>
         <div class="col-md-6">
-            <label class="form-label">Latitud</label>
+            <label class="form-label" for="id_latitud">Latitud</label>
             {{ form.latitud }}
         </div>
         <div class="col-md-6">
-            <label class="form-label">Longitud</label>
+            <label class="form-label" for="id_longitud">Longitud</label>
             {{ form.longitud }}
         </div>
         <div class="col-12">
-            <label class="form-label">Notas</label>
+            <label class="form-label" for="id_notas">Notas</label>
             {{ form.notas }}
         </div>
     </div>
 
     <div class="mt-4 d-flex gap-2">
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="submit" class="btn btn-primary"><i class="bi bi-send" aria-hidden="true"></i> Guardar</button>
         <a href="{% if router %}{% url 'mikrotik:detalle' router.pk %}{% else %}{% url 'mikrotik:lista' %}{% endif %}"
-           class="btn btn-outline-secondary">Cancelar</a>
+           class="btn btn-outline-secondary"><i class="bi bi-x" aria-hidden="true"></i> Cancelar</a>
     </div>
 </form>
+</section>
 {% endblock %}
