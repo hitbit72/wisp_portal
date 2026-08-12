@@ -19,16 +19,16 @@ def http_ruta(ruta):
     print(f'Entrada: {ruta}')
     if 'editar' in ruta:
         print(f'Salida1: {ruta}')
-        return 'red/dispositivos'
+        return '/red/dispositivos'
     if 'nuevo' in ruta:
         print(f'Salida2: {ruta}')
-        return 'red/dispositivos'
+        return '/red/dispositivos'
     if 'eliminar' in ruta:
         print(f'Salida3: {ruta}')
-        return 'red/dispositivos'
+        return '/red/dispositivos'
     if 'nuevo' in ruta:
         print(f'Salida4: {ruta}')
-        return 'red/dispositivos'
+        return '/red/dispositivos'
     print(f'Salida5: {ruta}')
     return ruta # Devuelve la ruta original
 
