@@ -14,6 +14,7 @@
     </div>
 </div>
 
+<section class="panel row g-1 mt-1">
 <div class="row mb-4">
     <div class="col-md-6">
         <div class="card h-100">
@@ -49,7 +50,9 @@
 {% if dispositivo.notas %}
 <div class="alert alert-light border mb-4">{{ dispositivo.notas|linebreaks }}</div>
 {% endif %}
+</section>
 
+<section class="panel mt-1">
 <div class="d-flex justify-content-between align-items-center mb-2">
     <h4 class="mb-0">Interfaces</h4>
     <a href="{% url 'red:nueva_interfaz' dispositivo.pk %}" class="btn btn-primary btn-sm">+ Nueva interfaz</a>
@@ -95,7 +98,9 @@
         {% endfor %}
     </tbody>
 </table>
+</section>
 
+<section class="panel mt-1">
 <div class="d-flex justify-content-between align-items-center mb-2">
     <h4 class="mb-0">Enlaces</h4>
     <a href="{% url 'red:nuevo_enlace' dispositivo.pk %}" class="btn btn-primary btn-sm">+ Nuevo enlace</a>
@@ -144,7 +149,12 @@
         {% endfor %}
     </tbody>
 </table>
+</section>
 
+<div style="margin-top: 0.5rem;">
 <a href="{{ url_anterior }}" class="btn btn-outline-secondary"><i class="bi bi-box-arrow-in-left"></i> Volver</a>
-| <a href="{% if dispositivo.sector %}{% url 'red:detalle_sector' dispositivo.sector.pk %}{% endif %}" class="btn btn-link ps-0">Volver al sector</a>
+{% if dispositivo.sector %}
+| <a href="{% url 'red:detalle_sector' dispositivo.sector.pk %}" class="btn btn-link ps-0"><i class="bi bi-box-arrow-in-left"></i> Sector</a>
+{% endif %}
+</div>
 {% endblock %}
