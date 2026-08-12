@@ -236,7 +236,7 @@ def editar_dispositivo(request, pk):
     })
 
 @login_required
-def editar_dispositivo_cliente(request, pk, pk2):
+def editar_dispositivo_cliente(request, pk):
     dispositivo = get_object_or_404(Dispositivo, pk=pk)
     cliente = get_object_or_404(Cliente, pk=dispositivo.cliente.pk)
     cliente_pk = dispositivo.cliente.pk
