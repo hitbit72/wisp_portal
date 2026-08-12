@@ -24,7 +24,7 @@
             <div class="card-body">
                 <h5 class="card-title">Datos de contacto</h5>
                 <p class="mb-1"><strong>Teléfono:</strong> {{ cliente.telefono|default:"—" }}</p>
-                <p class="mb-1"><strong>Teléfono alternativo:</strong> {{ cliente.telefono_alternativo|default:"—" }}</p>
+                {% if cliente.telefono_alternativo %}<p class="mb-1"><strong>Teléfono alternativo:</strong> {{ cliente.telefono_alternativo }}</p>{% endif %}
                 <p class="mb-1"><strong>Email:</strong> {{ cliente.email|default:"—" }}</p>
                 <p class="mb-0"><strong>Documento:</strong> {{ cliente.get_tipo_documento_display }} {{ cliente.numero_documento|default:"" }}</p>
             </div>
