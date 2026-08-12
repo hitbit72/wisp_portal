@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 {% block titulo %}{% if dispositivo %}Editar dispositivo{% else %}Nuevo dispositivo{% endif %} · Portal WISP{% endblock %}
 {% block contenido %}
-<h2>
-{% if dispositivo %}
+<h2>{% if dispositivo %}
 <i class="bi bi-router" aria-hidden="true"></i> Editar dispositivo
 {% else %}
 <i class="bi bi-router" aria-hidden="true"></i> Nuevo dispositivo
 {% endif %}</h2>
+{% if sector %}
 <div class="text-muted mb-3">Sector: <strong>{{ sector.nombre }}</strong> {% if sector.poblacion %}· {{ sector.poblacion }}{% endif %}</div>
+{% endif %}
 
 <section class="row">
 <form method="post" class="panel needs-validation" style="max-width: 760px;" novalidate>
