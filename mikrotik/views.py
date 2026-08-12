@@ -17,13 +17,13 @@ def http_ruta(ruta):
     correctamente a la lista de routers en lugar de volver a la página de edición.
     """
     if 'editar' in ruta:
-        return 'mikrotik:lista'
+        return '/mikrotik/'
     if 'nuevo' in ruta:
-        return 'mikrotik:lista'
+        return '/mikrotik/'
     if 'eliminar' in ruta:
-        return 'mikrotik:lista'
+        return '/mikrotik/'
     if 'nuevo' in ruta:
-        return 'mikrotik:lista'
+        return '/mikrotik/'
     return ruta # Devuelve la ruta original
 
 @login_required
