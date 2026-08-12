@@ -8,6 +8,24 @@ from red.models import Sector
 from .forms import PlanForm, RouterForm
 from .models import Plan, Router
 
+
+"""
+Funcion para obtener la ruta de retorno a partir de la URL anterior. Se usa para
+evitar que al editar o crear un router/plan, la página de detalle redirija
+correctamente a la lista de routers en lugar de volver a la página de edición.
+"""
+def switch_ruta(ruta):
+    ruta_back = {
+        'mikrotik:editar': 'mikrotik:lista',
+        'mikrotik:nuevo': 'mikrotik:lista',
+        'mikrotik:eliminar': 'mikrotik:lista',
+        'mikrotik:nuevo_plan': 'mikrotik:lista',
+        'mikrotik:editar_plan': 'mikrotik:lista',
+        'mikrotik:eliminar_plan': 'mikrotik:lista',
+    }
+    return ruta_back.get(ruta, ruta)  # Devuelve la ruta original si no está en el diccionario
+
+
 @login_required
 def lista_routers(request):
     """
@@ -49,6 +67,8 @@ def detalle_router(request, pk):
     router = get_object_or_404(Router.objects.prefetch_related('planes'), pk=pk)
     # Obtiene la URL anterior, o asigna una ruta por defecto si no existe
     url_anterior = request.META.get('HTTP_REFERER', 'mikrotik:lista')
+    url_anterior = switch_ruta(url_anterior)  # Cambia la ruta si es necesario
+
     return render(request, 'mikrotik/detalle.html', {'router': router, 'url_anterior': url_anterior})
 
 

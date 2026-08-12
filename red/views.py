@@ -10,6 +10,19 @@ from .models import Dispositivo, Enlace, Interfaz, Sector
 
 
 
+"""
+Funcion para obtener la ruta de retorno a partir de la URL anterior. Se usa para
+evitar que al editar o crear un router/plan, la página de detalle redirija
+correctamente a la lista de routers en lugar de volver a la página de edición.
+"""
+def switch_ruta(ruta):
+    ruta_back = {
+        'red:editar_dispositivo': 'red:lista_dispositivos',
+        'red:nuevo_dispositivo': 'red:lista_dispositivos',
+        'red:eliminar_dispositivo': 'red:lista_dispositivos',
+    }
+    return ruta_back.get(ruta, ruta)  # Devuelve la ruta original si no está en el diccionario
+
 # --- Sectores ---------------------------------------------------------------
 
 @login_required
@@ -178,7 +191,8 @@ def nuevo_dispositivo_cliente(request, cliente_pk):
 def detalle_dispositivo(request, pk):
     # Obtiene la URL anterior, o asigna una ruta por defecto si no existe
     url_anterior = request.META.get('HTTP_REFERER', 'red:lista_dispositivos')
-    
+    url_anterior = switch_ruta(url_anterior)  # Cambia la ruta si es necesario
+
     dispositivo = get_object_or_404(
         Dispositivo.objects.prefetch_related('interfaces', 'enlaces_origen', 'enlaces_destino'),
         pk=pk,
