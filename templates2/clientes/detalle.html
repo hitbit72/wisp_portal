@@ -81,7 +81,7 @@
             </td>
             <td>{{ contrato.precio_mensual }} €</td>
             <td class="text-end">
-                <a href="{% url 'clientes:editar_contrato' contrato.pk %}" class="btn btn-sm btn-outline-secondary">Editar</a>
+                <a href="{% url 'clientes:editar_contrato' contrato.pk %}" class="btn btn-sm btn-outline-primary">Editar</a>
                 <a href="{% url 'clientes:eliminar_contrato' contrato.pk %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
             </td>
         </tr>
@@ -133,6 +133,6 @@
 </section>
 
 <div style="margin-top: 0.5rem;">
-<a href="{% url 'clientes:lista' %}" class="btn btn-outline-secondary"><i class="bi bi-box-arrow-in-left"></i> Volver</a>
+<a href="{% url 'clientes:lista' %}" class="btn btn-sm btn-outline-primary"><i class="bi bi-box-arrow-in-left"></i> Volver</a>
 </div>
 {% endblock %}
