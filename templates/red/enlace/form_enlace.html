@@ -25,10 +25,12 @@ Nuevo enlace
         <div class="col-md-6">
             <label class="form-label" for="{{ form.interfaz_origen.id_for_label }}">Interfaz origen</label>
             {{ form.interfaz_origen }}
+            <div class="invalid-feedback">Seleccione el interface origen.</div>
         </div>
         <div class="col-md-6">
             <label class="form-label" for="{{ form.interfaz_destino.id_for_label }}">Interfaz destino</label>
             {{ form.interfaz_destino }}
+            <div class="invalid-feedback">Seleccione el interface destino.</div>
         </div>
         <div class="col-md-4">
             <label class="form-label" for="{{ form.ancho_banda_mbps.id_for_label }}">Ancho de banda (Mbps)</label>

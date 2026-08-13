@@ -110,6 +110,9 @@ class EnlaceForm(BootstrapFormMixin, forms.ModelForm):
             'hx-swap': 'innerHTML',
             'hx-include': '#id_dispositivo_destino',
         })
+        # Esto añade el atributo 'required' en el HTML y además fuerza la validación en el servidor
+        self.fields['interfaz_origen'].required = True
+        self.fields['interfaz_destino'].required = True
 
         for campo in ('interfaz_origen', 'interfaz_destino'):
             self.fields[campo].label_from_instance = _etiqueta_interfaz
