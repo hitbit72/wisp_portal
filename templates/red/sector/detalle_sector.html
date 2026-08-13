@@ -57,6 +57,7 @@
 </div>
 </section>
 
+{% if routers %}
 <section class="panel mt-1">
 <div class="d-flex justify-content-between align-items-center mb-2">
     <h4 class="mb-0">Routers MikroTik</h4>
@@ -92,6 +93,7 @@
 </table>
 </div>
 </section>
+{% endif %}
 <div style="margin-top: 0.5rem;">
 <a href="{% url 'red:lista' %}"  class="btn btn-sm btn-outline-primary"><i class="bi bi-box-arrow-in-left"></i> Volver</a>
 </div>
