@@ -56,6 +56,11 @@ class DispositivoForm(BootstrapFormMixin, forms.ModelForm):
     """'sector' se puede seleccionar en el formulario; al crear un dispositivo
     bajo un sector concreto la vista lo preselecciona como valor inicial."""
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Esto añade el atributo 'required' en el HTML y fuerza la validación en el servidor
+        self.fields['ip_gestion'].required = True
+
     atributos_extra = JSONTextoOpcional(
         required=False,
         label='Atributos del dispositivo',
