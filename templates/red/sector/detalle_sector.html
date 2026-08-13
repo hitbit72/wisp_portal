@@ -22,7 +22,8 @@
     <a href="{% url 'red:nuevo_dispositivo' sector.pk %}" class="btn btn-primary btn-sm">+ Nuevo dispositivo</a>
 </div>
 
-<table class="table table-hover align-middle bg-white">
+<div id="tabla-dispositivos" class="table-responsive">
+<table class="table table-hover align-middle" id="dispositivosTable" data-searchable-table>
     <thead>
         <tr>
             <th>Nombre</th>
@@ -62,6 +63,7 @@
         {% endfor %}
     </tbody>
 </table>
+</div>
 </section>
 
 <section class="panel mt-1">
@@ -70,7 +72,8 @@
     <!-- <a href="{% url 'mikrotik:lista' %}" class="btn btn-primary btn-sm">+ Nuevo router</a> -->
 </div>
 
-<table class="table table-hover align-middle bg-white">
+<div id="tabla-routers" class="table-responsive">
+<table class="table table-hover align-middle" id="routerTable" data-searchable-table>
     <thead>
         <tr>
             <th>Nombre</th>
@@ -96,6 +99,7 @@
         {% endfor %}
     </tbody>
 </table>
+</div>
 </section>
 <div style="margin-top: 0.5rem;">
 <a href="{% url 'red:lista' %}"  class="btn btn-sm btn-outline-primary"><i class="bi bi-box-arrow-in-left"></i> Volver</a>
