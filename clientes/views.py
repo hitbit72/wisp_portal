@@ -68,7 +68,10 @@ def lista_clientes(request):
 @login_required
 def detalle_cliente(request, pk):
     cliente = get_object_or_404(Cliente, pk=pk)
-    return render(request, 'clientes/detalle.html', {'cliente': cliente})
+    # Obtiene la URL anterior, o asigna una ruta por defecto si no existe
+    url_anterior = request.META.get('HTTP_REFERER', 'clientes:lista')
+    print(url_anterior)
+    return render(request, 'clientes/detalle.html', {'cliente': cliente, 'url_anterior': url_anterior})
 
 
 @login_required
