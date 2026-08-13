@@ -200,6 +200,7 @@ def nuevo_dispositivo_cliente(request, cliente_pk):
 def detalle_dispositivo(request, pk):
     # Obtiene la URL anterior, o asigna una ruta por defecto si no existe
     url_anterior = request.META.get('HTTP_REFERER', 'red:lista_dispositivos')
+    print(f'detalle_dispositivo: {url_anterior}')
     url_anterior = http_ruta(url_anterior)  # Cambia la ruta si es necesario
     #print(f'Url_Final: {url_anterior}')
 
