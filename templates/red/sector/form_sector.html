@@ -13,33 +13,33 @@
     {% csrf_token %}
     <div class="row g-3">
         <div class="col-md-6">
-            <label class="form-label" for="id_nombre">Nombre</label>
+            <label class="form-label" for="{{ form.nombre.id_for_label }}">Nombre</label>
             {{ form.nombre }}
             <div class="invalid-feedback">El nombre es obligatorio.</div>
         </div>
         <div class="col-md-6">
-            <label class="form-label" for="id_poblacion">Población</label>
+            <label class="form-label" for="{{ form.poblacion.id_for_label }}">Población</label>
             {{ form.poblacion }}
             <div class="invalid-feedback">La población es obligatoria.</div>
         </div>
         <div class="col-12">
-            <label class="form-label" for="id_direccion">Dirección</label>
+            <label class="form-label" for="{{ form.direccion.id_for_label }}">Dirección</label>
             {{ form.direccion }}
         </div>
         <div class="col-12">
-            <label class="form-label" for="id_descripcion">Descripción</label>
+            <label class="form-label" for="{{ form.descripcion.id_for_label }}">Descripción</label>
             {{ form.descripcion }}
         </div>
         <div class="col-md-4">
-            <label class="form-label" for="id_latitud">Latitud</label>
+            <label class="form-label" for="{{ form.latitud.id_for_label }}">Latitud</label>
             {{ form.latitud }}
         </div>
         <div class="col-md-4">
-            <label class="form-label" for="id_longitud">Longitud</label>
+            <label class="form-label" for="{{ form.longitud.id_for_label }}">Longitud</label>
             {{ form.longitud }}
         </div>
         <div class="col-md-4">
-            <label class="form-label" for="id_altitud">Altitud (m)</label>
+            <label class="form-label" for="{{ form.altitud.id_for_label }}">Altitud (m)</label>
             {{ form.altitud }}
         </div>
     </div>
