@@ -131,6 +131,4 @@ class EnlaceForm(BootstrapFormMixin, forms.ModelForm):
         ]
         widgets = {
             'notas': forms.Textarea(attrs={'rows': 3}),
-            'interfaz_origen': forms.Select(attrs={'required'}),
-            'interfaz_destino': forms.Select(attrs={'required'})
         }
