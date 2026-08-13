@@ -4,8 +4,8 @@
 <h2>Eliminar interfaz</h2>
 
 <div class="alert alert-warning" style="max-width: 640px;">
-    ¿Seguro que quieres eliminar la interfaz <strong>{{ dispositivo.get_marca_display }} {{ dispositivo.modelo|default:"" }} ({{ interfaz.nombre }})</strong>
-    del dispositivo <strong>{{ interfaz.dispositivo.nombre }}</strong>?
+    ¿Seguro que quieres eliminar la interfaz <strong>{{ interfaz.nombre }}</strong>
+    del dispositivo <strong>{{ interfaz.dispositivo.get_marca_display }} {{ interfaz.dispositivo.modelo|default:"" }} ({{ interfaz.dispositivo.nombre }})</strong>?
     La acción no se puede deshacer.
 </div>
 
