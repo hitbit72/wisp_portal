@@ -32,7 +32,7 @@
             <label class="form-label" for="{{ form.sector.id_for_label }}">Sector</label>
             {{ form.sector }}
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6" {% if cliente %}style='disable;'{% endif %}>
             <label class="form-label" for="{{ form.cliente.id_for_label }}">Cliente</label>
             {{ form.cliente }}
             <div class="form-text">Solo aplica cuando el tipo es "Antena de cliente".</div>
