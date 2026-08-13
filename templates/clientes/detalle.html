@@ -56,6 +56,7 @@
 <table class="table table-hover" id="contratoTable" data-searchable-table>
     <thead>
         <tr>
+            <th>Número</th>
             <th>Descripción</th>
             <th>Plan</th>
             <th>Conexión</th>
@@ -67,6 +68,7 @@
     <tbody>
         {% for contrato in cliente.contratos.all %}
         <tr>
+            <td>{{ contrato.pk }}</td>
             <td>{{ contrato.nombre|default:"—" }}</td>
             <td>{{ contrato.plan.nombre }} <span class="text-muted small">({{ contrato.plan.router.nombre }})</span></td>
             <td>{{ contrato.get_conexion_display }}</td>
@@ -86,7 +88,7 @@
             </td>
         </tr>
         {% empty %}
-        <tr><td colspan="5" class="text-center text-muted py-3">Este cliente todavía no tiene contratos.</td></tr>
+        <tr><td colspan="6" class="text-center text-muted py-3">Este cliente todavía no tiene contratos.</td></tr>
         {% endfor %}
     </tbody>
 </table>
