@@ -9,7 +9,7 @@
 {% endif %}</h2>
 
 <section class="row">
-<form method="post" class="panel needs-validation" style="max-width: 760px;" novalidate>
+<form method="post" class="panel needs-validation {% if form.errors %}was-validated{% endif %}" style="max-width: 760px;" novalidate>
     {% csrf_token %}
     <div class="row g-3">
         <div class="col-md-6">
