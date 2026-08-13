@@ -32,11 +32,13 @@
             <label class="form-label" for="{{ form.sector.id_for_label }}">Sector</label>
             {{ form.sector }}
         </div>
-        <div class="col-md-6" {% if cliente %}style='disable;'{% endif %}>
+        {% if cliente %}<fieldset :disabled="disabled" class="border-0 p-0 m-0">{% endif %}
+        <div class="col-md-6">
             <label class="form-label" for="{{ form.cliente.id_for_label }}">Cliente</label>
             {{ form.cliente }}
             <div class="form-text">Solo aplica cuando el tipo es "Antena de cliente".</div>
         </div>
+        {% if cliente %}</fieldset>{% endif %}
         <div class="col-md-6">
             <label class="form-label" for="{{ form.fecha_instalacion.id_for_label }}">Fecha de instalación</label>
             {{ form.fecha_instalacion }}
