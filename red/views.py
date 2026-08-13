@@ -58,7 +58,8 @@ def lista_sectores(request):
 @login_required
 def detalle_sector(request, pk):
     sector = get_object_or_404(Sector, pk=pk)
-    return render(request, 'red/sector/detalle_sector.html', {'sector': sector})
+    router_total = sector.routers_mikrotik.count()
+    return render(request, 'red/sector/detalle_sector.html', {'sector': sector, 'routers': router_total})
 
 
 @login_required
