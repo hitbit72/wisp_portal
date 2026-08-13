@@ -16,6 +16,7 @@ Nuevo enlace
         <div class="col-md-6">
             <label class="form-label" for="{{ form.dispositivo_destino.id_for_label }}">Hacia (dispositivo destino)</label>
             {{ form.dispositivo_destino }}
+            <div class="invalid-feedback">El dispositivo destino es obligatorio.</div>
         </div>
         <div class="col-md-6">
             <label class="form-label" for="{{ form.tipo.id_for_label }}">Tipo de enlace</label>
@@ -51,7 +52,7 @@ Nuevo enlace
         <div class="alert alert-danger mt-3" role="alert"><strong>{{ error_msg }}</strong></div>
     {% endif %}
     <div class="mt-4 d-flex gap-2">
-        <button type="submit" btn btn-primary"><i class="bi bi-send" aria-hidden="true"></i> Guardar</button>
+        <button type="submit" class="btn btn-primary"><i class="bi bi-send" aria-hidden="true"></i> Guardar</button>
         <a href="{% url 'red:detalle_dispositivo' dispositivo.pk %}" class="btn btn-outline-secondary"><i class="bi bi-x" aria-hidden="true"></i> Cancelar</a>
     </div>
 </form>
