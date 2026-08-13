@@ -23,7 +23,7 @@ class BootstrapFormMixin:
 class ClienteForm(BootstrapFormMixin, forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Esto añade el atributo HTML y fuerza la validación en el servidor
+        # Esto añade el atributo 'required' en el HTML y fuerza la validación en el servidor
         self.fields['telefono'].required = True
 
     class Meta:
