@@ -19,6 +19,7 @@ from .client import conectar
 def procesar_tarea(tarea):
     """Punto de entrada: ejecuta la tarea contra el router correspondiente."""
     if tarea.router is None:
+        # eventos: 5=notice
         raise RuntimeError(
             'La tarea no tiene un router asociado (el plan o el router pudo haberse eliminado).'
         )
@@ -29,6 +30,7 @@ def procesar_tarea(tarea):
         elif tarea.conexion == 'sq':
             _procesar_sq(api, tarea)
         else:
+            # eventos: 3=error
             raise RuntimeError(f"Tipo de conexión no soportado: {tarea.conexion!r}")
 
 
@@ -40,6 +42,7 @@ def _procesar_pppoe(api, tarea):
 
     if tarea.operacion == 'alta':
         if _buscar_por_nombre(secrets, tarea.identificador_mikrotik):
+            # eventos: 6=info
             return  # ya existe, no se crea de nuevo
         secrets.add(**_datos_secret(contrato))
         return
@@ -55,11 +58,13 @@ def _procesar_pppoe(api, tarea):
     nombre_buscar = tarea.identificador_anterior or tarea.identificador_mikrotik
     existente = _buscar_por_nombre(secrets, nombre_buscar)
     if not existente:
+        # eventos: 4=warning
         raise RuntimeError(
             f"No se encontró el secret '{nombre_buscar}' en el router para modificar. "
             "Revisa manualmente si hay que darlo de alta."
         )
     if contrato is None:
+        # eventos: 3=error
         raise RuntimeError('El contrato ya no existe; no se puede completar la modificación.')
 
     datos = _datos_secret(contrato)
@@ -118,11 +123,13 @@ def _procesar_sq(api, tarea):
     nombre_buscar = tarea.identificador_anterior or tarea.identificador_mikrotik
     existente = _buscar_por_nombre(queues, nombre_buscar)
     if not existente:
+        # eventos: 4=warning
         raise RuntimeError(
             f"No se encontró el queue '{nombre_buscar}' en el router para modificar. "
             "Revisa manualmente si hay que darlo de alta."
         )
     if contrato is None:
+        # eventos: 3=error
         raise RuntimeError('El contrato ya no existe; no se puede completar la modificación.')
 
     activo = contrato.estado == contrato.Estado.ACTIVO

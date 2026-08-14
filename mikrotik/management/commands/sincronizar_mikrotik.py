@@ -54,7 +54,7 @@ class Command(BaseCommand):
             self.stderr.write(
                 f'[FALLO] Tarea #{tarea.pk} ({tarea.identificador_mikrotik}, '
                 f'intento {tarea.intentos}/{max_intentos}): {exc}'
-            )
+            ) # eventos: 3=error
         else:
             tarea.estado = TareaSincronizacion.Estado.COMPLETADA
             tarea.mensaje_error = ''

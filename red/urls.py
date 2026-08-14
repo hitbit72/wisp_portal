@@ -14,7 +14,6 @@ urlpatterns = [
     # Dispositivos (vista global + CRUD)
     path('dispositivos/', views.lista_dispositivos, name='lista_dispositivos'),
     path('sectores/<int:sector_pk>/dispositivos/nuevo/', views.nuevo_dispositivo, name='nuevo_dispositivo'),
-    #path('dispositivos/<int:cliente_pk>/nuevo/', views.nuevo_dispositivo_cliente, name='nuevo_dispositivo_cliente'),
     path('cliente/<int:cliente_pk>/dispositivos/nuevo/', views.nuevo_dispositivo_cliente, name='nuevo_dispositivo_cliente'),
     path('dispositivos/nuevo/', views.nuevo_dispositivo_solo, name='nuevo_dispositivo_solo'),
     path('dispositivos/<int:pk>/', views.detalle_dispositivo, name='detalle_dispositivo'),
