@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="hitbit72 professional admin dashboard template">
-  <title>[x-cloak] { display: none !important; }</title>
+  <title>{% block titulo %}Portal WISP{% endblock %}</title>
+  <style>[x-cloak] { display: none !important; }</style>
 
   <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="/static/assets/vendors/bootstrap-icons/bootstrap-icons.css">
@@ -51,6 +52,10 @@
           <span class="nav-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
           <span class="nav-text">Clientes</span>
         </a>
+        <a class="nav-link {% if '/eventos/' in request.path %}active{% endif %}" href="{% url 'eventos:lista' %}">
+          <span class="nav-icon"><i class="bi bi-list-check" aria-hidden="true"></i></span>
+          <span class="nav-text">Eventos</span>
+        </a>
       </nav>
 
       <div class="sidebar-user">
@@ -85,28 +90,12 @@
               <i class="bi bi-moon-stars" data-theme-icon aria-hidden="true"></i>
             </button>
             <div class="dropdown">
-              <button class="icon-button" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Notifications">
-                <span class="notification-dot"></span>
+              <button class="icon-button" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Notificaciones">
+                <span class="notification-dot" id="notification-dot" {% if not eventos_no_leidos %}style="display:none"{% endif %}></span>
                 <i class="bi bi-bell" aria-hidden="true"></i>
               </button>
-              <div class="dropdown-menu dropdown-menu-end notification-menu">
-                <div class="dropdown-header fw-bold text-body">Notificaciones</div>
-                <a class="dropdown-item" href="users.html">
-                  <span class="notification-title">Nuevo usuario registrado</span>
-                  <span class="notification-time">Hace 4 minutos</span>
-                </a>
-                <a class="dropdown-item" href="charts.html">
-                  <span class="notification-title">Usuario nuevo no se pudo dar de alta</span>
-                  <span class="notification-time">Hace 32 minutos</span>
-                </a>
-                <a class="dropdown-item" href="settings.html">
-                  <span class="notification-title">Revisión de seguridad completada</span>
-                  <span class="notification-time">Hace 1 houra</span>
-                </a>
-                <a class="dropdown-item" href="settings.html">
-                  <span class="notification-title">Más eventos pendientes de leer...</span>
-                  <span class="notification-time">hace 2 días</span>
-                </a>
+              <div class="dropdown-menu dropdown-menu-end notification-menu" id="notification-menu">
+                {% include 'eventos/_notificaciones.html' %}
               </div>
             </div>
 

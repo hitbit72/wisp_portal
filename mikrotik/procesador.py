@@ -14,12 +14,23 @@ el admin (TareaSincronizacion) y directamente en el router.
 from django.conf import settings
 
 from .client import conectar
+from eventos.models import Evento
+from eventos.services import registrar_evento
+
+MODULO = 'mikrotik'
 
 
 def procesar_tarea(tarea):
     """Punto de entrada: ejecuta la tarea contra el router correspondiente."""
     if tarea.router is None:
         # eventos: 5=notice
+        registrar_evento(
+            MODULO,
+            'Tarea de sincronización sin router asociado',
+            f'Tarea #{tarea.pk} ({tarea.identificador_mikrotik}): el plan o el '
+            'router pudo haberse eliminado.',
+            nivel=Evento.Nivel.NOTICE,
+        )
         raise RuntimeError(
             'La tarea no tiene un router asociado (el plan o el router pudo haberse eliminado).'
         )
@@ -31,6 +42,12 @@ def procesar_tarea(tarea):
             _procesar_sq(api, tarea)
         else:
             # eventos: 3=error
+            registrar_evento(
+                MODULO,
+                f'Tipo de conexión no soportado: {tarea.conexion!r}',
+                f'Tarea #{tarea.pk} ({tarea.identificador_mikrotik}).',
+                nivel=Evento.Nivel.ERROR,
+            )
             raise RuntimeError(f"Tipo de conexión no soportado: {tarea.conexion!r}")
 
 
@@ -43,6 +60,12 @@ def _procesar_pppoe(api, tarea):
     if tarea.operacion == 'alta':
         if _buscar_por_nombre(secrets, tarea.identificador_mikrotik):
             # eventos: 6=info
+            registrar_evento(
+                MODULO,
+                f'Secret PPPoE ya existía: {tarea.identificador_mikrotik}',
+                f'Tarea #{tarea.pk} de alta: no se crea porque ya existe en el router.',
+                nivel=Evento.Nivel.INFO,
+            )
             return  # ya existe, no se crea de nuevo
         secrets.add(**_datos_secret(contrato))
         return
@@ -59,12 +82,26 @@ def _procesar_pppoe(api, tarea):
     existente = _buscar_por_nombre(secrets, nombre_buscar)
     if not existente:
         # eventos: 4=warning
+        registrar_evento(
+            MODULO,
+            f'Secret PPPoE no encontrado para modificar: {nombre_buscar}',
+            f'Tarea #{tarea.pk} ({tarea.identificador_mikrotik}). Revisa manualmente '
+            'si hay que darlo de alta.',
+            nivel=Evento.Nivel.WARNING,
+        )
         raise RuntimeError(
             f"No se encontró el secret '{nombre_buscar}' en el router para modificar. "
             "Revisa manualmente si hay que darlo de alta."
         )
     if contrato is None:
         # eventos: 3=error
+        registrar_evento(
+            MODULO,
+            'Contrato eliminado durante modificación PPPoE',
+            f'Tarea #{tarea.pk} ({tarea.identificador_mikrotik}): no se puede '
+            'completar la modificación.',
+            nivel=Evento.Nivel.ERROR,
+        )
         raise RuntimeError('El contrato ya no existe; no se puede completar la modificación.')
 
     datos = _datos_secret(contrato)
@@ -105,6 +142,12 @@ def _procesar_sq(api, tarea):
 
     if tarea.operacion == 'alta':
         if _buscar_por_nombre(queues, tarea.identificador_mikrotik):
+            registrar_evento(
+                MODULO,
+                f'Simple Queue ya existía: {tarea.identificador_mikrotik}',
+                f'Tarea #{tarea.pk} de alta: no se crea porque ya existe en el router.',
+                nivel=Evento.Nivel.INFO,
+            )
             return
         queues.add(**_datos_simple_queue(contrato))
         _asegurar_en_active_list(address_list, contrato, activo=True)
@@ -124,12 +167,26 @@ def _procesar_sq(api, tarea):
     existente = _buscar_por_nombre(queues, nombre_buscar)
     if not existente:
         # eventos: 4=warning
+        registrar_evento(
+            MODULO,
+            f'Simple Queue no encontrada para modificar: {nombre_buscar}',
+            f'Tarea #{tarea.pk} ({tarea.identificador_mikrotik}). Revisa manualmente '
+            'si hay que darla de alta.',
+            nivel=Evento.Nivel.WARNING,
+        )
         raise RuntimeError(
             f"No se encontró el queue '{nombre_buscar}' en el router para modificar. "
             "Revisa manualmente si hay que darlo de alta."
         )
     if contrato is None:
         # eventos: 3=error
+        registrar_evento(
+            MODULO,
+            'Contrato eliminado durante modificación de Simple Queue',
+            f'Tarea #{tarea.pk} ({tarea.identificador_mikrotik}): no se puede '
+            'completar la modificación.',
+            nivel=Evento.Nivel.ERROR,
+        )
         raise RuntimeError('El contrato ya no existe; no se puede completar la modificación.')
 
     activo = contrato.estado == contrato.Estado.ACTIVO

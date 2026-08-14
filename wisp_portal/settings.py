@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'clientes',
     'red',
     'mikrotik',
+    'eventos',
 ]
 
 MIDDLEWARE = [
@@ -62,6 +63,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'eventos.context_processors.notificaciones',
             ],
         },
     },
