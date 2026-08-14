@@ -19,7 +19,9 @@
 <div class="dropdown-item text-muted">No hay notificaciones.</div>
 {% endfor %}
 <hr class="dropdown-divider">
+<div class="row">
 <a class="dropdown-item" href="{% url 'eventos:lista' %}"><i class="bi bi-list-check" aria-hidden="true"></i> Ver todos los eventos</a>
+</div>
 {% if puede_marcar_eventos and eventos_notif %}
 <button type="button" class="dropdown-item"
         hx-post="{% url 'eventos:marcar_todos_leidos' %}"
