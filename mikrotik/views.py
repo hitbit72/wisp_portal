@@ -106,8 +106,8 @@ def nuevo_plan(request, router_pk):
             plan.save()
             registrar_evento(
                 MODULO,
-                'Nuevo PLAN registrado',
-                f'Plan #{plan.pk}: {plan.nombre}',
+                'PLAN de internet registrado',
+                f'Plan #{plan.pk}: {plan.nombre} - Down: {plan.velocidad_bajada} Mbps / Up: {plan.velocidad_subida} Mbps',
                 nivel=Evento.Nivel.INFO,)
             return redirect('mikrotik:detalle', pk=router.pk)
     else:
@@ -127,6 +127,11 @@ def editar_plan(request, pk):
         form = PlanForm(request.POST, instance=plan)
         if form.is_valid():
             form.save()
+            registrar_evento(
+                MODULO,
+                'PLAN de internet modificado',
+                f'Plan #{plan.pk}: {plan.nombre} - Down: {plan.velocidad_bajada} Mbps / Up: {plan.velocidad_subida} Mbps',
+                nivel=Evento.Nivel.INFO,)
             return redirect('mikrotik:detalle', pk=router.pk)
     else:
         form = PlanForm(instance=plan)
@@ -143,6 +148,11 @@ def eliminar_plan(request, pk):
     #num_contratos = plan.contratos.count()
 
     if request.method == 'POST':
+        registrar_evento(
+            MODULO,
+            'PLAN de internet eliminado',
+            f'Plan #{plan.pk}: {plan.nombre}',
+            nivel=Evento.Nivel.INFO,)
         plan.delete()
         return redirect('mikrotik:detalle', pk=router_pk)
 
