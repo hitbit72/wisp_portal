@@ -13,7 +13,8 @@
     </thead>
     <tbody>
         {% for evento in pagina %}
-        <tr class="{% if not evento.leido %}table-warning{% endif %}">
+        <!-- <tr class="{% if not evento.leido %}table-warning{% endif %}"> -->
+        <tr>
             <td class="text-nowrap">{{ evento.fecha|date:"d/m/Y H:i" }}</td>
             <td><span class="badge bg-{{ evento.color_badge }}">{{ evento.get_nivel_display }}</span></td>
             <td>
