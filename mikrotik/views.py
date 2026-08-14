@@ -8,7 +8,10 @@ from red.models import Sector
 from .forms import PlanForm, RouterForm
 from .models import Plan, Router
 
+from eventos.models import Evento
+from eventos.services import registrar_evento
 
+MODULO = 'mikrotik'
 
 def http_ruta(ruta):
     """
@@ -16,14 +19,9 @@ def http_ruta(ruta):
     evitar que al editar o crear un router/plan, la página de detalle redirija
     correctamente a la lista de routers en lugar de volver a la página de edición.
     """
-    if 'editar' in ruta:
+    if any(palabra in ruta for palabra in ['editar', 'nuevo', 'eliminar']):
         return '/mikrotik/'
-    if 'nuevo' in ruta:
-        return '/mikrotik/'
-    if 'eliminar' in ruta:
-        return '/mikrotik/'
-    if 'nuevo' in ruta:
-        return '/mikrotik/'
+    
     return ruta # Devuelve la ruta original
 
 @login_required
@@ -106,6 +104,11 @@ def nuevo_plan(request, router_pk):
             plan = form.save(commit=False)
             plan.router = router
             plan.save()
+            registrar_evento(
+                MODULO,
+                'Nuevo PLAN registrado',
+                f'Plan #{plan.pk}: {plan.nombre}',
+                nivel=Evento.Nivel.INFO,)
             return redirect('mikrotik:detalle', pk=router.pk)
     else:
         form = PlanForm()
