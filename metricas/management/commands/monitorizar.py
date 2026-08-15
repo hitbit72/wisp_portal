@@ -62,12 +62,15 @@ class Command(BaseCommand):
             self.stdout.write(self.style.WARNING(
                 'No hay dispositivos con IP de gestión.'))
         for dispositivo in dispositivos:
+            """
             if not dispositivo.snmp_community:
                 self.stdout.write(self.style.WARNING(
                     f'[{dispositivo.nombre}] sin comunidad SNMP: se probará'
                     f' con "public".'))
-            if self._procesar(dispositivo):
-                ok += 1
+            """
+            if dispositivo.snmp_community: 
+                if self._procesar(dispositivo):
+                    ok += 1
         self.stdout.write(self.style.SUCCESS(
             f'Monitorizados {ok} de {total} dispositivos.'))
 
