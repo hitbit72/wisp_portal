@@ -4,6 +4,15 @@ gestión y comunidad, guarda una métrica por dispositivo y aplica alarmas.
 
 Para ejecutarse cada minuto, planificar una tarea con el planificador del
 SO o el worker de fondo del proyecto.
+
+Ejemplo de crontab (cada minuto):
+
+*/1 * * * * cd /ruta/wisp_portal && uv run manage.py monitorizar >> /var/log/wispcontrol/metricas.log 2>&1
+
+Uso manual:
+
+    uv run manage.py monitorizar
+
 """
 
 from django.core.management.base import BaseCommand
