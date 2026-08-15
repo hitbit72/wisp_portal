@@ -55,6 +55,10 @@ class Command(BaseCommand):
         )
         # Debug
         print(f'Total dispositivos: {Dispositivo.objects.count()}')
+        for disp1 in Dispositivo.objects.all():
+            print(f'{disp1.nombre} {disp1.ip_gestion}')
+        # Fin debug
+
         total, ok = dispositivos.count(), 0
         for dispositivo in dispositivos:
             if self._procesar(dispositivo):
