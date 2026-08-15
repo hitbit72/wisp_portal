@@ -59,9 +59,16 @@ def _sincronizar_alarmas(dispositivo, detectadas):
         resultados['resueltas'].append(alarma)
 
     for regla, datos in detectadas.items():
-        alarma = Alarma.objects.create(
-            device=dispositivo, regla=regla, titulo=datos['titulo'], texto=datos['texto'],
+        if regla in reglas_activas:
+            continue
+        alarma, creada = Alarma.objects.get_or_create(
+            device=dispositivo,
+            regla=regla,
+            estado=Alarma.Estado.ACTIVA,
+            defaults={'titulo': datos['titulo'], 'texto': datos['texto']},
         )
+        if not creada:
+            continue
         registrar_evento(
             MODULO, alarma.titulo,
             f'{dispositivo.nombre} · {alarma.texto}',

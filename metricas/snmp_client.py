@@ -28,6 +28,9 @@ MODO_IPV4 = 0  # CommunityData(mpModel=0) -> SNMPv2c
 OID_IF_DESCR = '1.3.6.1.2.1.2.2.1.2'
 OID_IF_OPER = '1.3.6.1.2.1.2.2.1.8'
 
+# ErrorStatus que significan "el OID no existe" (no fallo de comunicaciones).
+_FALTA_OID = ('nosuchname', 'nosuchobject', 'nosuchinstance')
+
 
 class SnmpError(Exception):
     """Error de consulta SNMP (sin respuesta, protocolo, etc.)."""
@@ -76,6 +79,14 @@ def _auth(comunidad):
     return CommunityData(comunidad, mpModel=MODO_IPV4)
 
 
+def _es_falta_oid(error_st):
+    try:
+        nombre = error_st.prettyPrint().lower()
+    except AttributeError:
+        nombre = str(error_st).lower()
+    return nombre in _FALTA_OID
+
+
 def consultar_escalares(dispositivo, oids):
     """GET múltiple: dict métrica -> OID. Devuelve dict métrica ->
     (valor_numero, valor_texto). Los OIDs sin soporte se omiten. Lanza
@@ -84,20 +95,25 @@ def consultar_escalares(dispositivo, oids):
         return {}
     conf = _conf_snmp(dispositivo)
     comunidad = dispositivo.snmp_community or 'public'
-    objetos = [_objetos(oid) for oid in oids.values()]
+    engine = SnmpEngine()
+    transporte = _trasporte(dispositivo.ip_gestion, conf)
+    contexto = ContextData()
 
     error_ind, error_st, _, var_binds = next(
         getCmd(
-            SnmpEngine(),
-            _auth(comunidad),
-            _trasporte(dispositivo.ip_gestion, conf),
-            ContextData(),
-            *objetos,
+            engine, _auth(comunidad), transporte, contexto,
+            *[_objetos(oid) for oid in oids.values()],
         )
     )
     if error_ind:
         raise SnmpError(str(error_ind))
+
+    # Un agente SNMPv1 devuelve noSuchName para TODO el GET si un solo OID
+    # no existe. En ese caso se reintenta cada OID por separado.
     if error_st:
+        if _es_falta_oid(error_st):
+            return _escalares_uno_a_uno(engine, _auth(comunidad), transporte,
+                                        contexto, oids)
         raise SnmpError(error_st.prettyPrint())
 
     resultado = {}
@@ -106,6 +122,26 @@ def consultar_escalares(dispositivo, oids):
         if not texto:
             continue
         resultado[metrica] = (_valor_numero(valor), texto)
+    return resultado
+
+
+def _escalares_uno_a_uno(engine, auth, transporte, contexto, oids):
+    resultado = {}
+    for metrica, oid in oids.items():
+        error_ind, error_st, _, var_binds = next(
+            getCmd(engine, auth, transporte, contexto, _objetos(oid))
+        )
+        if error_ind:
+            raise SnmpError(str(error_ind))
+        if error_st:
+            if _es_falta_oid(error_st):
+                continue
+            raise SnmpError(error_st.prettyPrint())
+        for _oid, valor in var_binds:
+            texto = _valor_texto(valor)
+            if not texto:
+                continue
+            resultado[metrica] = (_valor_numero(valor), texto)
     return resultado
 
 
