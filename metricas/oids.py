@@ -15,7 +15,9 @@ según marca/modelo. Se puede sobrescribir el mapa por dispositivo desde
 from django.conf import settings
 
 OIDS_GENERICO = {
-    'uptime': '1.3.6.1.2.1.1.3.0',        # sysUpTime (hundredths de segundo)
+    'uptime': '1.3.6.1.2.1.1.3.0',           # sysUpTime (hundredths de segundo)
+    'sys_name': '1.3.6.1.2.1.1.5.0',         #sysName
+    'sys_descr': '1.3.6.1.2.1.1.1.0',        #sysDescription
     'mem_total': '1.3.6.1.4.1.2021.4.5.0',   # memTotalReal (bytes) - UCD
     'mem_libre': '1.3.6.1.4.1.2021.4.6.0',   # memAvailReal (bytes) - UCD
     'if_descr': '1.3.6.1.2.1.2.2.1.2',       # ifTable/ifDescr (walk)
