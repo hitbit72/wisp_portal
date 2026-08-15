@@ -48,6 +48,8 @@ class Dispositivo(models.Model):
     class Marca(models.TextChoices):
         MIKROTIK = 'mikrotik', 'MikroTik'
         UBIQUITI = 'ubiquiti', 'Ubiquiti'
+        UBNTAIRMAX = 'ubntairmax', 'UBNT-AirMax'
+        UBNTAF = 'ubntaf', 'UBNT-AirFiber'
         DLINK = 'dlink', 'D-Link'
         TPLINK = 'tplink', 'TP-Link'
         HUAWEI = 'huawei', 'Huawei'

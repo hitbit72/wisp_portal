@@ -31,7 +31,7 @@ OIDS_MIKROTIK = {
     'uptime': '1.3.6.1.4.1.14988.1.1.1.2.1.4.0',     # mtikSystemUptime (segundos)
 }
 
-OIDS_UBNT_AIRMAX = {
+OIDS_UBNT_AIRMAX_ORIGINAL = {
     'signal': '1.3.6.1.4.1.41112.1.4.5.1.1.0',   # señal (dBm)
     'ccq': '1.3.6.1.4.1.41112.1.4.5.1.2.0',      # CCQ (%)
     'rx': '1.3.6.1.4.1.41112.1.4.5.1.3.0',       # tasa Rx (bps)
@@ -44,9 +44,33 @@ OIDS_UBNT_AIRMAX = {
     'snr': '1.3.6.1.4.1.41112.1.4.5.1.7.0',        # SNR (dB)
 }
 
+
+OIDS_UBNT_AIRMAX = {
+    'ccq': '1.3.6.1.4.1.41112.1.4.5.1.7.1',         # UBNT-AirMAX-MIB::ubntWlStatCcq.1
+    'clients': '1.3.6.1.4.1.41112.1.4.5.1.15.1',    # UBNT-AirMAX-MIB::ubntWlStatStaCount.1
+    'distancia': '1.3.6.1.4.1.41112.1.4.1.1.7.1',   # UBNT-AirMAX-MIB::ubntRadioDistance (metros)
+    'noise': '1.3.6.1.4.1.41112.1.4.5.1.8.1',       # UBNT-AirMAX-MIB::ubntWlStatNoiseFloor
+    'power': '1.3.6.1.4.1.41112.1.4.1.1.6.1',       # UBNT-AirMAX-MIB::ubntRadioTxPower
+    'signal': '1.3.6.1.4.1.41112.1.4.5.1.5.1',      # UBNT-AirMAX-MIB::ubntWlStatSignal
+    'airmax_q': '1.3.6.1.4.1.41112.1.4.6.1.3.1',    # UBNT-AirMAX-MIB::ubntAirMaxQuality
+    'rx': '1.3.6.1.4.1.41112.1.4.5.1.10.1',         # tasa Rx (bps) UBNT-AirMAX-MIB::ubntWlStatRxRate
+    'tx': '1.3.6.1.4.1.41112.1.4.5.1.9.1',          # tasa Tx (bps) UBNT-AirMAX-MIB::ubntWlStatTxRate
+    'rssi': '1.3.6.1.4.1.41112.1.4.5.1.6.1',        # UBNT-AirMAX-MIB::ubntWlStatRssi
+    'frequency': '1.3.6.1.4.1.41112.1.4.1.1.4.1',   # frecuencia (MHz)
+    'ssid': '1.3.6.1.4.1.41112.1.4.5.1.2.1',        # nombre ssid
+    'antena': '1.3.6.1.4.1.41112.1.4.1.1.9.1',      # tipo de antena instalada
+    'airmax': '1.3.6.1.4.1.41112.1.4.6.1.4.1',      # UBNT-AirMAX-MIB::ubntAirMaxCapacity.1
+}
+
+OIDS_UBNT_AF60 = {
+    'frequency': '1.3.6.1.4.1.41112.1.11.1.1.2.1',  # UI-AF60-MIB::af60Frequency
+}
+
 VENDOR_MAP = {
     'mikrotik': OIDS_MIKROTIK,
     'ubiquiti': OIDS_UBNT_AIRMAX,
+    'ubntairmax': OIDS_UBNT_AIRMAX,
+    'ubntaf': OIDS_UBNT_AF60,
 }
 
 
