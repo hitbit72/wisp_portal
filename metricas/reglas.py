@@ -51,8 +51,8 @@ def evaluar(dispositivo, metrica, anterior, config):
     reglas = []
     conect = _conectar_por_tipo(dispositivo)
     if metrica.status != DeviceMetrics.Status.OK:
-        texto = f'{dispositivo.nombre} no responde a SNMP ({metrica.get_status_display()}).'
-        return [{'regla': conect, 'titulo': _titulo_conectividad(conect), 'texto': texto}]
+        texto = f'{dispositivo.ip_gestion} ({dispositivo.nombre}) no responde a SNMP ({metrica.get_status_display()}).'
+        return [{'regla': conect, 'titulo': f'{dispositivo.ip_gestion} {_titulo_conectividad(conect)}', 'texto': texto}]
 
     if metrica.cpu is not None and metrica.cpu > config['cpu_max']:
         reglas.append({'regla': 'cpu_alta', 'titulo': 'CPU alta',
@@ -96,7 +96,7 @@ def evaluar(dispositivo, metrica, anterior, config):
 
 def _titulo_conectividad(regla):
     return {
-        'sin_respuesta': 'Dispositivo sin respuesta',
+        'sin_respuesta': 'sin respuesta',
         'onu_offline': 'ONU offline',
         'olt_sin_respuesta': 'OLT sin respuesta',
     }.get(regla, 'Fallo de conectividad')
