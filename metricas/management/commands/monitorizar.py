@@ -50,27 +50,18 @@ class Command(BaseCommand):
     help = 'Consulta SNMP a cada dispositivo y guarda métricas + alarmas.'
 
     def handle(self, *args, **options):
-        # Filtrado en Python: el filtro SQL sobre GenericIPAddressField
-        # (columna 'inet' en Postgres) se comporta de forma impredecible con
-        # .exclude(ip_gestion=''), y el inventario es pequeño.
-        dispositivos = sorted(
-            (d for d in Dispositivo.objects.all() if d.ip_gestion),
-            key=lambda d: d.nombre,
+        dispositivos = (
+            Dispositivo.objects
+            .filter(ip_gestion__isnull=False)
+            .exclude(snmp_community__isnull=True)
         )
         total, ok = len(dispositivos), 0
         if not total:
             self.stdout.write(self.style.WARNING(
                 'No hay dispositivos con IP de gestión.'))
         for dispositivo in dispositivos:
-            """
-            if not dispositivo.snmp_community:
-                self.stdout.write(self.style.WARNING(
-                    f'[{dispositivo.nombre}] sin comunidad SNMP: se probará'
-                    f' con "public".'))
-            """
-            if dispositivo.snmp_community: 
-                if self._procesar(dispositivo):
-                    ok += 1
+            if self._procesar(dispositivo):
+                ok += 1
         self.stdout.write(self.style.SUCCESS(
             f'Monitorizados {ok} de {total} dispositivos.'))
 

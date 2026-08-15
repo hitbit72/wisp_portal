@@ -330,7 +330,7 @@ a {
 }
 
 .notification-menu {
-  width: min(320px, calc(100vw - 2rem));
+  width: min(340px, calc(100vw - 2rem));
   border: 1px solid var(--admin-border);
   border-radius: 8px;
   box-shadow: var(--admin-shadow);
@@ -346,6 +346,10 @@ a {
   font-weight: 700;
 }
 
+.notification-title-base{
+  font-weight: 700;
+  font-size: 0.80em;
+}
 .notification-time {
   color: var(--admin-muted);
   font-size: 0.82rem;

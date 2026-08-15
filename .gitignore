@@ -11,3 +11,4 @@ migrations/
 run.bat
 opencode.json
 AGENTS.md
+metricas/management/commands/monitorizar2.py
