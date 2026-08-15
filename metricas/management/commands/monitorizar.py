@@ -53,6 +53,8 @@ class Command(BaseCommand):
             .exclude(snmp_community__isnull=True)
             .exclude(snmp_community='')
         )
+        # Debug
+        print(f'Total dispositivos: {Dispositivo.count()}')
         total, ok = dispositivos.count(), 0
         for dispositivo in dispositivos:
             if self._procesar(dispositivo):
