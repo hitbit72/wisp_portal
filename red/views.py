@@ -8,7 +8,9 @@ from clientes.models import Cliente
 from .forms import DispositivoForm, EnlaceForm, InterfazForm, SectorForm
 from .models import Dispositivo, Enlace, Interfaz, Sector
 
-
+from eventos.models import Evento
+from eventos.services import registrar_evento
+MODULO = 'red'
 
 def http_ruta(ruta):
     """
@@ -70,6 +72,12 @@ def form_sector(request, pk=None):
 def eliminar_sector(request, pk):
     sector = get_object_or_404(Sector, pk=pk)
     if request.method == 'POST':
+        registrar_evento(
+	        MODULO,
+	        f'Sector {sector.nombre} eliminado',
+	        f'Sector #{sector.pk} - {sector.nombre} {sector.poblacion}.',
+	        nivel=Evento.Nivel.INFO,
+        )
         sector.delete()
         return redirect('red:lista')
     return render(request, 'red/sector/confirmar_eliminar_sector.html', {'sector': sector})
@@ -228,7 +236,7 @@ def editar_dispositivo(request, pk):
 def editar_dispositivo_cliente(request, pk):
     dispositivo = get_object_or_404(Dispositivo, pk=pk)
     cliente = get_object_or_404(Cliente, pk=dispositivo.cliente.pk)
-    cliente_pk = dispositivo.cliente.pk
+    cliente_pk = cliente.pk
 
     if request.method == 'POST':
         form = DispositivoForm(request.POST, instance=dispositivo)
@@ -248,6 +256,12 @@ def eliminar_dispositivo(request, pk):
     sector_pk = dispositivo.sector_id
 
     if request.method == 'POST':
+        registrar_evento(
+	        MODULO,
+	        f'Dipositivo {dispositivo.nombre} eliminado',
+	        f'Dispositivo #{dispositivo.pk} - {dispositivo.marca} {dispositivo.modelo|""} {dispositivo.ip_gestion}.',
+	        nivel=Evento.Nivel.INFO,
+        )
         dispositivo.delete()
         return redirect('red:detalle_sector', pk=sector_pk)
 

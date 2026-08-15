@@ -81,10 +81,8 @@ class Dispositivo(models.Model):
     rol = models.CharField(max_length=20, choices=Rol.choices, default=Rol.OTRO, verbose_name='Modo operación')
 
     sector = models.ForeignKey(Sector, on_delete=models.SET_NULL, null=True, blank=True, related_name='dispositivos')
-    cliente = models.ForeignKey(
-        'clientes.Cliente', on_delete=models.SET_NULL, null=True, blank=True,
-        related_name='dispositivos',
-    )
+    cliente = models.ForeignKey('clientes.Cliente', on_delete=models.SET_NULL, null=True, blank=True,
+        related_name='dispositivos',)
 
     ip_gestion = models.GenericIPAddressField(null=True, blank=True, verbose_name='IP de gestión')
     mac_address = models.CharField(max_length=17, blank=True, verbose_name='Dirección MAC')

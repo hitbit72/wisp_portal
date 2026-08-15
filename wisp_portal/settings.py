@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'red',
     'mikrotik',
     'eventos',
+    'metricas',
 ]
 
 MIDDLEWARE = [
@@ -138,3 +139,30 @@ MK_OPTIONS = {
 # Intentos máximos antes de dejar una TareaSincronizacion como 'fallida'
 # definitiva (a partir de ahí, solo se reintenta a mano desde el admin).
 MK_MAX_INTENTOS = int(os.environ.get('MK_MAX_INTENTOS', '3'))
+
+
+# --- Servicio de monitorización (metricas) ----------------------------------
+#
+# SNMP: valores por defecto del transporte. Cada dispositivo puede
+# sobrescribirlos en Dispositivo.atributos_extra['snmp'].
+METRICAS_SNMP = {
+    'puerto': 161,
+    'timeout': 2.0,
+    'reintentos': 2,
+}
+
+# OIDs extra por marca (se suman a los genéricos y a los de la marca base
+# definidos en metricas/oids.py). Util para marcas sin mapa base.
+METRICAS_OIDS_POR_MARCA = {}
+
+# Umbrales de las reglas de alarma (ver metricas/reglas.py).
+METRICAS_ALARMAS = {
+    'cpu_max': 90.0,              # % CPU a partir del cual la CPU es alta
+    'temp_max': 70.0,             # °C a partir del cual la temperatura es alta
+    'puerto_caido': True,         # avisar con interfaz(es) abajo
+    'sin_clientes_ap': True,      # avisar de AP sin clientes
+    'cambio_frecuencia': True,    # avisar si cambia la frecuencia del enlace
+    'cambio_canal': True,         # avisar si cambia el canal
+    'caida_potencia_dbm': 20.0,   # dBm de bajada de Rx que dispara la alarma
+    'caida_signal_dbm': 20.0,     # dBm de bajada de señal que dispara la alarma
+}
