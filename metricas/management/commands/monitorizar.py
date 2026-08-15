@@ -50,11 +50,12 @@ class Command(BaseCommand):
     help = 'Consulta SNMP a cada dispositivo y guarda métricas + alarmas.'
 
     def handle(self, *args, **options):
-        dispositivos = list(
-            Dispositivo.objects
-            .filter(ip_gestion__isnull=False)
-            .exclude(ip_gestion='')
-            .order_by('nombre')
+        # Filtrado en Python: el filtro SQL sobre GenericIPAddressField
+        # (columna 'inet' en Postgres) se comporta de forma impredecible con
+        # .exclude(ip_gestion=''), y el inventario es pequeño.
+        dispositivos = sorted(
+            (d for d in Dispositivo.objects.all() if d.ip_gestion),
+            key=lambda d: d.nombre,
         )
         total, ok = len(dispositivos), 0
         if not total:
