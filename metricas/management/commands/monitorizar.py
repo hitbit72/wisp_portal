@@ -56,7 +56,7 @@ class Command(BaseCommand):
         # Debug
         print(f'Total dispositivos: {Dispositivo.objects.count()}')
         for disp1 in Dispositivo.objects.all():
-            print(f'{disp1.nombre} {disp1.ip_gestion}')
+            print(f'{disp1.nombre} {disp1.ip_gestion} {disp1.snmp_community}')
         # Fin debug
 
         total, ok = dispositivos.count(), 0
