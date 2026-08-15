@@ -7,11 +7,15 @@ SO o el worker de fondo del proyecto.
 
 Ejemplo de crontab (cada minuto):
 
-*/1 * * * * cd /ruta/wisp_portal && uv run manage.py monitorizar >> /var/log/wispcontrol/metricas.log 2>&1
+    */1 * * * * cd /ruta/wisp_portal && uv run manage.py monitorizar >> /var/log/wispcontrol/metricas.log 2>&1
 
 Uso manual:
 
     uv run manage.py monitorizar
+
+Si quieres confirmar qué hay realmente en esa columna:
+
+    uv run manage.py shell -c "from red.models import Dispositivo; [print(d.nombre, repr(d.snmp_community)) for d in Dispositivo.objects.all()]"
 
 """
 
@@ -46,21 +50,21 @@ class Command(BaseCommand):
     help = 'Consulta SNMP a cada dispositivo y guarda métricas + alarmas.'
 
     def handle(self, *args, **options):
-        dispositivos = (
+        dispositivos = list(
             Dispositivo.objects
             .filter(ip_gestion__isnull=False)
             .exclude(ip_gestion='')
-            .exclude(snmp_community__isnull=True)
-            .exclude(snmp_community='')
+            .order_by('nombre')
         )
-        # Debug
-        print(f'Total dispositivos: {Dispositivo.objects.count()}')
-        for disp1 in Dispositivo.objects.all():
-            print(f'{disp1.nombre} {disp1.ip_gestion} {disp1.snmp_community}')
-        # Fin debug
-
-        total, ok = dispositivos.count(), 0
+        total, ok = len(dispositivos), 0
+        if not total:
+            self.stdout.write(self.style.WARNING(
+                'No hay dispositivos con IP de gestión.'))
         for dispositivo in dispositivos:
+            if not dispositivo.snmp_community:
+                self.stdout.write(self.style.WARNING(
+                    f'[{dispositivo.nombre}] sin comunidad SNMP: se probará'
+                    f' con "public".'))
             if self._procesar(dispositivo):
                 ok += 1
         self.stdout.write(self.style.SUCCESS(
@@ -92,6 +96,8 @@ class Command(BaseCommand):
 
         metrica = guardar_metrica(dispositivo, **datos)
         evaluar_y_aplicar(dispositivo, metrica)
+        self.stdout.write(self.style.SUCCESS(
+            f'[{dispositivo.nombre}] {status}'))
         return status == DeviceMetrics.Status.OK
 
     def _construir_datos(self, dispositivo, resultado):
