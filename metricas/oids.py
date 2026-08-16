@@ -20,7 +20,7 @@ OIDS_GENERICO = {
     'sys_descr': '1.3.6.1.2.1.1.1.0',        #sysDescription
     'mem_total': '1.3.6.1.4.1.2021.4.5.0',   # memTotalReal (bytes) - UCD
     'mem_libre': '1.3.6.1.4.1.2021.4.6.0',   # memAvailReal (bytes) - UCD
-    'cpu_p': '1.3.6.1.4.1.2021.10.1.3.2',    # 5min load average
+    'cpu': '1.3.6.1.4.1.2021.10.1.3.2',    # 5min load average
     'if_descr': '1.3.6.1.2.1.2.2.1.2',       # ifTable/ifDescr (walk)
     'if_oper': '1.3.6.1.2.1.2.2.1.8',        # ifTable/ifOperStatus (walk)
 }
@@ -47,7 +47,7 @@ OIDS_UBNT_AIRMAX_ORIGINAL = {
 
 
 OIDS_UBNT_AIRMAX = {
-    'cpu_p': '1.3.6.1.4.1.10002.1.1.1.4.2.1.3.2',   # 5 Minute Average
+    'cpu': '1.3.6.1.4.1.10002.1.1.1.4.2.1.3.2',   # 5 Minute Average
     'ccq': '1.3.6.1.4.1.41112.1.4.5.1.7.1',         # UBNT-AirMAX-MIB::ubntWlStatCcq.1
     'clients': '1.3.6.1.4.1.41112.1.4.5.1.15.1',    # UBNT-AirMAX-MIB::ubntWlStatStaCount.1
     'noise': '1.3.6.1.4.1.41112.1.4.5.1.8.1',       # UBNT-AirMAX-MIB::ubntWlStatNoiseFloor
@@ -66,8 +66,8 @@ OIDS_UBNT_AIRMAX = {
 }
 
 OIDS_UBNT_AF60 = {
-    'memory_p': '1.3.6.1.4.1.41112.1.11.1.2.5.1',     # Memoria %
-    'cpu_p': '1.3.6.1.4.1.41112.1.11.1.2.6.1',        # CPU %
+    'ram': '1.3.6.1.4.1.41112.1.11.1.2.5.1',     # Memoria %
+    'cpu': '1.3.6.1.4.1.41112.1.11.1.2.6.1',        # CPU %
     'frequency': '1.3.6.1.4.1.41112.1.11.1.1.2.1',  # UI-AF60-MIB::af60Frequency
     'w_channel': '1.3.6.1.4.1.41112.1.11.1.1.3.1',      # Ancho de canal
     'ssid': '1.3.6.1.4.1.41112.1.11.1.1.4.1',
