@@ -76,9 +76,7 @@ def _trasporte(host, conf):
 
 
 def _auth(comunidad):
-    # return CommunityData(comunidad, mpModel=MODO_IPV4)
     return CommunityData(comunidad, mpModel=MODO_IPV4)
-
 
 def _es_falta_oid(error_st):
     try:
@@ -163,6 +161,7 @@ def consultar_if_table(dispositivo):
         )
         print('---------------')
         print(f'{columna} - {bucket}')
+        print(f'{descr} - {oper}')
         """
         Puertos. desactivado porque generaba muchas respuestas no vinculadas a los puertos
         try:
