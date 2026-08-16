@@ -86,8 +86,44 @@ def _es_falta_oid(error_st):
         nombre = str(error_st).lower()
     return nombre in _FALTA_OID
 
-
 def consultar_escalares(dispositivo, oids):
+    """GET múltiple: dict métrica -> OID. Devuelve dict métrica ->
+    (valor_numero, valor_texto). Los OIDs sin soporte se omiten. Lanza
+    SnmpError si el equipo no responde o da error de protocolo."""
+    print(oids)
+    if not oids:
+        return {}
+
+    conf = _conf_snmp(dispositivo)
+    comunidad = dispositivo.snmp_community or 'public'
+    community = _auth(comunidad)
+    engine = SnmpEngine()
+    transporte = _trasporte(dispositivo.ip_gestion, conf)
+    contexto = ContextData()
+
+    # 1. Convertir los valores OID del diccionario en una lista de ObjectType
+    var_binds_query = [ObjectType(ObjectIdentity(oid)) for oid in oids.values()]
+
+    # 2. Enviar la consulta pasando la lista desempaquetada con *
+    errorIndication, errorStatus, errorIndex, varBinds = next(
+        getCmd(engine, community, transporte, contexto, *var_binds_query)
+    )
+
+    # 3. Mapear los resultados de vuelta a las claves del diccionario
+    if errorIndication:
+        print(f"Error de red/transporte: {errorIndication}")
+        raise SnmpError(str(errorIndication))
+    elif errorStatus:
+        print(f"Error SNMP: {errorStatus.prettyPrint()}")
+        raise SnmpError(errorStatus.prettyPrint())
+    else:
+        # Como la respuesta respeta exactamente el orden de consulta:
+        resultados = {}
+        for key, varBind in zip(oids.keys(), varBinds):
+            resultados[key] = varBind[1].prettyPrint()
+        return resultados
+
+def consultar_escalares2(dispositivo, oids):
     """GET múltiple: dict métrica -> OID. Devuelve dict métrica ->
     (valor_numero, valor_texto). Los OIDs sin soporte se omiten. Lanza
     SnmpError si el equipo no responde o da error de protocolo."""
@@ -159,7 +195,7 @@ def consultar_if_table(dispositivo):
     print(f'conf: {conf}')
     print(f'comunity: {comunity}')
     print(f'transporte: {transporte}')
-    
+
     # OIDs base a consultar en IF-MIB
     # .1.3.6.1.2.1.2.2.1.2 = ifDescr (Nombre del puerto)
     # .1.3.6.1.2.1.2.2.1.5 = ifSpeed (Velocidad en bps)
