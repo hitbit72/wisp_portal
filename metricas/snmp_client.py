@@ -150,10 +150,13 @@ def consultar_if_table(dispositivo):
     {nombre, estado} con estado 'up'/'down'."""
     conf = _conf_snmp(dispositivo)
     comunidad = dispositivo.snmp_community or 'public'
+    comunity = _auth(comunidad)
     engine = SnmpEngine()
     transporte = _trasporte(dispositivo.ip_gestion, conf)
     contexto = ContextData()
     puertos = []
+
+    print(f'conf: {conf}')
 
     # OIDs base a consultar en IF-MIB
     # .1.3.6.1.2.1.2.2.1.2 = ifDescr (Nombre del puerto)
@@ -167,7 +170,7 @@ def consultar_if_table(dispositivo):
     # Usamos nextCmd para hacer un walk sobre las 3 columnas simultáneamente
     for errorIndication, errorStatus, errorIndex, varBinds in nextCmd(
         engine,
-        comunidad,
+        comunity,
         transporte,
         contexto,
         oid_descr,
