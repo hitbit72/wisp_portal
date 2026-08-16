@@ -148,6 +148,8 @@ def _escalares_uno_a_uno(engine, auth, transporte, contexto, oids):
 def consultar_if_table(dispositivo):
     """Walk de ifTable (descr + oper status). Devuelve lista de
     {nombre, estado} con estado 'up'/'down'."""
+    # Puertos. desactivado porque generaba muchas respuestas no vinculadas a los puertos
+    return []
     conf = _conf_snmp(dispositivo)
     comunidad = dispositivo.snmp_community or 'public'
     engine = SnmpEngine()
@@ -159,11 +161,6 @@ def consultar_if_table(dispositivo):
         iterador = nextCmd(
             engine, _auth(comunidad), transporte, contexto, _objetos(columna),
         )
-        print('---------------')
-        print(f'{columna} - {bucket}')
-        print(f'{descr} - {oper}')
-        """
-        Puertos. desactivado porque generaba muchas respuestas no vinculadas a los puertos
         try:
             while True:
                 error_ind, error_st, _, var_binds = next(iterador)
@@ -175,7 +172,6 @@ def consultar_if_table(dispositivo):
                     bucket[str(oid)] = _valor_texto(valor)
         except StopIteration:
             pass
-        """
     puertos = []
     for sufijo in sorted(set(descr) | set(oper)):
         nombre = descr.get(sufijo) or f'if {sufijo.rsplit(".", 1)[-1]}'
