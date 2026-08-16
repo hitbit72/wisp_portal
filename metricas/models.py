@@ -35,11 +35,15 @@ class DeviceMetrics(models.Model):
         verbose_name='Uptime (segundos)',
         help_text='Segundos desde el último reinicio.',
     )
+    ssid = models.CharField(max_length=200, null=True, blank=True)
     snr = models.FloatField(null=True, blank=True, verbose_name='SNR (dB)')
     ccq = models.FloatField(null=True, blank=True, verbose_name='CCQ (%)')
     signal = models.FloatField(null=True, blank=True, verbose_name='Señal (dBm)')
     frequency = models.FloatField(null=True, blank=True, verbose_name='Frecuencia (MHz)')
     channel = models.CharField(max_length=20, blank=True, verbose_name='Canal')
+    noise = models.IntegerField(null=True,blank=True, verbose_name='Noise floor')
+    w_channel = models.IntegerField(null=True,blank=True, verbose_name='Ancho canal')
+    antena = models.CharField(max_length=100, null=True, blank=True, verbose_name='Tipo Antena')
     clients = models.PositiveIntegerField(null=True, blank=True, verbose_name='Clientes conectados')
     puertos = models.JSONField(
         default=list, blank=True,

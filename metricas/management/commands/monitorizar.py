@@ -103,6 +103,10 @@ class Command(BaseCommand):
             libre, _ = resultado['mem_libre']
             if total:
                 datos['ram'] = round((1 - libre / total) * 100, 2)
+        if 'memory_p' in resultado:
+            datos['ram'] = resultado['memory_p']
+        if 'cpu_p' in resultado:
+            datos['cpu'] = resultado['cpu_p']
         for metrica, (numero, texto) in resultado.items():
             campo = CAMPO.get(metrica)
             if not campo:

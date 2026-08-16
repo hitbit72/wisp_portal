@@ -46,40 +46,42 @@ OIDS_UBNT_AIRMAX_ORIGINAL = {
 
 
 OIDS_UBNT_AIRMAX = {
+    'cpu_p': '1.3.6.1.4.1.10002.1.1.1.4.2.1.2.2',     # 5 Minute Average
     'ccq': '1.3.6.1.4.1.41112.1.4.5.1.7.1',         # UBNT-AirMAX-MIB::ubntWlStatCcq.1
     'clients': '1.3.6.1.4.1.41112.1.4.5.1.15.1',    # UBNT-AirMAX-MIB::ubntWlStatStaCount.1
-    'distancia': '1.3.6.1.4.1.41112.1.4.1.1.7.1',   # UBNT-AirMAX-MIB::ubntRadioDistance (metros)
     'noise': '1.3.6.1.4.1.41112.1.4.5.1.8.1',       # UBNT-AirMAX-MIB::ubntWlStatNoiseFloor
     'power': '1.3.6.1.4.1.41112.1.4.1.1.6.1',       # UBNT-AirMAX-MIB::ubntRadioTxPower
     'signal': '1.3.6.1.4.1.41112.1.4.5.1.5.1',      # UBNT-AirMAX-MIB::ubntWlStatSignal
-    'airmax_q': '1.3.6.1.4.1.41112.1.4.6.1.3.1',    # UBNT-AirMAX-MIB::ubntAirMaxQuality
+    'w_channel': '1.3.6.1.4.1.41112.1.4.5.1.14.1',   # width channel
     'rx': '1.3.6.1.4.1.41112.1.4.5.1.10.1',         # tasa Rx (bps) UBNT-AirMAX-MIB::ubntWlStatRxRate
     'tx': '1.3.6.1.4.1.41112.1.4.5.1.9.1',          # tasa Tx (bps) UBNT-AirMAX-MIB::ubntWlStatTxRate
-    'rssi': '1.3.6.1.4.1.41112.1.4.5.1.6.1',        # UBNT-AirMAX-MIB::ubntWlStatRssi
     'frequency': '1.3.6.1.4.1.41112.1.4.1.1.4.1',   # frecuencia (MHz)
     'ssid': '1.3.6.1.4.1.41112.1.4.5.1.2.1',        # nombre ssid
     'antena': '1.3.6.1.4.1.41112.1.4.1.1.9.1',      # tipo de antena instalada
-    'airmax': '1.3.6.1.4.1.41112.1.4.6.1.4.1',      # UBNT-AirMAX-MIB::ubntAirMaxCapacity.1
-    'momory': '1.3.6.1.4.1.41112.1.11.1.2.5.1',     # Memoria %
-    'cpu': '1.3.6.1.4.1.41112.1.11.1.2.6.1',        # CPU %
+    #'rssi': '1.3.6.1.4.1.41112.1.4.5.1.6.1',        # UBNT-AirMAX-MIB::ubntWlStatRssi
+    #'airmax_q': '1.3.6.1.4.1.41112.1.4.6.1.3.1',    # UBNT-AirMAX-MIB::ubntAirMaxQuality
+    #'distancia': '1.3.6.1.4.1.41112.1.4.1.1.7.1',   # UBNT-AirMAX-MIB::ubntRadioDistance (metros)
+    #'airmax': '1.3.6.1.4.1.41112.1.4.6.1.4.1',      # UBNT-AirMAX-MIB::ubntAirMaxCapacity.1
 }
 
 OIDS_UBNT_AF60 = {
+    'memory_p': '1.3.6.1.4.1.41112.1.11.1.2.5.1',     # Memoria %
+    'cpu_p': '1.3.6.1.4.1.41112.1.11.1.2.6.1',        # CPU %
     'frequency': '1.3.6.1.4.1.41112.1.11.1.1.2.1',  # UI-AF60-MIB::af60Frequency
-    'witch': '1.3.6.1.4.1.41112.1.11.1.1.3.1',      # Ancho de canal
+    'w_channel': '1.3.6.1.4.1.41112.1.11.1.1.3.1',      # Ancho de canal
     'ssid': '1.3.6.1.4.1.41112.1.11.1.1.4.1',
-    'ip': '1.3.6.1.4.1.41112.1.11.1.1.5.1',
-    #'uptime': '1.3.6.1.4.1.41112.1.11.1.2.7.1',                             # Tiempo de ectividad
-    'modelo': '1.3.6.1.4.1.41112.1.11.1.2.3.1',                             # Modelo, largo
-    'signal': '1.3.6.1.4.1.41112.1.11.1.3.1.3.36.90.76.244.78.191.1',       # Señal local dbm
-    'signal_r': '1.3.6.1.4.1.41112.1.11.1.3.1.18.36.90.76.244.78.191.1',    # Señal remota dbm
-    'modulacion': '1.3.6.1.4.1.41112.1.11.1.3.1.4.36.90.76.244.78.191.1',   # modulacion de señal
-    'rx_rate': '1.3.6.1.4.1.41112.1.11.1.3.1.5.36.90.76.244.78.191.1',      # RX Data Rate
-    'exp_rx_rate': '1.3.6.1.4.1.41112.1.11.1.3.1.6.36.90.76.244.78.191.1',  # expected RX Data Rate
     'capacity': '1.3.6.1.4.1.41112.1.11.1.3.1.7.36.90.76.244.78.191.1',     # Total Capacity bps
-    'tx_bytes': '1.3.6.1.4.1.41112.1.11.1.3.1.9.36.90.76.244.78.191.1',     # 60GHz TX Bytes
-    'rx_bytes': '1.3.6.1.4.1.41112.1.11.1.3.1.10.36.90.76.244.78.191.1',    # 60GHz RX Bytes
-    'altitud': '3.6.1.4.1.41112.1.11.1.4.5.1',
+    'tx': '1.3.6.1.4.1.41112.1.11.1.3.1.9.36.90.76.244.78.191.1',           # 60GHz TX Bytes
+    'rx': '1.3.6.1.4.1.41112.1.11.1.3.1.10.36.90.76.244.78.191.1',          # 60GHz RX Bytes
+    'uptime': '1.3.6.1.4.1.41112.1.11.1.2.7.1',                             # Tiempo de ectividad
+    'signal': '1.3.6.1.4.1.41112.1.11.1.3.1.3.36.90.76.244.78.191.1',       # Señal local dbm
+    #'ip': '1.3.6.1.4.1.41112.1.11.1.1.5.1',
+    #'modelo': '1.3.6.1.4.1.41112.1.11.1.2.3.1',                             # Modelo, largo
+    #'signal_r': '1.3.6.1.4.1.41112.1.11.1.3.1.18.36.90.76.244.78.191.1',    # Señal remota dbm
+    #'modulacion': '1.3.6.1.4.1.41112.1.11.1.3.1.4.36.90.76.244.78.191.1',   # modulacion de señal
+    #'rx_rate': '1.3.6.1.4.1.41112.1.11.1.3.1.5.36.90.76.244.78.191.1',      # RX Data Rate
+    #'exp_rx_rate': '1.3.6.1.4.1.41112.1.11.1.3.1.6.36.90.76.244.78.191.1',  # expected RX Data Rate
+    #'altitud': '3.6.1.4.1.41112.1.11.1.4.5.1',
 }
 
 OIDS_UBNT_AF = {

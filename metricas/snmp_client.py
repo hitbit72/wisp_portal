@@ -23,7 +23,7 @@ from pysnmp.hlapi import (
     nextCmd,
 )
 
-MODO_IPV4 = 0  # CommunityData(mpModel=0) -> SNMPv2c
+MODO_IPV4 = 0  # CommunityData(mpModel=0) mpModel=0 para SNMPv1, 1 para SNMPv2c
 
 OID_IF_DESCR = '1.3.6.1.2.1.2.2.1.2'
 OID_IF_OPER = '1.3.6.1.2.1.2.2.1.8'
@@ -76,6 +76,7 @@ def _trasporte(host, conf):
 
 
 def _auth(comunidad):
+    # return CommunityData(comunidad, mpModel=MODO_IPV4)
     return CommunityData(comunidad, mpModel=MODO_IPV4)
 
 
@@ -91,6 +92,7 @@ def consultar_escalares(dispositivo, oids):
     """GET múltiple: dict métrica -> OID. Devuelve dict métrica ->
     (valor_numero, valor_texto). Los OIDs sin soporte se omiten. Lanza
     SnmpError si el equipo no responde o da error de protocolo."""
+    print(oids)
     if not oids:
         return {}
     conf = _conf_snmp(dispositivo)
