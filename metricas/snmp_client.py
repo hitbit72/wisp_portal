@@ -27,6 +27,7 @@ MODO_IPV4 = 0  # CommunityData(mpModel=0) mpModel=0 para SNMPv1, 1 para SNMPv2c
 
 OID_IF_DESCR = '1.3.6.1.2.1.2.2.1.2'
 OID_IF_OPER = '1.3.6.1.2.1.2.2.1.8'
+OID_IF_SPEED = '1.3.6.1.2.1.2.2.1.5'
 
 # ErrorStatus que significan "el OID no existe" (no fallo de comunicaciones).
 _FALTA_OID = ('nosuchname', 'nosuchobject', 'nosuchinstance')
@@ -144,8 +145,63 @@ def _escalares_uno_a_uno(engine, auth, transporte, contexto, oids):
             resultado[metrica] = (_valor_numero(valor), texto)
     return resultado
 
-
 def consultar_if_table(dispositivo):
+    """Walk de ifTable (descr + oper status). Devuelve lista de
+    {nombre, estado} con estado 'up'/'down'."""
+    conf = _conf_snmp(dispositivo)
+    comunidad = dispositivo.snmp_community or 'public'
+    engine = SnmpEngine()
+    transporte = _trasporte(dispositivo.ip_gestion, conf)
+    contexto = ContextData()
+    puertos = []
+
+    # OIDs base a consultar en IF-MIB
+    # .1.3.6.1.2.1.2.2.1.2 = ifDescr (Nombre del puerto)
+    # .1.3.6.1.2.1.2.2.1.5 = ifSpeed (Velocidad en bps)
+    # .1.3.6.1.2.1.2.2.1.8 = ifOperStatus (Estado operativo: 1=Up, 2=Down)
+
+    oid_descr = ObjectType(ObjectIdentity("1.3.6.1.2.1.2.2.1.2"))
+    oid_speed = ObjectType(ObjectIdentity("1.3.6.1.2.1.2.2.1.5"))
+    oid_status = ObjectType(ObjectIdentity("1.3.6.1.2.1.2.2.1.8"))
+
+    # Usamos nextCmd para hacer un walk sobre las 3 columnas simultáneamente
+    for errorIndication, errorStatus, errorIndex, varBinds in nextCmd(
+        engine,
+        comunidad,
+        transporte,
+        contexto,
+        oid_descr,
+        oid_speed,
+        oid_status,
+        lexicographicMode=False,
+    ):
+        if errorIndication:
+            print(f"Error de conexión: {errorIndication}")
+            break
+        elif errorStatus:
+            print(f"Error SNMP: {errorStatus.prettyPrint()}")
+            break
+        else:
+            # Extraer los datos de la fila actual
+            interface_name = str(varBinds[0][1])
+            speed_bps = int(varBinds[1][1])
+            status_code = int(varBinds[2][1])
+
+            # Formatear el estado y la velocidad
+            status_str = "UP (Conectado)" if status_code == 1 else "DOWN (Desconectado)"
+            speed_mbps = speed_bps // 1_000_000 if speed_bps > 0 else 0
+
+            print(
+                f"Interfaz: {interface_name:<10} | Estado: {status_str:<18} | Velocidad: {speed_mbps} Mbps"
+            )
+
+            puertos.append({
+                'nombre': {interface_name},
+                'estado': {status_str},
+            })
+    return puertos
+
+def consultar_if_table2(dispositivo):
     """Walk de ifTable (descr + oper status). Devuelve lista de
     {nombre, estado} con estado 'up'/'down'."""
     # Puertos. desactivado porque generaba muchas respuestas no vinculadas a los puertos
