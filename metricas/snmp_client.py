@@ -163,6 +163,7 @@ def consultar_if_table(dispositivo):
         )
         try:
             while True:
+                print(f'{columna} - {bucket}')
                 error_ind, error_st, _, var_binds = next(iterador)
                 if error_ind:
                     raise SnmpError(str(error_ind))
