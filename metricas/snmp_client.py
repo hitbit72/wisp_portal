@@ -161,9 +161,11 @@ def consultar_if_table(dispositivo):
         iterador = nextCmd(
             engine, _auth(comunidad), transporte, contexto, _objetos(columna),
         )
+        print('---------------')
+        print(f'{columna} - {bucket}')
+        """
         try:
             while True:
-                print(f'{columna} - {bucket}')
                 error_ind, error_st, _, var_binds = next(iterador)
                 if error_ind:
                     raise SnmpError(str(error_ind))
@@ -173,7 +175,7 @@ def consultar_if_table(dispositivo):
                     bucket[str(oid)] = _valor_texto(valor)
         except StopIteration:
             pass
-
+        """
     puertos = []
     for sufijo in sorted(set(descr) | set(oper)):
         nombre = descr.get(sufijo) or f'if {sufijo.rsplit(".", 1)[-1]}'
