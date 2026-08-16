@@ -25,12 +25,14 @@ def guardar_metrica(dispositivo, **datos):
 def evaluar_y_aplicar(dispositivo, metrica):
     """Evalúa las reglas sobre la métrica recién creada y aplica alarmas y
     estado. Devuelve dict {nuevas, resueltas} con las alarmas tocadas."""
+    resultados =[]
     anterior = (
         DeviceMetrics.objects.filter(device=dispositivo, pk__lt=metrica.pk)
         .order_by('-pk').first()
     )
     activas = evaluar(dispositivo, metrica, anterior, settings.METRICAS_ALARMAS)
-    resultados = _sincronizar_alarmas(dispositivo, activas)
+    if dispositivo.alarma:
+        resultados = _sincronizar_alarmas(dispositivo, activas)
     _actualizar_estado(dispositivo, activas)
     return resultados
 

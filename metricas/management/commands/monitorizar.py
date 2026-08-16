@@ -91,6 +91,7 @@ class Command(BaseCommand):
         datos['status'] = status
 
         metrica = guardar_metrica(dispositivo, **datos)
+        # evalua la alerta/alarma
         evaluar_y_aplicar(dispositivo, metrica)
         self.stdout.write(self.style.SUCCESS(
             f'[{dispositivo.nombre}] {status}'))
