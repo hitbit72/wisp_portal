@@ -54,6 +54,7 @@ class Command(BaseCommand):
             Dispositivo.objects
             .filter(ip_gestion__isnull=False)
             .exclude(snmp_community__isnull=True)
+            .exclude(escanear=False)
         )
         total, ok = len(dispositivos), 0
         if not total:
