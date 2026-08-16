@@ -47,7 +47,7 @@ OIDS_UBNT_AIRMAX_ORIGINAL = {
 
 
 OIDS_UBNT_AIRMAX = {
-    'cpu_p': '1.3.6.1.4.1.10002.1.1.1.4.2.1.2.2',     # 5 Minute Average
+    'cpu_p': '1.3.6.1.4.1.10002.1.1.1.4.2.1.3.2',   # 5 Minute Average
     'ccq': '1.3.6.1.4.1.41112.1.4.5.1.7.1',         # UBNT-AirMAX-MIB::ubntWlStatCcq.1
     'clients': '1.3.6.1.4.1.41112.1.4.5.1.15.1',    # UBNT-AirMAX-MIB::ubntWlStatStaCount.1
     'noise': '1.3.6.1.4.1.41112.1.4.5.1.8.1',       # UBNT-AirMAX-MIB::ubntWlStatNoiseFloor
