@@ -196,8 +196,9 @@ def consultar_if_table(dispositivo):
             )
 
             puertos.append({
-                'nombre': {interface_name},
-                'estado': {status_str},
+                'nombre': interface_name,
+                'estado': status_str,
+                'speed': speed_mbps,
             })
     return puertos
 
