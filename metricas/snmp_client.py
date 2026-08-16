@@ -157,7 +157,9 @@ def consultar_if_table(dispositivo):
     puertos = []
 
     print(f'conf: {conf}')
-
+    print(f'comunity: {comunity}')
+    print(f'transporte: {transporte}')
+    
     # OIDs base a consultar en IF-MIB
     # .1.3.6.1.2.1.2.2.1.2 = ifDescr (Nombre del puerto)
     # .1.3.6.1.2.1.2.2.1.5 = ifSpeed (Velocidad en bps)
