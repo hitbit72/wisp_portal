@@ -2,6 +2,7 @@
 .venv/
 .agents/
 docs/
+temp/
 __pycache__/
 *.pyc
 staticfiles/
