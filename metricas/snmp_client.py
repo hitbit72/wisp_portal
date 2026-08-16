@@ -229,7 +229,7 @@ def consultar_if_table(dispositivo):
             status_code = int(varBinds[2][1])
 
             # Formatear el estado y la velocidad
-            status_str = "UP (Conectado)" if status_code == 1 else "DOWN (Desconectado)"
+            status_str = "UP" if status_code == 1 else "DOWN"
             speed_mbps = speed_bps // 1_000_000 if speed_bps > 0 else 0
 
             print(
@@ -243,39 +243,3 @@ def consultar_if_table(dispositivo):
             })
     return puertos
 
-def consultar_if_table2(dispositivo):
-    """Walk de ifTable (descr + oper status). Devuelve lista de
-    {nombre, estado} con estado 'up'/'down'."""
-    # Puertos. desactivado porque generaba muchas respuestas no vinculadas a los puertos
-    return []
-    conf = _conf_snmp(dispositivo)
-    comunidad = dispositivo.snmp_community or 'public'
-    engine = SnmpEngine()
-    transporte = _trasporte(dispositivo.ip_gestion, conf)
-    contexto = ContextData()
-
-    descr, oper = {}, {}
-    for columna, bucket in ((OID_IF_DESCR, descr), (OID_IF_OPER, oper)):
-        iterador = nextCmd(
-            engine, _auth(comunidad), transporte, contexto, _objetos(columna),
-        )
-        try:
-            while True:
-                error_ind, error_st, _, var_binds = next(iterador)
-                if error_ind:
-                    raise SnmpError(str(error_ind))
-                if error_st:
-                    raise SnmpError(error_st.prettyPrint())
-                for oid, valor in var_binds:
-                    bucket[str(oid)] = _valor_texto(valor)
-        except StopIteration:
-            pass
-    puertos = []
-    for sufijo in sorted(set(descr) | set(oper)):
-        nombre = descr.get(sufijo) or f'if {sufijo.rsplit(".", 1)[-1]}'
-        oper_raw = oper.get(sufijo, '2')
-        puertos.append({
-            'nombre': nombre,
-            'estado': 'up' if oper_raw == '1' else 'down',
-        })
-    return puertos

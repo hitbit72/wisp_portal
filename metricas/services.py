@@ -92,16 +92,18 @@ def _actualizar_estado(dispositivo, detectadas):
     if inactivo and dispositivo.estado == Dispositivo.Estado.ACTIVO:
         dispositivo.estado = Dispositivo.Estado.INACTIVO
         dispositivo.save(update_fields=['estado'])
-        registrar_evento(
-            MODULO, f'Dispositivo sin conectividad: {dispositivo.ip_gestion}',
-            'Se marcó como inactivo por falta de respuesta SNMP.',
-            nivel=Evento.Nivel.CRITICAL,
-        )
+        if dispositivo.alarma:
+            registrar_evento(
+                MODULO, f'Dispositivo sin conectividad: {dispositivo.ip_gestion}',
+                'Se marcó como inactivo por falta de respuesta SNMP.',
+                nivel=Evento.Nivel.CRITICAL,
+            )
     elif not inactivo and dispositivo.estado == Dispositivo.Estado.INACTIVO:
         dispositivo.estado = Dispositivo.Estado.ACTIVO
         dispositivo.save(update_fields=['estado'])
-        registrar_evento(
-            MODULO, f'Dispositivo recuperado: {dispositivo.ip_gestion}',
-            'Vuelve a responder correctamente a SNMP.',
-            nivel=Evento.Nivel.NOTICE,
-        )
+        if dispositivo.alarma:
+            registrar_evento(
+                MODULO, f'Dispositivo recuperado: {dispositivo.ip_gestion}',
+                'Vuelve a responder correctamente a SNMP.',
+                nivel=Evento.Nivel.NOTICE,
+            )
