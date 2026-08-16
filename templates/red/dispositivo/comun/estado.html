@@ -1,8 +1,8 @@
 <span class="badge
     {% if dispositivo.estado == 'activo' %}bg-success
-    {% elif dispositivo.estado == 'inactivo' %}bg-warning text-dark
+    {% elif dispositivo.estado == 'inactivo' %}bg-danger text-dark
     {% elif dispositivo.estado == 'mantenimiento' %}bg-warning text-dark
     {% elif dispositivo.estado == 'instalacion' %}bg-info text-dark
-    {% elif dispositivo.estado == 'retirado' %}bg-danger{% else %}bg-secondary{% endif %}">
+    {% elif dispositivo.estado == 'retirado' %}bg-warning{% else %}bg-secondary{% endif %}">
     {{ dispositivo.get_estado_display }}
 </span>
