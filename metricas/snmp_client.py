@@ -164,6 +164,7 @@ def consultar_if_table(dispositivo):
         print('---------------')
         print(f'{columna} - {bucket}')
         """
+        Puertos. desactivado porque generaba muchas respuestas no vinculadas a los puertos
         try:
             while True:
                 error_ind, error_st, _, var_binds = next(iterador)
