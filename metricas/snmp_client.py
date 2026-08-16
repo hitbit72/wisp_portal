@@ -86,7 +86,7 @@ def _es_falta_oid(error_st):
         nombre = str(error_st).lower()
     return nombre in _FALTA_OID
 
-def consultar_escalares(dispositivo, oids):
+def consultar_escalares2(dispositivo, oids):
     """GET múltiple: dict métrica -> OID. Devuelve dict métrica ->
     (valor_numero, valor_texto). Los OIDs sin soporte se omiten. Lanza
     SnmpError si el equipo no responde o da error de protocolo."""
@@ -123,7 +123,7 @@ def consultar_escalares(dispositivo, oids):
             resultados[key] = varBind[1].prettyPrint()
         return resultados
 
-def consultar_escalares2(dispositivo, oids):
+def consultar_escalares(dispositivo, oids):
     """GET múltiple: dict métrica -> OID. Devuelve dict métrica ->
     (valor_numero, valor_texto). Los OIDs sin soporte se omiten. Lanza
     SnmpError si el equipo no responde o da error de protocolo."""
