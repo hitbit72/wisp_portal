@@ -170,7 +170,7 @@ def nuevo_dispositivo_solo(request):
         form = DispositivoForm(request.POST)
         if form.is_valid():
             dispositivo = form.save()
-            return redirect('red:dispositivos')
+            return redirect('red:lista_dispositivos')
     else:
         form = DispositivoForm()
 
