@@ -55,10 +55,6 @@
             <label class="form-label" for="{{ form.mac_address.id_for_label }}">Dirección MAC</label>
             {{ form.mac_address }}
         </div>
-        <div class="col-6">
-            <label class="form-label" for="{{ form.firmware_version.id_for_label }}">Versión de firmware</label>
-            {{ form.firmware_version }}
-        </div>
         <div class="col-md-6">
             <label class="form-label" for="{{ form.latitud.id_for_label }}">Latitud</label>
             {{ form.latitud }}
@@ -67,12 +63,16 @@
             <label class="form-label" for="{{ form.longitud.id_for_label }}">Longitud</label>
             {{ form.longitud }}
         </div>
-        <div class="col-md-6">
+        <div class="col-4">
+            <label class="form-label" for="{{ form.firmware_version.id_for_label }}">Versión de firmware</label>
+            {{ form.firmware_version }}
+        </div>
+        <div class="col-md-4">
             <label class="form-label" for="{{ form.escanear.id_for_label }}">Escanear</label>
             {{ form.escanear }}
             <div class="form-text">Comprobar periodicamente el estado del dispositivo"</div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <label class="form-label" for="{{ form.alarma.id_for_label }}">Alarma</label>
             {{ form.alarma }}
             <div class="form-text">Mostrar alarmas de estdo</div>
