@@ -28,6 +28,12 @@ MODO_IPV4 = 0  # CommunityData(mpModel=0) mpModel=0 para SNMPv1, 1 para SNMPv2c
 OID_IF_DESCR = '1.3.6.1.2.1.2.2.1.2'
 OID_IF_OPER = '1.3.6.1.2.1.2.2.1.8'
 OID_IF_SPEED = '1.3.6.1.2.1.2.2.1.5'
+OID_IF_TYPE = '1.3.6.1.2.1.2.2.1.3' 
+
+# IF_TYPE
+# 6 (ethernetCsmacd): Redes Ethernet estándar.
+# 24 (softwareLoopback): Interfaz virtual de bucle local (loopback).
+# 71 (ieee80211): Interfaces inalámbricas (Wi-Fi) en equipos D-Link antiguos o puntos
 
 # ErrorStatus que significan "el OID no existe" (no fallo de comunicaciones).
 _FALTA_OID = ('nosuchname', 'nosuchobject', 'nosuchinstance')
