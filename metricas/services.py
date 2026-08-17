@@ -20,12 +20,12 @@ def guardar_metrica(dispositivo, **datos):
     """Crea la fila DeviceMetrics. Solo la usa el servicio de monitorización."""
     datos.setdefault('status', DeviceMetrics.Status.OK)
     datos.setdefault('timescan', timezone.now())
-    DeviceMetrics.objects.update_or_create(
+    return DeviceMetrics.objects.update_or_create(
         device=dispositivo.pk,
         defaults=datos
     )
     # return DeviceMetrics.objects.create(device=dispositivo, **datos)
-    return DeviceMetrics.objects.last()
+    # return DeviceMetrics.objects.last()
 
 def evaluar_y_aplicar(dispositivo, metrica):
     """Evalúa las reglas sobre la métrica recién creada y aplica alarmas y
