@@ -39,6 +39,8 @@ class Marca(models.Model):
     def __str__(self):
         return f'{self.nombre} {self.modelo}'
 
+
+
 class Dispositivo(models.Model):
     """
     Cualquier equipo de la red: nodo, router, switch, AP, OLT, ONU o antena de cliente.
