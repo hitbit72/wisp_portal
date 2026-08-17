@@ -25,3 +25,4 @@ class AlarmaAdmin(admin.ModelAdmin):
 class OIDmetricAdmin(admin.ModelAdmin):
     list_display = ('marca','descripcion', 'oid')
     list_filter = ('marca__nombre','descripcion')
+    list_select_related = ('marca',)
