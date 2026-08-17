@@ -105,3 +105,19 @@ class Alarma(models.Model):
 
     def __str__(self):
         return f'{self.device.nombre} · {self.regla} · {self.get_estado_display()}'
+
+class OIDdevice(models.Model):
+    """OIDs SNMP del servicio de monitorización."""
+
+    marca = models.CharField(max_length=255)
+    modelo = models.CharField(max_length=255, null=True, blank=True)
+    descripcion = models.CharField(max_length=255, verbose_name='Descripción')
+    oid = models.CharField(max_length=255, verbose_name='OID')
+
+    class Meta:
+        verbose_name = 'OID'
+        verbose_name_plural = 'OIDs'
+        ordering = ['marca']
+
+    def __str__(self):
+        return f'{self.marca} {self.modelo}'
