@@ -19,7 +19,11 @@ MODULO = 'metricas'
 def guardar_metrica(dispositivo, **datos):
     """Crea la fila DeviceMetrics. Solo la usa el servicio de monitorización."""
     datos.setdefault('status', DeviceMetrics.Status.OK)
-    return DeviceMetrics.objects.create(device=dispositivo, **datos)
+    return DeviceMetrics.objects.get_or_create(
+        device=dispositivo,
+        **datos
+    )
+    #return DeviceMetrics.objects.create(device=dispositivo, **datos)
 
 
 def evaluar_y_aplicar(dispositivo, metrica):
