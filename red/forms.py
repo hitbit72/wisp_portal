@@ -73,7 +73,7 @@ class DispositivoForm(BootstrapFormMixin, forms.ModelForm):
         fields = [
             'nombre', 'rol', 'tipo', 'marca', 'modelo', 'sector', 'cliente',
             'ip_gestion', 'mac_address', 'firmware_version', 'snmp_community', 'escanear', 'alarma',
-            'estado', 'fecha_instalacion', 'latitud', 'longitud', 'atributos_extra', 'notas',
+            'oid', 'estado', 'fecha_instalacion', 'latitud', 'longitud', 'atributos_extra', 'notas',
         ]
         widgets = {
             'fecha_instalacion': forms.DateInput(format='%Y-%m-%d', attrs={'type': 'date'}),
