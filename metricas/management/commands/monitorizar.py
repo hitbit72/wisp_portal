@@ -20,6 +20,8 @@ Si quieres confirmar qué hay realmente en esa columna:
 """
 
 from django.core.management.base import BaseCommand
+from django.utils import timezone
+
 from red.models import Dispositivo
 
 from metricas import snmp_client
@@ -89,7 +91,8 @@ class Command(BaseCommand):
         datos = self._construir_datos(dispositivo, resultado)
         datos['puertos'] = puertos
         datos['status'] = status
-
+        datos['timescan'] = timezone.now()
+        
         metrica = guardar_metrica(dispositivo, **datos)
         # evalua la alerta/alarma
         evaluar_y_aplicar(dispositivo, metrica)
