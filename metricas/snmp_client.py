@@ -90,7 +90,7 @@ def consultar_escalares2(dispositivo, oids):
     """GET múltiple: dict métrica -> OID. Devuelve dict métrica ->
     (valor_numero, valor_texto). Los OIDs sin soporte se omiten. Lanza
     SnmpError si el equipo no responde o da error de protocolo."""
-    print(oids)
+    #print(oids)
     if not oids:
         return {}
 
@@ -127,7 +127,7 @@ def consultar_escalares(dispositivo, oids):
     """GET múltiple: dict métrica -> OID. Devuelve dict métrica ->
     (valor_numero, valor_texto). Los OIDs sin soporte se omiten. Lanza
     SnmpError si el equipo no responde o da error de protocolo."""
-    print(oids)
+    #print(oids)
     if not oids:
         return {}
     conf = _conf_snmp(dispositivo)
@@ -192,15 +192,16 @@ def consultar_if_table(dispositivo):
     contexto = ContextData()
     puertos = []
 
+    """
     print(f'conf: {conf}')
     print(f'comunity: {comunity}')
     print(f'transporte: {transporte}')
 
-    # OIDs base a consultar en IF-MIB
-    # .1.3.6.1.2.1.2.2.1.2 = ifDescr (Nombre del puerto)
-    # .1.3.6.1.2.1.2.2.1.5 = ifSpeed (Velocidad en bps)
-    # .1.3.6.1.2.1.2.2.1.8 = ifOperStatus (Estado operativo: 1=Up, 2=Down)
-
+     OIDs base a consultar en IF-MIB
+     .1.3.6.1.2.1.2.2.1.2 = ifDescr (Nombre del puerto)
+     .1.3.6.1.2.1.2.2.1.5 = ifSpeed (Velocidad en bps)
+     .1.3.6.1.2.1.2.2.1.8 = ifOperStatus (Estado operativo: 1=Up, 2=Down)
+    """
     oid_descr = ObjectType(ObjectIdentity("1.3.6.1.2.1.2.2.1.2"))
     oid_speed = ObjectType(ObjectIdentity("1.3.6.1.2.1.2.2.1.5"))
     oid_status = ObjectType(ObjectIdentity("1.3.6.1.2.1.2.2.1.8"))
@@ -232,9 +233,7 @@ def consultar_if_table(dispositivo):
             status_str = "up" if status_code == 1 else "down"
             speed_mbps = speed_bps // 1_000_000 if speed_bps > 0 else 0
 
-            print(
-                f"Interfaz: {interface_name:<10} | Estado: {status_str:<18} | Velocidad: {speed_mbps} Mbps"
-            )
+            #print(f"Interfaz: {interface_name:<10} | Estado: {status_str:<18} | Velocidad: {speed_mbps} Mbps")
 
             puertos.append({
                 'nombre': interface_name,
