@@ -91,8 +91,9 @@ class Command(BaseCommand):
         datos = self._construir_datos(dispositivo, resultado)
         datos['puertos'] = puertos
         datos['status'] = status
-        datos['timescan'] = timezone.now()
-        
+
+        print(f'Datos antes de envio: {datos}')
+
         metrica = guardar_metrica(dispositivo, **datos)
         # evalua la alerta/alarma
         evaluar_y_aplicar(dispositivo, metrica)

@@ -17,10 +17,16 @@ MODULO = 'metricas'
 
 
 def guardar_metrica(dispositivo, **datos):
-    """Crea la fila DeviceMetrics. Solo la usa el servicio de monitorización."""
+    """ Crea la fila DeviceMetrics. Solo la usa el servicio de monitorización.
+        Se actualiza simepre el mismo registro, ya que se refiere siempre al
+        mismo dispositivo y no necesitamos datos  a lo largo del tiempo.
+        Usamos timescan solo para saber cuando se actualizó.
+    """
     datos.setdefault('status', DeviceMetrics.Status.OK)
+    datos.setdefault('timescan', timezone.now())
+    print(f'Datos despues: {datos}')
     return DeviceMetrics.objects.update_or_create(
-        device=dispositivo.pk,
+        device=dispositivo,
         defaults=datos
     )[0]
     # return DeviceMetrics.objects.create(device=dispositivo, **datos)
