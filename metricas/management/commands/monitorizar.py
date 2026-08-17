@@ -44,6 +44,10 @@ CAMPO = {
     'rx': 'rx',
     'tx': 'tx',
     'uptime': 'uptime',
+    'w_channel': 'w_channel',
+    'ssid': 'ssid',
+    'antena': 'antena',
+    'noise': 'noise',
 }
 
 
