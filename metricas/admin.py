@@ -5,9 +5,10 @@ from .models import Alarma, DeviceMetrics
 
 @admin.register(DeviceMetrics)
 class DeviceMetricsAdmin(admin.ModelAdmin):
-    list_display = ('device', 'timestamp', 'status', 'cpu', 'ram', 'clients', 'uptime')
+    list_display = ('device', 'timescan', 'status', 'cpu', 'ram', 'clients', 'uptime')
     list_filter = ('status', 'device__tipo', 'device__marca')
-    date_hierarchy = 'timestamp'
+    #date_hierarchy = 'timestamp'
+    date_hierarchy = 'timescan'
     search_fields = ('device__nombre',)
     readonly_fields = ('device', 'timestamp')
     list_select_related = ('device',)
