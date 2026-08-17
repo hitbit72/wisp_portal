@@ -22,7 +22,7 @@ def guardar_metrica(dispositivo, **datos):
     return DeviceMetrics.objects.update_or_create(
         device=dispositivo.pk,
         defaults=datos
-    )
+    )[0]
     # return DeviceMetrics.objects.create(device=dispositivo, **datos)
     # return DeviceMetrics.objects.last()
 
