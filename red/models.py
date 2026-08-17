@@ -63,7 +63,7 @@ class Dispositivo(models.Model):
         TERMINAL_CLIENTE = 'terminal_cliente', 'Terminal de cliente',
         OTROS = 'otros', 'Otros'
 
-    class Marca(models.TextChoices):
+    class Marcas(models.TextChoices):
         MIKROTIK = 'mikrotik', 'MikroTik'
         UBIQUITI = 'ubiquiti', 'Ubiquiti'
         UBNTAIRMAX = 'ubntairmax', 'UBNT-AirMax'
@@ -96,7 +96,7 @@ class Dispositivo(models.Model):
     
     nombre = models.CharField(max_length=100)
     tipo = models.CharField(max_length=20, choices=Tipo.choices)
-    marca = models.CharField(max_length=20, choices=Marca.choices)
+    marca = models.CharField(max_length=20, choices=Marcas.choices)
     modelo = models.CharField(max_length=100, blank=True)
     rol = models.CharField(max_length=20, choices=Rol.choices, default=Rol.OTRO, verbose_name='Modo operación')
 
