@@ -61,7 +61,7 @@ def evaluar(dispositivo, metrica, anterior, config):
         reglas.append({'regla': 'temp_alta', 'titulo': f'Temperatura alta {dispositivo.ip_gestion}',
                        'texto': f'Temperatura de {metrica.temperature:.0f} °C (máx. {config["temp_max"]:.0f} °C).'})
     if config.get('puerto_caido'):
-        caidos = [p['nombre'] for p in metrica.puertos if p.get('estado') == 'DOWN']
+        caidos = [p['nombre'] for p in metrica.puertos if p.get('estado') == 'down']
         if caidos:
             reglas.append({'regla': 'puerto_caido', 'titulo': f'Puerto caído {dispositivo.ip_gestion}',
                            'texto': f'Interfaz(es) caída(s): {", ".join(caidos)}.'})

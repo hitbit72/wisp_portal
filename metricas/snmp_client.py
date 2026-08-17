@@ -229,7 +229,7 @@ def consultar_if_table(dispositivo):
             status_code = int(varBinds[2][1])
 
             # Formatear el estado y la velocidad
-            status_str = "UP" if status_code == 1 else "DOWN"
+            status_str = "up" if status_code == 1 else "down"
             speed_mbps = speed_bps // 1_000_000 if speed_bps > 0 else 0
 
             print(

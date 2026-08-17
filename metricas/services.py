@@ -24,7 +24,7 @@ def guardar_metrica(dispositivo, **datos):
     """
     datos.setdefault('status', DeviceMetrics.Status.OK)
     datos.setdefault('timescan', timezone.now())
-    print(f'Datos despues: {datos}')
+    #print(f'Datos despues: {datos}')
     return DeviceMetrics.objects.update_or_create(
         device=dispositivo,
         defaults=datos

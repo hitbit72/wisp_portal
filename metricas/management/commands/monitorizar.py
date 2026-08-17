@@ -20,7 +20,6 @@ Si quieres confirmar qué hay realmente en esa columna:
 """
 
 from django.core.management.base import BaseCommand
-from django.utils import timezone
 
 from red.models import Dispositivo
 
@@ -92,7 +91,7 @@ class Command(BaseCommand):
         datos['puertos'] = puertos
         datos['status'] = status
 
-        print(f'Datos antes de envio: {datos}')
+        #print(f'Datos antes de envio: {datos}')
 
         metrica = guardar_metrica(dispositivo, **datos)
         # evalua la alerta/alarma
