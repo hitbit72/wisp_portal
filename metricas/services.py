@@ -20,7 +20,7 @@ def guardar_metrica(dispositivo, **datos):
     """Crea la fila DeviceMetrics. Solo la usa el servicio de monitorización."""
     datos.setdefault('status', DeviceMetrics.Status.OK)
     return DeviceMetrics.objects.update_or_create(
-        device=dispositivo,
+        device=dispositivo.pk,
         defaults=datos
     )
     #return DeviceMetrics.objects.create(device=dispositivo, **datos)
