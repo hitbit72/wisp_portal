@@ -20,8 +20,8 @@ class DeviceMetrics(models.Model):
         'red.Dispositivo', on_delete=models.CASCADE, related_name='metricas',
     )
     timestamp = models.DateTimeField(auto_now_add=True, verbose_name='Fecha y hora')
-    timescan = models.DateTimeField(verbose_name='Fecha escaneo')
-    
+    timescan = models.DateTimeField(null=True, verbose_name='Fecha escaneo')
+
     cpu = models.FloatField(null=True, blank=True, verbose_name='CPU (%)')
     ram = models.FloatField(null=True, blank=True, verbose_name='RAM (%)')
     temperature = models.FloatField(null=True, blank=True, verbose_name='Temperatura (°C)')
