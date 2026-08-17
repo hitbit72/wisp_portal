@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Sector, Dispositivo, Interfaz, Enlace
+from .models import Sector, Marca, Dispositivo, Interfaz, Enlace
 
 
 class InterfazInline(admin.TabularInline):
@@ -12,6 +12,11 @@ class SectorAdmin(admin.ModelAdmin):
     list_display = ('nombre','poblacion')
     search_fields = ('nombre','poblacion')
 
+@admin.register(Marca)
+class MarcaAdmin(admin.ModelAdmin):
+    list_display = ('nombre', 'modelo')
+    list_filter = ('nombre',)
+    search_fields = ('nombre', 'modelo')
 
 @admin.register(Dispositivo)
 class DispositivoAdmin(admin.ModelAdmin):

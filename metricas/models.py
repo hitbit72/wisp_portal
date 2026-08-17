@@ -1,5 +1,6 @@
 from django.db import models
 
+from red.models import Marca
 
 class DeviceMetrics(models.Model):
     """
@@ -106,18 +107,18 @@ class Alarma(models.Model):
     def __str__(self):
         return f'{self.device.nombre} · {self.regla} · {self.get_estado_display()}'
 
-class OIDdevice(models.Model):
-    """OIDs SNMP del servicio de monitorización."""
 
-    marca = models.CharField(max_length=255)
-    modelo = models.CharField(max_length=255, null=True, blank=True)
+class OIDmetric(models.Model):
+    """ Lista de todos los OID para una marca """
+
+    marca = models.ForeignKey(Marca, on_delete=models.CASCADE, related_name='marca')
     descripcion = models.CharField(max_length=255, verbose_name='Descripción')
     oid = models.CharField(max_length=255, verbose_name='OID')
 
     class Meta:
-        verbose_name = 'OID'
-        verbose_name_plural = 'OIDs'
+        verbose_name = 'OIDmetric'
+        verbose_name_plural = 'OIDmetrics'
         ordering = ['marca']
 
     def __str__(self):
-        return f'{self.marca} {self.modelo}'
+        return f'{self.marca.marca} {self.marca.modelo} {self.descripcion}'

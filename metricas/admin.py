@@ -1,7 +1,6 @@
 from django.contrib import admin
 
-from .models import Alarma, DeviceMetrics
-
+from .models import Alarma, DeviceMetrics, OIDmetric
 
 @admin.register(DeviceMetrics)
 class DeviceMetricsAdmin(admin.ModelAdmin):
@@ -20,3 +19,9 @@ class AlarmaAdmin(admin.ModelAdmin):
     search_fields = ('device__nombre', 'titulo', 'texto')
     list_select_related = ('device',)
     readonly_fields = ('device', 'regla', 'titulo', 'texto', 'creada_en', 'resuelta_en')
+
+
+@admin.register(OIDmetric)
+class OIDmetricAdmin(admin.ModelAdmin):
+    list_display = ('marca','descripcion', 'oid')
+    list_filter = ('marca__nombre','descripcion')

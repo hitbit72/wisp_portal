@@ -23,6 +23,22 @@ class Sector(models.Model):
         return self.nombre
 
 
+class Marca(models.Model):
+    """ 
+    Marcas para los dispositivos.
+    Los OID selecioanan la marca de este modelo (metricas.models.OIDmetric)
+    """
+    nombre = models.CharField(max_length=255, unique=True)
+    modelo = models.CharField(max_length=255, null=True, blank=True)
+
+    class Meta:
+        verbose_name = 'Marca'
+        verbose_name_plural = 'Marcas'
+        ordering = ['nombre']
+
+    def __str__(self):
+        return f'{self.nombre} {self.modelo}'
+
 class Dispositivo(models.Model):
     """
     Cualquier equipo de la red: nodo, router, switch, AP, OLT, ONU o antena de cliente.
