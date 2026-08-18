@@ -48,6 +48,11 @@
         <div class="card h-100">
             <div class="card-body">
                 <h5 class="card-title">Métricas</h5>
+                <p class="mb-1"><strong>Nombre:</strong> {{ metricas.sys_name|default:"—" }}</p>
+                <p class="mb-1"><strong>SSID:</strong> {{ metricas.ssid|default:"—" }}</p>
+                <p class="mb-1"><strong>Frecuencia:</strong> {{ metricas.frequency|default:"—" }} MHz</p>
+                <p class="mb-1"><strong>Señal:</strong> {{ metricas.signal|default:"—" }} dbm</p>
+                <p class="mb-0"><strong>CCQ:</strong> {{ metricas.ccq|default:"—" }}%</p>
             </div>
         </div>
     </div>
