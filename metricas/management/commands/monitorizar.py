@@ -97,7 +97,7 @@ class Command(BaseCommand):
         datos['puertos'] = puertos
         datos['status'] = status
 
-        #print(f'Datos antes de envio: {datos}')
+        print(f'Datos: {datos}')
 
         metrica = guardar_metrica(dispositivo, **datos)
         # evalua la alerta/alarma
