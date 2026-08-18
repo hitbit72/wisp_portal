@@ -219,6 +219,9 @@ def consultar_if_table(dispositivo, oids):
     oid_descr = ObjectType(ObjectIdentity(oids.get('if_descr', OID_IF_DESCR)))
     oid_status = ObjectType(ObjectIdentity(oids.get('if_oper', OID_IF_OPER)))
     oid_speed = ObjectType(ObjectIdentity(oids.get('if_speed', OID_IF_SPEED)))
+    if 'if_speed' in oids:
+        if oids['if_speed'] == '0':
+            oid_speed = '' # eliminar esta consulta
 
     # Usamos nextCmd para hacer un walk sobre las 3 columnas simultáneamente
     for errorIndication, errorStatus, errorIndex, varBinds in nextCmd(
