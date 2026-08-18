@@ -114,6 +114,8 @@ class Command(BaseCommand):
             if total:
                 datos['ram'] = round((1 - libre / total) * 100, 2)
         for metrica, (numero, texto) in resultado.items():
+            #debug
+            print(f'numero: {numero}, texto: {texto}')
             campo = CAMPO.get(metrica)
             if not campo:
                 continue
