@@ -30,7 +30,7 @@ OID_IF_OPER = '1.3.6.1.2.1.2.2.1.8'
 OID_IF_SPEED = '1.3.6.1.2.1.2.2.1.5'
 OID_IF_TYPE = '1.3.6.1.2.1.2.2.1.3' 
 
-EXCLUDE_PORT = {'lo','ubound'}
+EXCLUDE_PORT = ('lo','ubond')
 
 # IF_TYPE
 # 6 (ethernetCsmacd): Redes Ethernet estándar.
