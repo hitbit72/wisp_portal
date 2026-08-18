@@ -15,8 +15,8 @@
 </div>
 
 <section class="panel row g-1 mt-1">
-<div class="row mb-4">
-    <div class="col-md-6">
+<div class="row mb-2">
+    <div class="col-md-4">
         <div class="card h-100">
             <div class="card-body">
                 <h5 class="card-title">Datos del equipo</h5>
@@ -54,11 +54,11 @@
 </div>
 
 {% if dispositivo.atributos_extra %}
-<div class="alert alert-light border mb-4">{{ dispositivo.atributos_extra|linebreaks }}</div>
+<div class="alert alert-light border mb-2">{{ dispositivo.atributos_extra|linebreaks }}</div>
 {% endif %}
 
 {% if dispositivo.notas %}
-<div class="alert alert-light border mb-4">{{ dispositivo.notas|linebreaks }}</div>
+<div class="alert alert-light border mb-2">{{ dispositivo.notas|linebreaks }}</div>
 {% endif %}
 </section>
 

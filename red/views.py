@@ -9,6 +9,7 @@ from .forms import DispositivoForm, EnlaceForm, InterfazForm, SectorForm
 from .models import Dispositivo, Enlace, Interfaz, Sector
 
 from eventos.models import Evento
+from metricas.models import DeviceMetrics
 from eventos.services import registrar_evento
 MODULO = 'red'
 
@@ -204,6 +205,8 @@ def detalle_dispositivo(request, pk):
         Dispositivo.objects.prefetch_related('interfaces', 'enlaces_origen', 'enlaces_destino'),
         pk=pk,
     )
+    metricas = get_object_or_404(DeviceMetrics, device = Dispositivo)
+
     enlaces = sorted(
         (*dispositivo.enlaces_origen.all(), *dispositivo.enlaces_destino.all()),
         key=lambda e: e.pk,
@@ -212,6 +215,7 @@ def detalle_dispositivo(request, pk):
         'dispositivo': dispositivo,
         'enlaces': enlaces,
         'url_anterior': url_anterior,
+        'metrica': metricas,
     })
 
 
