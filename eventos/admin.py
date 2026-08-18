@@ -9,4 +9,4 @@ class EventoAdmin(admin.ModelAdmin):
     list_display = ('fecha', 'nivel', 'titulo', 'modulo', 'leido', 'user')
     list_filter = ('nivel', 'leido', 'modulo')
     search_fields = ('titulo', 'texto', 'modulo')
-    readonly_fields = ('fecha', 'nivel', 'modulo', 'leido', 'user')
+    readonly_fields = ('fecha', 'nivel', 'modulo', 'user')
