@@ -49,6 +49,7 @@ CAMPO = {
     'antena': 'antena',
     'noise': 'noise',
     'sys_name': 'sys_name',
+    'sys_descr': 'sys_descr',
 }
 
 class Command(BaseCommand):
@@ -136,6 +137,8 @@ class Command(BaseCommand):
                 datos['antena'] = texto or ''
             elif campo == 'sys_name':
                 datos['sys_name'] = texto or ''
+            elif campo == 'sys_descr':
+                datos['sys_descr'] = texto or ''
             elif numero is not None:
                 datos[campo] = numero
         return datos

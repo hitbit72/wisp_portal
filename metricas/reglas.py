@@ -57,14 +57,17 @@ def evaluar(dispositivo, metrica, anterior, config):
     if metrica.cpu is not None and metrica.cpu > config['cpu_max']:
         reglas.append({'regla': 'cpu_alta', 'titulo': f'CPU alta {dispositivo.ip_gestion}',
                        'texto': f'CPU al {metrica.cpu:.0f}% (máx. {config["cpu_max"]:.0f}%).'})
+        
     if metrica.temperature is not None and metrica.temperature > config['temp_max']:
         reglas.append({'regla': 'temp_alta', 'titulo': f'Temperatura alta {dispositivo.ip_gestion}',
                        'texto': f'Temperatura de {metrica.temperature:.0f} °C (máx. {config["temp_max"]:.0f} °C).'})
+        
     if config.get('puerto_caido'):
         caidos = [p['nombre'] for p in metrica.puertos if p.get('estado') == 'down']
         if caidos:
             reglas.append({'regla': 'puerto_caido', 'titulo': f'Puerto caído {dispositivo.ip_gestion}',
                            'texto': f'Interfaz(es) caída(s): {", ".join(caidos)}.'})
+            
     if config.get('sin_clientes_ap') and dispositivo.tipo in (Dispositivo.Tipo.AP,) \
             and metrica.clients is not None and metrica.clients == 0:
         reglas.append({'regla': 'sin_clientes_ap', 'titulo': f'AP sin clientes {dispositivo.ip_gestion}',
@@ -75,10 +78,12 @@ def evaluar(dispositivo, metrica, anterior, config):
                 and anterior.frequency is not None and metrica.frequency != anterior.frequency:
             reglas.append({'regla': 'cambio_frecuencia', 'titulo': f'Cambio de frecuencia {dispositivo.ip_gestion}',
                            'texto': f'Frecuencia {anterior.frequency:.0f} → {metrica.frequency:.0f} MHz.'})
+            
         if config.get('cambio_canal') and metrica.channel and anterior.channel \
                 and metrica.channel != anterior.channel:
             reglas.append({'regla': 'cambio_canal', 'titulo': f'Cambio de canal {dispositivo.ip_gestion}',
                            'texto': f'Canal {anterior.channel} → {metrica.channel}.'})
+            
         for metrica_campo, regla, titulo, umbral in (
             ('rx_dbm', 'caida_potencia', 'Caída de potencia', config.get('caida_potencia_dbm')),
             ('signal', 'caida_signal', 'Caída de señal', config.get('caida_signal_dbm')),

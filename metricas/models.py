@@ -24,6 +24,8 @@ class DeviceMetrics(models.Model):
     timescan = models.DateTimeField(null=True, blank=True, verbose_name='Fecha escaneo')
 
     sys_name = models.CharField(max_length=255, null=True, blank=True, verbose_name='Nombre sistema')
+    sys_descr = models.CharField(max_length=255, null=True, blank=True, verbose_name='Nombre sistema')
+    
     cpu = models.FloatField(null=True, blank=True, verbose_name='CPU (%)')
     ram = models.FloatField(null=True, blank=True, verbose_name='RAM (%)')
     temperature = models.FloatField(null=True, blank=True, verbose_name='Temperatura (°C)')
