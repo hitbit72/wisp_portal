@@ -31,15 +31,15 @@
             <td>{{ dispositivo.get_rol_display }}</td>
             <td>{{ dispositivo.get_tipo_display }}</td>
             <td>{% if dispositivo.sector %}<a href="{% url 'red:detalle_sector' dispositivo.sector.pk %}">{{ dispositivo.sector.nombre }}</a>{% else %}—{% endif %}</td>
+            <td>{{ dispositivo.metricas.frequency }}</td>
+            <td>{{ dispositivo.metricas.signal }}</td>
             <td class="text-end">
                 <a href="{% url 'red:detalle_dispositivo' dispositivo.pk %}" class="btn btn-sm btn-outline-secondary">Ver</a>
                 <a href="{% url 'red:editar_dispositivo' dispositivo.pk %}" class="btn btn-sm btn-outline-primary">Editar</a>
             </td>
-            <td>{{ dispositivo.metricas.frequency }}</td>
-            <td>{{ dispositivo.metricas.signal }}</td>
         </tr>
         {% empty %}
-        <tr><td colspan="9" class="text-center text-muted py-4">No se encontraron dispositivos.</td></tr>
+        <tr><td colspan="11" class="text-center text-muted py-4">No se encontraron dispositivos.</td></tr>
         {% endfor %}
     </tbody>
 </table>
