@@ -30,6 +30,8 @@ OID_IF_OPER = '1.3.6.1.2.1.2.2.1.8'
 OID_IF_SPEED = '1.3.6.1.2.1.2.2.1.5'
 OID_IF_TYPE = '1.3.6.1.2.1.2.2.1.3' 
 
+EXCLUDE_PORT = {'lo','ubound'}
+
 # IF_TYPE
 # 6 (ethernetCsmacd): Redes Ethernet estándar.
 # 24 (softwareLoopback): Interfaz virtual de bucle local (loopback).
@@ -208,9 +210,9 @@ def consultar_if_table(dispositivo):
      .1.3.6.1.2.1.2.2.1.5 = ifSpeed (Velocidad en bps)
      .1.3.6.1.2.1.2.2.1.8 = ifOperStatus (Estado operativo: 1=Up, 2=Down)
     """
-    oid_descr = ObjectType(ObjectIdentity("1.3.6.1.2.1.2.2.1.2"))
-    oid_speed = ObjectType(ObjectIdentity("1.3.6.1.2.1.2.2.1.5"))
-    oid_status = ObjectType(ObjectIdentity("1.3.6.1.2.1.2.2.1.8"))
+    oid_descr = ObjectType(ObjectIdentity(OID_IF_DESCR))
+    oid_speed = ObjectType(ObjectIdentity(OID_IF_SPEED))
+    oid_status = ObjectType(ObjectIdentity(OID_IF_OPER))
 
     # Usamos nextCmd para hacer un walk sobre las 3 columnas simultáneamente
     for errorIndication, errorStatus, errorIndex, varBinds in nextCmd(
@@ -240,11 +242,12 @@ def consultar_if_table(dispositivo):
             speed_mbps = speed_bps // 1_000_000 if speed_bps > 0 else 0
 
             #print(f"Interfaz: {interface_name:<10} | Estado: {status_str:<18} | Velocidad: {speed_mbps} Mbps")
-
-            puertos.append({
-                'nombre': interface_name,
-                'estado': status_str,
-                'speed': speed_mbps,
-            })
+            # Comprueba si NINGUNO de los patrones en EXCLUDE_PORT está contenido en interface_name
+            if not any(excluir in interface_name for excluir in EXCLUDE_PORT):
+                puertos.append({
+                    'nombre': interface_name,
+                    'estado': status_str,
+                    'speed': speed_mbps,
+                })
     return puertos
 
