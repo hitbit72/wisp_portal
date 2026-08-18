@@ -189,7 +189,7 @@ def _escalares_uno_a_uno(engine, auth, transporte, contexto, oids):
             resultado[metrica] = (_valor_numero(valor), texto)
     return resultado
 
-def consultar_if_table(dispositivo):
+def consultar_if_table(dispositivo, oids):
     """Walk de ifTable (descr + oper status). Devuelve lista de
     {nombre, estado} con estado 'up'/'down'."""
     conf = _conf_snmp(dispositivo)
@@ -205,14 +205,20 @@ def consultar_if_table(dispositivo):
     print(f'comunity: {comunity}')
     print(f'transporte: {transporte}')
 
-     OIDs base a consultar en IF-MIB
-     .1.3.6.1.2.1.2.2.1.2 = ifDescr (Nombre del puerto)
-     .1.3.6.1.2.1.2.2.1.5 = ifSpeed (Velocidad en bps)
-     .1.3.6.1.2.1.2.2.1.8 = ifOperStatus (Estado operativo: 1=Up, 2=Down)
-    """
+    OIDs base a consultar en IF-MIB
+    1.3.6.1.2.1.2.2.1.2 = ifDescr (Nombre del puerto)
+    1.3.6.1.2.1.2.2.1.5 = ifSpeed (Velocidad en bps)
+    1.3.6.1.2.1.2.2.1.8 = ifOperStatus (Estado operativo: 1=Up, 2=Down)
+    
     oid_descr = ObjectType(ObjectIdentity(OID_IF_DESCR))
     oid_speed = ObjectType(ObjectIdentity(OID_IF_SPEED))
     oid_status = ObjectType(ObjectIdentity(OID_IF_OPER))
+    """
+
+    # Toma el OID del diccionario o usa la constante por defecto si no existe en 'oids'
+    oid_descr = ObjectType(ObjectIdentity(oids.get('if_descr', OID_IF_DESCR)))
+    oid_status = ObjectType(ObjectIdentity(oids.get('if_oper', OID_IF_OPER)))
+    oid_speed = ObjectType(ObjectIdentity(oids.get('if_speed', OID_IF_SPEED)))
 
     # Usamos nextCmd para hacer un walk sobre las 3 columnas simultáneamente
     for errorIndication, errorStatus, errorIndex, varBinds in nextCmd(

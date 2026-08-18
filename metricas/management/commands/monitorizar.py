@@ -82,7 +82,7 @@ class Command(BaseCommand):
         escalares = oids_dispositivo(dispositivo)
         try:
             resultado = snmp_client.consultar_escalares(dispositivo, escalares)
-            puertos = snmp_client.consultar_if_table(dispositivo)
+            puertos = snmp_client.consultar_if_table(dispositivo, escalares)
             status = DeviceMetrics.Status.OK
         except snmp_client.SnmpError as exc:
             self.stdout.write(
