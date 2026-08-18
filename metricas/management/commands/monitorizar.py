@@ -139,6 +139,9 @@ class Command(BaseCommand):
                 datos['sys_name'] = texto or ''
             elif campo == 'sys_descr':
                 datos['sys_descr'] = texto or ''
+            elif campo == 'temperature':
+                if numero > 1000:
+                    datos['temperature'] = numero / 1000
             elif numero is not None:
                 datos[campo] = numero
         return datos
