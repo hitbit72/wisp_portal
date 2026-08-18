@@ -93,10 +93,12 @@ class Command(BaseCommand):
                 else DeviceMetrics.Status.ERROR
             )
 
+        print(resultado)
         datos = self._construir_datos(dispositivo, resultado)
         datos['puertos'] = puertos
         datos['status'] = status
 
+        print('--------------------')
         print(f'Datos: {datos}')
 
         metrica = guardar_metrica(dispositivo, **datos)
