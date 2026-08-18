@@ -21,11 +21,14 @@
 <hr class="dropdown-divider">
 <a class="dropdown-item" style="display: table;" href="{% url 'eventos:lista' %}"><i class="bi bi-list-check" aria-hidden="true"></i> Ver todos los eventos</a>
 {% if puede_marcar_eventos and eventos_notif %}
+<form method="post" action="{% url 'eventos:marcar_todos_leidos' %}">
+{% csrf_token %}
 <button type="button" class="dropdown-item" style="display: table;" 
         hx-post="{% url 'eventos:marcar_todos_leidos' %}" 
         hx-target="#notification-menu" hx-swap="innerHTML">
     <i class="bi bi-check-all" aria-hidden="true"></i> Marcar todos como leídos
 </button>
+</form>
 {% endif %}
 {% if request.META.HTTP_HX_REQUEST %}
 <span class="notification-dot" id="notification-dot" hx-swap-oob="true"
