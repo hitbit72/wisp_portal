@@ -215,7 +215,7 @@ def detalle_dispositivo(request, pk):
         'dispositivo': dispositivo,
         'enlaces': enlaces,
         'url_anterior': url_anterior,
-        'metrica': metricas,
+        'metricas': metricas,
     })
 
 
