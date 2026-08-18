@@ -95,14 +95,14 @@ class Command(BaseCommand):
                 else DeviceMetrics.Status.ERROR
             )
 
-        print('RESULTADO --------------------')
-        print(resultado)
+        #print('RESULTADO --------------------')
+        #print(resultado)
         datos = self._construir_datos(dispositivo, resultado)
         datos['puertos'] = puertos
         datos['status'] = status
 
-        print(' DATOS --------------------')
-        print(f'Datos: {datos}')
+        #print(' DATOS --------------------')
+        #print(f'Datos: {datos}')
 
         metrica = guardar_metrica(dispositivo, **datos)
         # evalua la alerta/alarma
@@ -120,7 +120,7 @@ class Command(BaseCommand):
                 datos['ram'] = round((1 - libre / total) * 100, 2)
         for metrica, (numero, texto) in resultado.items():
             #debug
-            print(f'numero: {numero}, texto: {texto}')
+            #print(f'numero: {numero}, texto: {texto}')
             campo = CAMPO.get(metrica)
             if not campo:
                 continue
