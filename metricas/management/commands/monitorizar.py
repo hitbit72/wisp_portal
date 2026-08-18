@@ -93,12 +93,13 @@ class Command(BaseCommand):
                 else DeviceMetrics.Status.ERROR
             )
 
+        print('RESULTADO --------------------')
         print(resultado)
         datos = self._construir_datos(dispositivo, resultado)
         datos['puertos'] = puertos
         datos['status'] = status
 
-        print('--------------------')
+        print(' DATOS --------------------')
         print(f'Datos: {datos}')
 
         metrica = guardar_metrica(dispositivo, **datos)
@@ -124,9 +125,14 @@ class Command(BaseCommand):
             if metrica == 'uptime':
                 # sysUpTime está en centésimas; MTIK en segundos.
                 valor = numero / 100 if dispositivo.marca != Dispositivo.Marcas.MIKROTIK else numero
-                datos['uptime'] = int(valor)
+                #datos['uptime'] = int(valor)
+                datos['uptime'] = numero or 0
             elif campo == 'channel':
-                datos['channel'] = texto or ''
+                datos['channel'] = numero or ''
+            elif campo == 'ssid':
+                datos['ssid'] = texto or ''
+            elif campo == 'antena':
+                datos['antena'] = texto or ''
             elif numero is not None:
                 datos[campo] = numero
         return datos
