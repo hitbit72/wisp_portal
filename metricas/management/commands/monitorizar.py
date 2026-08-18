@@ -25,7 +25,7 @@ from red.models import Dispositivo
 
 from metricas import snmp_client
 from metricas.models import DeviceMetrics
-from metricas.oids import oids_para_dispositivo
+from metricas.oids import oids_dispositivo
 from metricas.services import evaluar_y_aplicar, guardar_metrica
 
 # metrica OID -> campo del modelo (clave 'mem_total'/'mem_libre' -> ram).
@@ -50,7 +50,6 @@ CAMPO = {
     'noise': 'noise',
 }
 
-
 class Command(BaseCommand):
     help = 'Consulta SNMP a cada dispositivo y guarda métricas + alarmas.'
 
@@ -72,10 +71,13 @@ class Command(BaseCommand):
             f'Monitorizados {ok} de {total} dispositivos.'))
 
     def _procesar(self, dispositivo):
+        """
         escalares = {
             k: v for k, v in oids_para_dispositivo(dispositivo).items()
             if k not in ('if_descr', 'if_oper')
         }
+        """
+        escalares = oids_dispositivo(dispositivo)
         try:
             resultado = snmp_client.consultar_escalares(dispositivo, escalares)
             puertos = snmp_client.consultar_if_table(dispositivo)

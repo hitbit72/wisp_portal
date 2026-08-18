@@ -13,17 +13,9 @@ según marca/modelo. Se puede sobrescribir el mapa por dispositivo desde
 """
 
 from django.conf import settings
+from red.models import Marca
+from metricas.models import OIDmetric
 
-OIDS_GENERICO = {
-    'uptime': '1.3.6.1.2.1.1.3.0',           # sysUpTime (hundredths de segundo)
-    'sys_name': '1.3.6.1.2.1.1.5.0',         #sysName
-    'sys_descr': '1.3.6.1.2.1.1.1.0',        #sysDescription
-    'mem_total': '1.3.6.1.4.1.2021.4.5.0',   # memTotalReal (bytes) - UCD
-    'mem_libre': '1.3.6.1.4.1.2021.4.6.0',   # memAvailReal (bytes) - UCD
-    'cpu': '1.3.6.1.4.1.2021.10.1.3.2',    # 5min load average
-    'if_descr': '1.3.6.1.2.1.2.2.1.2',       # ifTable/ifDescr (walk)
-    'if_oper': '1.3.6.1.2.1.2.2.1.8',        # ifTable/ifOperStatus (walk)
-}
 
 OIDS_MIKROTIK = {
     'cpu': '1.3.6.1.4.1.14988.1.1.1.2.1.1.0',      # mtikSystemCpu (%)
@@ -100,6 +92,17 @@ OIDS_UBNT_AF = {
     'temp_radio1': '1.3.6.1.4.1.41112.3.2.1.10.1',
 }
 
+OIDS_GENERICO = {
+    'uptime': '1.3.6.1.2.1.1.3.0',           # sysUpTime (hundredths de segundo)
+    'sys_name': '1.3.6.1.2.1.1.5.0',         #sysName
+    'sys_descr': '1.3.6.1.2.1.1.1.0',        #sysDescription
+    'mem_total': '1.3.6.1.4.1.2021.4.5.0',   # memTotalReal (bytes) - UCD
+    'mem_libre': '1.3.6.1.4.1.2021.4.6.0',   # memAvailReal (bytes) - UCD
+    'cpu': '1.3.6.1.4.1.2021.10.1.3.2',    # 5min load average
+    'if_descr': '1.3.6.1.2.1.2.2.1.2',       # ifTable/ifDescr (walk)
+    'if_oper': '1.3.6.1.2.1.2.2.1.8',        # ifTable/ifOperStatus (walk)
+}
+
 VENDOR_MAP = {
     'mikrotik': OIDS_MIKROTIK,
     'ubiquiti': OIDS_UBNT_AIRMAX,
@@ -107,6 +110,34 @@ VENDOR_MAP = {
     'ubntaf': OIDS_UBNT_AF60,
     'ubntaf60': OIDS_UBNT_AF60,
 }
+
+OIDS_GENERICO = {
+    'uptime': '1.3.6.1.2.1.1.3.0',           # sysUpTime (hundredths de segundo)
+    'sys_name': '1.3.6.1.2.1.1.5.0',         #sysName
+    'sys_descr': '1.3.6.1.2.1.1.1.0',        #sysDescription
+    'mem_total': '1.3.6.1.4.1.2021.4.5.0',   # memTotalReal (bytes) - UCD
+    'mem_libre': '1.3.6.1.4.1.2021.4.6.0',   # memAvailReal (bytes) - UCD
+    'cpu': '1.3.6.1.4.1.2021.10.1.3.2',    # 5min load average
+    'if_descr': '1.3.6.1.2.1.2.2.1.2',       # ifTable/ifDescr (walk)
+    'if_oper': '1.3.6.1.2.1.2.2.1.8',        # ifTable/ifOperStatus (walk)
+}
+
+def oids_dispositivo(dispositivo):
+    """
+    Devuelve el mapa de OIDs combinado para un dispositivo: genéricos + los de su marca.
+    """
+    # copia limpia del diccionario genérico
+    oids = OIDS_GENERICO.copy()
+
+    # Consultamos solo los campos necesarios de la BD
+    oids_especificos = OIDmetric.objects.filter(
+        marca=dispositivo.oid
+    ).values_list('descripcion', 'oid')
+
+    # Actualizamos el diccionario directamente con las tuplas (descripcion, oid)
+    oids.update(oids_especificos)
+    return oids
+
 
 
 def oids_para_dispositivo(dispositivo):
