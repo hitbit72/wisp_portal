@@ -36,6 +36,10 @@
           <span class="nav-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
           <span class="nav-text">Dashboard</span>
         </a>
+        <a class="nav-link {% if '/eventos/' in request.path %}active{% endif %}" href="{% url 'eventos:lista' %}">
+          <span class="nav-icon"><i class="bi bi-list-check" aria-hidden="true"></i></span>
+          <span class="nav-text">Notificaciones</span>
+        </a>
         <a class="nav-link {% if '/mikrotik/' in request.path  %}active{% endif %}" href="{% url 'mikrotik:lista' %}">
           <span class="nav-icon"><i class="bi bi-router" aria-hidden="true"></i></span>
           <span class="nav-text">Routers</span>
@@ -51,10 +55,6 @@
         <a class="nav-link {% if '/clientes/' in request.path %}active{% endif %}" href="{% url 'clientes:lista' %}">
           <span class="nav-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
           <span class="nav-text">Clientes</span>
-        </a>
-        <a class="nav-link {% if '/eventos/' in request.path %}active{% endif %}" href="{% url 'eventos:lista' %}">
-          <span class="nav-icon"><i class="bi bi-list-check" aria-hidden="true"></i></span>
-          <span class="nav-text">Eventos</span>
         </a>
       </nav>
 
