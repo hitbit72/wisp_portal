@@ -23,6 +23,7 @@ class DeviceMetrics(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True, verbose_name='Fecha y hora')
     timescan = models.DateTimeField(null=True, blank=True, verbose_name='Fecha escaneo')
 
+    sys_name = models.CharField(max_length=255, null=True, blank=True, verbose_name='Nombre sistema')
     cpu = models.FloatField(null=True, blank=True, verbose_name='CPU (%)')
     ram = models.FloatField(null=True, blank=True, verbose_name='RAM (%)')
     temperature = models.FloatField(null=True, blank=True, verbose_name='Temperatura (°C)')
@@ -37,7 +38,6 @@ class DeviceMetrics(models.Model):
         verbose_name='Uptime (segundos)',
         help_text='Segundos desde el último reinicio.',
     )
-    sysname = models.CharField(max_length=255, null=True, blank=True, verbose_name='Nombre sistema')
     ssid = models.CharField(max_length=200, null=True, blank=True)
     snr = models.FloatField(null=True, blank=True, verbose_name='SNR (dB)')
     ccq = models.FloatField(null=True, blank=True, verbose_name='CCQ (%)')

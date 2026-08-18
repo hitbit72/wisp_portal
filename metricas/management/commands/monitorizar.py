@@ -48,6 +48,7 @@ CAMPO = {
     'ssid': 'ssid',
     'antena': 'antena',
     'noise': 'noise',
+    'sys_name': 'sys_name',
 }
 
 class Command(BaseCommand):
@@ -133,6 +134,8 @@ class Command(BaseCommand):
                 datos['ssid'] = texto or ''
             elif campo == 'antena':
                 datos['antena'] = texto or ''
+            elif campo == 'sys_name':
+                datos['sys_name'] = texto or ''
             elif numero is not None:
                 datos[campo] = numero
         return datos
