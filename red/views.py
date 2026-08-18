@@ -205,7 +205,7 @@ def detalle_dispositivo(request, pk):
         Dispositivo.objects.prefetch_related('interfaces', 'enlaces_origen', 'enlaces_destino'),
         pk=pk,
     )
-    metricas = get_object_or_404(DeviceMetrics, device = Dispositivo.pk)
+    metricas = get_object_or_404(DeviceMetrics, device = pk)
 
     enlaces = sorted(
         (*dispositivo.enlaces_origen.all(), *dispositivo.enlaces_destino.all()),
