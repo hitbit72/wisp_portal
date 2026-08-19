@@ -1,3 +1,4 @@
+import json
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -206,6 +207,9 @@ def detalle_dispositivo(request, pk):
         pk=pk,
     )
     metricas = get_object_or_404(DeviceMetrics, device = pk)
+    # procesar los datos tipo json antes de enviarlos a la platilla
+    if isinstance(metricas.puertos, str):
+        metricas.puertos = json.loads(metricas.puertos)
 
     enlaces = sorted(
         (*dispositivo.enlaces_origen.all(), *dispositivo.enlaces_destino.all()),
