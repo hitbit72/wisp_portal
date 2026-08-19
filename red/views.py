@@ -210,6 +210,7 @@ def detalle_dispositivo(request, pk):
     # procesar los datos tipo json antes de enviarlos a la platilla
     if isinstance(metricas.puertos, str):
         metricas.puertos = json.loads(metricas.puertos)
+    print(metricas.puertos)
 
     enlaces = sorted(
         (*dispositivo.enlaces_origen.all(), *dispositivo.enlaces_destino.all()),
