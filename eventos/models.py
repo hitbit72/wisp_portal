@@ -48,8 +48,8 @@ class Evento(models.Model):
     class Meta:
         verbose_name = 'Evento'
         verbose_name_plural = 'Eventos'
-        # Orden primero por fecha descendente.
-        # después por nivel (0 = el más importante) y
+        # Orden primero por fecha descendente y
+        # después por nivel (0 = el más importante)
         ordering = ['-fecha', 'nivel']
 
     def __str__(self):

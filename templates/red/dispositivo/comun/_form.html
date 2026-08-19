@@ -72,6 +72,7 @@
             {{ form.oid }}
             <div class="invalid-feedback">Seleccione una marca para los códigos OID</div>
         </div>
+        <section class="row g-1">
         <div class="col-md-4">
             <label class="form-label" for="{{ form.escanear.id_for_label }}">Escanear</label>
             {{ form.escanear }}
@@ -87,6 +88,7 @@
             {{ form.alarma_puerto }}
             <div class="form-text">Mostrar alarma de puerto desconectado</div>
         </div>
+        </section>
         <div class="col-12">
             <label class="form-label" for="{{ form.atributos_extra.id_for_label }}">Atributos del dispositivo</label>
             {{ form.atributos_extra }}
