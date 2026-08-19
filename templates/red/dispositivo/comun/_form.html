@@ -78,6 +78,11 @@
             <div class="form-text">Mostrar alarmas de estdo</div>
         </div>
         <div class="col-md-4">
+            <label class="form-label" for="{{ form.alarma_puerto.id_for_label }}">Alarma de Puerto</label>
+            {{ form.alarma_puerto }}
+            <div class="form-text">Mostrar alarma de puerto desconectado</div>
+        </div>
+        <div class="col-md-4">
             <label class="form-label" for="{{ form.oid.id_for_label }}">Metrica OID</label>
             {{ form.oid }}
             <div class="invalid-feedback">Seleccione una marca para los códigos OID</div>

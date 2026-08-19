@@ -111,6 +111,7 @@ class Dispositivo(models.Model):
 
     escanear = models.BooleanField(default=False, null=True, blank=True)
     alarma = models.BooleanField(default=False, null=True, blank=True)
+    alarma_puerto = models.BooleanField(default=False, null=True, blank=True, verbose_name='Alarma puertos')
     oid = models.ForeignKey(Marca, null=True, blank=True, on_delete=models.SET_NULL, related_name='dispositivos')
     
     latitud = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
