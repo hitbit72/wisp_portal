@@ -104,6 +104,7 @@ class Command(BaseCommand):
         #print(' DATOS --------------------')
         #print(f'Datos: {datos}')
 
+        # guarda los datos en DeviceMetrics
         metrica = guardar_metrica(dispositivo, **datos)
         # evalua la alerta/alarma
         evaluar_y_aplicar(dispositivo, metrica)

@@ -211,7 +211,7 @@ def detalle_dispositivo(request, pk):
         (*dispositivo.enlaces_origen.all(), *dispositivo.enlaces_destino.all()),
         key=lambda e: e.pk,
     )
-    return render(request, 'red/dispositivo/detalle_dispositivo.html', {
+    return render(request, 'red/dispositivo/detalle_dispositivo2.html', {
         'dispositivo': dispositivo,
         'enlaces': enlaces,
         'url_anterior': url_anterior,

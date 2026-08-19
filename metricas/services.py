@@ -17,7 +17,7 @@ MODULO = 'metricas'
 
 
 def guardar_metrica(dispositivo, **datos):
-    """ Crea la fila DeviceMetrics. Solo la usa el servicio de monitorización.
+    """ Crea la fila DeviceMetrics.
         Se actualiza simepre el mismo registro, ya que se refiere siempre al
         mismo dispositivo y no necesitamos datos  a lo largo del tiempo.
         Usamos timescan solo para saber cuando se actualizó.
@@ -29,8 +29,6 @@ def guardar_metrica(dispositivo, **datos):
         device=dispositivo,
         defaults=datos
     )[0]
-    # return DeviceMetrics.objects.create(device=dispositivo, **datos)
-    # return DeviceMetrics.objects.last()
 
 def evaluar_y_aplicar(dispositivo, metrica):
     """Evalúa las reglas sobre la métrica recién creada y aplica alarmas y
