@@ -50,7 +50,7 @@ class Evento(models.Model):
         verbose_name_plural = 'Eventos'
         # Orden por defecto: primero por nivel (0 = el más importante) y
         # después por fecha descendente.
-        ordering = ['nivel', '-fecha']
+        ordering = ['-fecha', 'nivel']
 
     def __str__(self):
         return f'[{self.get_nivel_display()}] {self.titulo} ({self.modulo})'
