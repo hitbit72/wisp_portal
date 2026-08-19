@@ -105,8 +105,6 @@
             <td></td>
             <td>{% firstof interfaz.speed "—" %} {% if interfaz.speed %}Mbps{% endif %}</td>
             <td class="text-end">
-                <a href="{% url 'red:editar_interfaz' interfaz.pk %}" class="btn btn-sm btn-outline-primary">Editar</a>
-                <a href="{% url 'red:eliminar_interfaz' interfaz.pk %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
             </td>
         </tr>
         {% empty %}
