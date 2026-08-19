@@ -13,6 +13,7 @@
 <section class="row">
 <form method="post" class="panel needs-validation" style="max-width: 760px;" novalidate>
     {% csrf_token %}
+    <input type="hidden" name="urlanterior" value='{{url_anterior}}'>
     {% if form.non_field_errors %}
     <div class="alert alert-danger">{{ form.non_field_errors }}</div>
     {% endif %}

@@ -225,18 +225,23 @@ def editar_dispositivo(request, pk):
     sector_pk = dispositivo.sector_id
     # Obtiene la URL anterior, o asigna una ruta por defecto si no existe
     url_anterior = request.META.get('HTTP_REFERER', 'red:lista_dispositivos')
-    print(url_anterior)
-    
+
     if request.method == 'POST':
         form = DispositivoForm(request.POST, instance=dispositivo)
+        url_anterior = request.POST.get('urlanterior')
         if form.is_valid():
             dispositivo = form.save()
+            if '/red/' in url_anterior:
+                return redirect('red:lista_dispositivos')
             return redirect('red:detalle_sector', pk=dispositivo.sector_id or sector_pk)
     else:
         form = DispositivoForm(instance=dispositivo)
 
     return render(request, 'red/dispositivo/form_dispositivo.html', {
-        'form': form, 'sector': dispositivo.sector, 'dispositivo': dispositivo,
+        'form': form, 
+        'sector': dispositivo.sector, 
+        'dispositivo': dispositivo,
+        'url_anterior': url_anterior,
     })
 
 @login_required
