@@ -63,9 +63,14 @@
             <label class="form-label" for="{{ form.longitud.id_for_label }}">Longitud</label>
             {{ form.longitud }}
         </div>
-        <div class="col-4">
+        <div class="col-6">
             <label class="form-label" for="{{ form.firmware_version.id_for_label }}">Versión de firmware</label>
             {{ form.firmware_version }}
+        </div>
+        <div class="col-md-6">
+            <label class="form-label" for="{{ form.oid.id_for_label }}">Metrica OID</label>
+            {{ form.oid }}
+            <div class="invalid-feedback">Seleccione una marca para los códigos OID</div>
         </div>
         <div class="col-md-4">
             <label class="form-label" for="{{ form.escanear.id_for_label }}">Escanear</label>
@@ -81,11 +86,6 @@
             <label class="form-label" for="{{ form.alarma_puerto.id_for_label }}">Alarma de Puerto</label>
             {{ form.alarma_puerto }}
             <div class="form-text">Mostrar alarma de puerto desconectado</div>
-        </div>
-        <div class="col-md-4">
-            <label class="form-label" for="{{ form.oid.id_for_label }}">Metrica OID</label>
-            {{ form.oid }}
-            <div class="invalid-feedback">Seleccione una marca para los códigos OID</div>
         </div>
         <div class="col-12">
             <label class="form-label" for="{{ form.atributos_extra.id_for_label }}">Atributos del dispositivo</label>
