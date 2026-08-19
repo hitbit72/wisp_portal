@@ -1,4 +1,4 @@
-import json
+#import json
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -208,15 +208,14 @@ def detalle_dispositivo(request, pk):
     )
     metricas = get_object_or_404(DeviceMetrics, device = pk)
     # procesar los datos tipo json antes de enviarlos a la platilla
-    if isinstance(metricas.puertos, str):
-        metricas.puertos = json.loads(metricas.puertos)
-    print(metricas.puertos)
+    #if isinstance(metricas.puertos, str):
+    #    metricas.puertos = json.loads(metricas.puertos)
 
     enlaces = sorted(
         (*dispositivo.enlaces_origen.all(), *dispositivo.enlaces_destino.all()),
         key=lambda e: e.pk,
     )
-    return render(request, 'red/dispositivo/detalle_dispositivo2.html', {
+    return render(request, 'red/dispositivo/detalle_dispositivo.html', {
         'dispositivo': dispositivo,
         'enlaces': enlaces,
         'url_anterior': url_anterior,
