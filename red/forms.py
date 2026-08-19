@@ -80,6 +80,7 @@ class DispositivoForm(BootstrapFormMixin, forms.ModelForm):
             'notas': forms.Textarea(attrs={'rows': 3}),
             'escanear': forms.CheckboxInput(),
             'alarma': forms.CheckboxInput(),
+            'alarma_puerto': forms.CheckboxInput(),
         }
 
 
