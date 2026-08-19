@@ -223,7 +223,10 @@ def detalle_dispositivo(request, pk):
 def editar_dispositivo(request, pk):
     dispositivo = get_object_or_404(Dispositivo, pk=pk)
     sector_pk = dispositivo.sector_id
-
+    # Obtiene la URL anterior, o asigna una ruta por defecto si no existe
+    url_anterior = request.META.get('HTTP_REFERER', 'red:lista_dispositivos')
+    print(url_anterior)
+    
     if request.method == 'POST':
         form = DispositivoForm(request.POST, instance=dispositivo)
         if form.is_valid():
