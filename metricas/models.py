@@ -1,7 +1,5 @@
 from django.db import models
 
-from red.models import Marca
-
 class DeviceMetrics(models.Model):
     """
     Muestra periódica (SNMP) de un dispositivo en un instante concreto.
@@ -114,7 +112,7 @@ class Alarma(models.Model):
 class OIDmetric(models.Model):
     """ Lista de todos los OID para una marca """
 
-    marca = models.ForeignKey(Marca, on_delete=models.CASCADE, related_name='marca')
+    marca = models.ForeignKey('red.Marca', on_delete=models.CASCADE, related_name='marca')
     descripcion = models.CharField(max_length=255, verbose_name='Descripción')
     oid = models.CharField(max_length=255, verbose_name='OID')
 
