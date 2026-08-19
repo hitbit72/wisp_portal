@@ -92,16 +92,6 @@ OIDS_UBNT_AF = {
     'temp_radio1': '1.3.6.1.4.1.41112.3.2.1.10.1',
 }
 
-OIDS_GENERICO = {
-    'uptime': '1.3.6.1.2.1.1.3.0',           # sysUpTime (hundredths de segundo)
-    'sys_name': '1.3.6.1.2.1.1.5.0',         #sysName
-    'sys_descr': '1.3.6.1.2.1.1.1.0',        #sysDescription
-    'mem_total': '1.3.6.1.4.1.2021.4.5.0',   # memTotalReal (bytes) - UCD
-    'mem_libre': '1.3.6.1.4.1.2021.4.6.0',   # memAvailReal (bytes) - UCD
-    'cpu': '1.3.6.1.4.1.2021.10.1.3.2',    # 5min load average
-    'if_descr': '1.3.6.1.2.1.2.2.1.2',       # ifTable/ifDescr (walk)
-    'if_oper': '1.3.6.1.2.1.2.2.1.8',        # ifTable/ifOperStatus (walk)
-}
 
 VENDOR_MAP = {
     'mikrotik': OIDS_MIKROTIK,
@@ -117,9 +107,13 @@ OIDS_GENERICO = {
     'sys_descr': '1.3.6.1.2.1.1.1.0',        #sysDescription
     'mem_total': '1.3.6.1.4.1.2021.4.5.0',   # memTotalReal (bytes) - UCD
     'mem_libre': '1.3.6.1.4.1.2021.4.6.0',   # memAvailReal (bytes) - UCD
-    'cpu': '1.3.6.1.4.1.2021.10.1.3.2',    # 5min load average
-    'if_descr': '1.3.6.1.2.1.2.2.1.2',       # ifTable/ifDescr (walk)
-    'if_oper': '1.3.6.1.2.1.2.2.1.8',        # ifTable/ifOperStatus (walk)
+    'cpu': '1.3.6.1.4.1.2021.10.1.3.2',      # 5min load average. UCD-SNMP-MIB
+    'if_descr': '1.3.6.1.2.1.2.2.1.2',       # ifTable/ifDescr (walk). MIB-II (RFC1213-MIB / IF-MIB)
+    'if_oper': '1.3.6.1.2.1.2.2.1.8',        # ifTable/ifOperStatus (walk). MIB-II (RFC1213-MIB / IF-MIB)
+    'if_speed': '1.3.6.1.2.1.2.2.1.5',       # ifSpeed (Velocidad en bps) (walk). (RFC1213-MIB / IF-MIB)
+    #'if_physadress': '1.3.6.1.2.1.2.2.1.6'   # ifPhysAddress (walk) MAC
+    #'if_inerrors': '1.3.6.1.2.1.2.2.1.14'    # ifInErrors (walk)
+    #'if_outerrors': '1.3.6.1.2.1.2.2.1.20'   # ifOutErrors (walk)
 }
 
 def oids_dispositivo(dispositivo):
