@@ -1,7 +1,9 @@
 from django import forms
 from .models import Cliente, Contrato
 
+from core.utils import BootstrapFormMixin
 
+"""
 class BootstrapFormMixin:
     """Agrega automáticamente las clases de Bootstrap a cada campo, para no
     tener que repetirlas a mano en cada formulario."""
@@ -18,7 +20,7 @@ class BootstrapFormMixin:
                 css_extra = 'form-control'
             actual = widget.attrs.get('class', '')
             widget.attrs['class'] = f'{actual} {css_extra}'.strip()
-
+"""
 
 class ClienteForm(BootstrapFormMixin, forms.ModelForm):
     def __init__(self, *args, **kwargs):

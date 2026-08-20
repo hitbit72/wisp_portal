@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Apps propias del núcleo
+    'core',
     'accounts',
     'clientes',
     'red',

@@ -1,7 +1,8 @@
 from django import forms
 from django.urls import reverse
 
-from clientes.forms import BootstrapFormMixin
+#from clientes.forms import BootstrapFormMixin
+from core.utils import BootstrapFormMixin
 
 from .models import Dispositivo, Enlace, Interfaz, Sector
 
